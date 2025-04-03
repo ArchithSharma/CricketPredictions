@@ -6,6 +6,7 @@ library(glmnet)
 library(ggplot2)
 library(stats)
 library(datasets)
+set.seed(123)
 
 
 
