@@ -49,7 +49,7 @@ This project is licensed under the MIT License.
 - **Archith Sharma** *(Project Creator)*
 
 ## Contact
-For questions or suggestions, open an issue on GitHub or reach out via email.
+For questions or suggestions, open an issue on GitHub or reach out via email at [archithsharma@gmail.com](url).
 
 ## Acknowledgments
 Special thanks to the cricket analytics community and open-source contributors for making data-driven sports analysis possible.
