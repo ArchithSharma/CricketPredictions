@@ -153,7 +153,7 @@ team1vec = numeric(nrow(playertotalimpact2))
 team2vec = numeric(nrow(playertotalimpact2))
 nummatches = nrow(playertotalimpact2)
 for(i in 1:nrow(playertotalimpact2)){
-  #sum rows one through 17
+  #sum rows one through 14
   team1_total = sum(playertotalimpact2[i, 1:14])
   team2_total = sum(playertotalimpact2[i, 15:28])
   team1vec[i] = team1_total
