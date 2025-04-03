@@ -1,3 +1,14 @@
+library(cricketdata)
+library(dplyr)
+library(pROC)
+library(caret)
+library(glmnet)
+library(ggplot2)
+library(stats)
+library(datasets)
+
+
+
 batting_data <- read.csv("battinginningdata.csv")  # Replace with your batting data file name
 bowling_data <- read.csv("bowlinginningdata.csv")  # Replace with your bowling data file name
 match_data_file_cricinfo = read.csv("MatchData-Cricinfo.csv") # Replace with your match data file name
