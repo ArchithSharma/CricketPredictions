@@ -176,7 +176,7 @@ target = factor(playertotalimpact2$Winner_Team1, levels = c(0, 1), labels = c("T
 # Train the Logistic Regression model
 accvector = numeric(30)  # Initialize accuracy vector for 30 iterations
 set.seed(123)
-# This process can be skipped, results are shown in HyperparameterTuning.txt
+# This process can be skipped as it is very time-consuming, results are shown in HyperparameterTuning.txt
 for(i in 1:30){
   
   # Train-test split (80-20)
