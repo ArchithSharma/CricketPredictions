@@ -1,0 +1,120 @@
+[1] “Best Lambda: 0.05 Best Alpha: 0" # Best hyperparameters
+[1] "Final Averaged Threshold: 0.5444" # Tuning threshold
+[1] 0.6536585 # Accuracy value
+
+[1] "Best Lambda: 0.029 Best Alpha: 0.5"
+[1] "Final Averaged Threshold: 0.4993" # Tuning threshold for best model recalibrated when model retrained (highest accuracy on test set)
+[1] 0.702439
+
+[1] "Best Lambda: 0.014 Best Alpha: 1"
+[1] "Final Averaged Threshold: 0.5145"
+[1] 0.6439024
+
+[1] "Best Lambda: 0.049 Best Alpha: 0.1"
+[1] "Final Averaged Threshold: 0.5191"
+[1] 0.6731707
+
+[1] "Best Lambda: 0.092 Best Alpha: 0.1"
+[1] "Final Averaged Threshold: 0.5162"
+[1] 0.6487805
+
+[1] "Best Lambda: 0.034 Best Alpha: 0.1"
+[1] "Final Averaged Threshold: 0.5398"
+[1] 0.6487805
+
+[1] "Best Lambda: 0.028 Best Alpha: 0.4"
+[1] "Final Averaged Threshold: 0.5126"
+[1] 0.6682927
+
+[1] "Best Lambda: 0.063 Best Alpha: 0"
+[1] "Final Averaged Threshold: 0.5138"
+[1] 0.6926829
+
+[1] "Best Lambda: 0.073 Best Alpha: 0.1"
+[1] "Final Averaged Threshold: 0.5456"
+[1] 0.6634146
+
+[1] "Best Lambda: 0.023 Best Alpha: 0"
+[1] "Final Averaged Threshold: 0.5203"
+[1] 0.6536585
+
+[1] "Best Lambda: 0.019 Best Alpha: 0.1"
+[1] "Final Averaged Threshold: 0.497"
+[1] 0.5902439
+
+[1] "Best Lambda: 0.1 Best Alpha: 0"
+[1] "Final Averaged Threshold: 0.5607"
+[1] 0.595122
+
+[1] "Best Lambda: 0.1 Best Alpha: 0"
+[1] "Final Averaged Threshold: 0.5545"
+[1] 0.6292683
+
+[1] "Best Lambda: 0.1 Best Alpha: 0"
+[1] "Final Averaged Threshold: 0.5421"
+[1] 0.6829268
+
+[1] "Best Lambda: 0.001 Best Alpha: 0.2"
+[1] "Final Averaged Threshold: 0.5237"
+[1] 0.6341463
+
+[1] "Best Lambda: 0.063 Best Alpha: 0.2"
+[1] "Final Averaged Threshold: 0.515"
+[1] 0.6536585
+
+[1] "Best Lambda: 0.062 Best Alpha: 0.1"
+[1] "Final Averaged Threshold: 0.5315"
+[1] 0.6487805
+
+[1] "Best Lambda: 0.1 Best Alpha: 0"
+[1] "Final Averaged Threshold: 0.5552"
+[1] 0.604878
+
+[1] "Best Lambda: 0.025 Best Alpha: 0.1"
+[1] "Final Averaged Threshold: 0.5116"
+[1] 0.6634146
+
+[1] "Best Lambda: 0.063 Best Alpha: 0.4"
+[1] "Final Averaged Threshold: 0.5276"
+[1] 0.6682927
+
+[1] "Best Lambda: 0.089 Best Alpha: 0.1"
+[1] "Final Averaged Threshold: 0.5406"
+[1] 0.6
+
+[1] "Best Lambda: 0.095 Best Alpha: 0"
+[1] "Final Averaged Threshold: 0.5243"
+[1] 0.6634146
+
+[1] "Best Lambda: 0.019 Best Alpha: 0.2"
+[1] "Final Averaged Threshold: 0.5411"
+[1] 0.6536585
+
+[1] "Best Lambda: 0.026 Best Alpha: 0.9"
+[1] "Final Averaged Threshold: 0.5051"
+[1] 0.6292683
+
+[1] "Best Lambda: 0.042 Best Alpha: 0.6"
+[1] "Final Averaged Threshold: 0.5199"
+[1] 0.604878
+
+[1] "Best Lambda: 0.066 Best Alpha: 0.2"
+[1] "Final Averaged Threshold: 0.5312"
+[1] 0.6682927
+
+[1] "Best Lambda: 0.091 Best Alpha: 0"
+[1] "Final Averaged Threshold: 0.5433"
+[1] 0.6390244
+
+[1] "Best Lambda: 0.1 Best Alpha: 0"
+[1] "Final Averaged Threshold: 0.5272"
+[1] 0.6634146
+
+[1] "Best Lambda: 0.086 Best Alpha: 0"
+[1] "Final Averaged Threshold: 0.5298"
+[1] 0.6292683
+
+[1] "Best Lambda: 0.096 Best Alpha: 0"
+[1] "Final Averaged Threshold: 0.5412"
+[1] 0.6926829
+
