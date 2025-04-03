@@ -1,6 +1,6 @@
-batting_data <- read.csv("/Users/archith/Downloads/battinginningdata.csv")  # Replace with your batting data file name
-bowling_data <- read.csv("/Users/archith/Downloads/bowlinginningdata.csv")  # Replace with your bowling data file name
-match_data_file_cricinfo = read.csv("/Users/archith/Downloads/MatchData-Cricinfo.csv") # Replace with your match data file name
+batting_data <- read.csv("battinginningdata.csv")  # Replace with your batting data file name
+bowling_data <- read.csv("bowlinginningdata.csv")  # Replace with your bowling data file name
+match_data_file_cricinfo = read.csv("MatchData-Cricinfo.csv") # Replace with your match data file name
 # 1. Data Cleaning and Preparation
 
 country_acronyms <- c(
