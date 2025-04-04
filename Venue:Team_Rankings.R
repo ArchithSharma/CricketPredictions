@@ -59,3 +59,5 @@ ggplot(team_ranking_recent, aes(x = reorder(Country, TotalImpact), y = TotalImpa
        x = "Country",
        y = "Total Impact") +
   theme_minimal()
+
+battingranking[79,]
