@@ -153,7 +153,7 @@ team1vec = numeric(nrow(playertotalimpact2))
 team2vec = numeric(nrow(playertotalimpact2))
 nummatches = nrow(playertotalimpact2)
 for(i in 1:nrow(playertotalimpact2)){
-  #sum rows one through 14
+  #sum rows one through 17
   team1_total = sum(playertotalimpact2[i, 1:14])
   team2_total = sum(playertotalimpact2[i, 15:28])
   team1vec[i] = team1_total
@@ -176,7 +176,6 @@ target = factor(playertotalimpact2$Winner_Team1, levels = c(0, 1), labels = c("T
 # Train the Logistic Regression model
 accvector = numeric(30)  # Initialize accuracy vector for 30 iterations
 set.seed(123)
-# This process can be skipped as it is very time-consuming, results are shown in HyperparameterTuning.txt
 for(i in 1:30){
   
   # Train-test split (80-20)
@@ -338,8 +337,83 @@ for( j in 1:10) {
 final_threshold <- mean(final_thresholds)
 
 
-# Max Accuracy: 70.24%
+# RF model
+library(randomForest)
+set.seed(123)  # For reproducibility
+# Train-test split (80-20)
+accvec_rf = numeric(30)  # Initialize accuracy vector for 30 iterations
+for(i in 1:30) {  # Repeat for 30 iterations to get a robust accuracy
+  train_index_rf <- createDataPartition(playertotalimpact2$Winner_Team1, p = 0.8, list = FALSE)
+  train_data_rf <- playertotalimpact2[train_index_rf, ]
+  test_data_rf  <- playertotalimpact2[-train_index_rf, ]
+  # Define Predictors and Target for RF model
+  train_x_rf <- train_data_rf[, 1:28]  # Player impact features
+  train_y_rf <- as.factor(train_data_rf$Winner_Team1)  # Target variable (0 or 1)
+  test_x_rf  <- test_data_rf[, 1:28]
+  test_y_rf  <- as.factor(test_data_rf$Winner_Team1)  # Target variable (0 or 1)
+  # Train the Random Forest model
+  rf_model <- train(
+    x = train_x_rf,
+    y = train_y_rf,
+    method = "rf",
+    trControl = trainControl(method = "cv", number = 5),
+    tuneLength = 5,  # Number of different mtry values to try
+    ntree = 500,  # Number of trees
+    importance = TRUE
+  )
+  # Get accuracy
+  rf_predictions <- predict(rf_model, newdata = test_x_rf)
+  # Compute Accuracy
+  rf_conf_matrix <- confusionMatrix(rf_predictions, test_y_rf)
+  rf_accuracy <- rf_conf_matrix$overall['Accuracy']
+  print(paste("Random Forest Model Accuracy on Test Set: ", round(rf_accuracy * 100, 2), "%"))
+  accvec_rf[i] <- rf_accuracy  # Store accuracy for each iteration
+}
+max(accvec_rf) # Print the maximum accuracy from the 30 iterations
+# Maximum: 67.8%
 
-print(paste("Final Averaged Threshold for Final Model:", round(final_threshold, 4)))
+# SVMs
+library(e1071)
+set.seed(123)  # For reproducibility
+accvec_svm = numeric(30)  # Initialize accuracy vector for 30 iterations
+for(i in 1:30) {  # Repeat for 30 iterations to get a robust accuracy
+  train_index_svm <- createDataPartition(playertotalimpact2$Winner_Team1, p = 0.8, list = FALSE)
+  train_data_svm <- playertotalimpact2[train_index_svm, ]
+  test_data_svm  <- playertotalimpact2[-train_index_svm, ]
+  
+  # Define Predictors and Target for SVM model
+  train_x_svm <- train_data_svm[, 1:28]  # Player impact features
+  train_y_svm <- as.factor(train_data_svm$Winner_Team1)  # Target variable (0 or 1)
+  test_x_svm  <- test_data_svm[, 1:28]
+  test_y_svm  <- as.factor(test_data_svm$Winner_Team1)  # Target variable (0 or 1)
+  
+  # Train the SVM model
+  grid_svm <- expand.grid(C = 2^(-5:5))  # Hyperparameter grid for SVM
+  svm_model <- train(
+    x = train_x_svm,
+    y = train_y_svm,
+    method = "svmLinear",
+    trControl = trainControl(method = "cv", number = 5),
+    tunegrid = grid_svm,
+  )
+  
+  # Get accuracy
+  svm_predictions <- predict(svm_model, newdata = test_x_svm)
+  
+  # Compute Accuracy
+  svm_conf_matrix <- confusionMatrix(svm_predictions, test_y_svm)
+  svm_accuracy <- svm_conf_matrix$overall['Accuracy']
+  
+  print(paste("SVM Model Accuracy on Test Set: ", round(svm_accuracy * 100, 2), "%"))
+  
+  accvec_svm[i] <- svm_accuracy  # Store accuracy for each iteration
+}
+max(accvec_svm) # Print the maximum accuracy from the 30 iterations
+#Max: 69.7%
 
-
+# Compare models
+model_accuracies <- data.frame(
+  Model = c("Logistic Regression", "Random Forest", "SVM", "Heuristic"),
+  Accuracy = c(max(accvector) * 100, max(accvec_rf) * 100, max(accvec_svm) * 100, accuracy * 100)
+)
+print(model_accuracies)
