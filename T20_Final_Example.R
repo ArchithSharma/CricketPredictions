@@ -233,19 +233,21 @@ print(paste("India win probability: ", round(ind_winprob, 4) * 100, "%"))
 
 
 # Another example with unseen data in any of the data: Pak vs NZ March 26 2025
+# Change to IND RSA to predict the T20 World Cup Final 2024 as well, or
+# any game you'd like
 
-team1_playingxi = player_data %>% filter(ID == 3126)
+team1_playingxi = player_data %>% filter(ID == 3126) # 2729
 team1_playingxi = team1_playingxi[1:22,]
-team1_playingxi = team1_playingxi %>% filter(Country == "NZL")
+team1_playingxi = team1_playingxi %>% filter(Country == "NZL") # IND
 team1_playingxi = team1_playingxi$Player
 
-team2_playingxi = player_data %>% filter(ID == 3126)
+team2_playingxi = player_data %>% filter(ID == 3126) # 2729
 team2_playingxi = team2_playingxi[1:22,]
-team2_playingxi = team2_playingxi %>% filter(Country == "PAK")
+team2_playingxi = team2_playingxi %>% filter(Country == "PAK") # RSA
 team2_playingxi = team2_playingxi$Player
 
 # Get the ground buffs
-ground_buffs = venue_factors %>% filter(Ground == "Wellington")
+ground_buffs = venue_factors %>% filter(Ground == "Wellington") #Bridgetown
 # Get the player ratings per match for the playing xi
 team1_playingxi_ratings = player_rankings_2 %>% filter(Player %in% team1_playingxi)
 team2_playingxi_ratings = player_rankings_2 %>% filter(Player %in% team2_playingxi)
@@ -349,4 +351,7 @@ ind_winprob = predict(final_model, newx = (data.frame(Batsman1_T1 = team1_battin
 }
 # Apply threshold correction
 kvec = kvec * 0.5 / final_threshold
-print(paste("Team 1 (New Zealand) win probability: ", round(mean(kvec), 4) * 100, "%"))
+print(paste("Team 1 (Pakistan) win probability: ", round(mean(kvec), 4) * 100, "%"))
+
+
+
