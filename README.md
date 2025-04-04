@@ -47,17 +47,9 @@ This project is licensed under the MIT License.
 
 ## Contributors
 - **Archith Sharma** *(Project Creator)*
-- 
+  
 ## Images of figures generated in analysis
-![team_rankings](https://github.com/user-attachments/assets/b7b2318c-fe4a-4182-a435-b11abc5e26fe)
 ![bat_careerimpact](https://github.com/user-attachments/assets/c2a45d61-f3be-43b9-aee6-5f4b37a2c480)
-![bowl_careerimpact](https://github.com/user-attachments/assets/9d7817a2-7173-4374-a6f1-fcfc485a6eab)
-![allrounder_careerimpact](https://github.com/user-attachments/assets/4d45f97b-5fec-42a9-a0b4-bb9fff8bcd23)
-![allrounder_bygame](https://github.com/user-attachments/assets/bcaa02c9-8e22-4eb3-b98e-f24e673715b6)
-![batting_bygame](https://github.com/user-attachments/assets/ecb2bb5b-2e02-406a-ad8c-7c2070882090)
-![bowling_bygame](https://github.com/user-attachments/assets/6c8b75e8-0ad6-400c-877e-05b48ea8895a)
-![Bowling_Grounds](https://github.com/user-attachments/assets/b9da078a-91a4-4eb2-bcae-5e80a05d80de)
-![Batting_Grounds](https://github.com/user-attachments/assets/309b5190-1a2a-4dd7-8ba1-97f887867073)
 ![impact_dist](https://github.com/user-attachments/assets/60f91e04-abc0-4e55-bc1b-13b6b6a66038)
 
 
