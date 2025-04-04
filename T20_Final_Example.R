@@ -351,7 +351,7 @@ ind_winprob = predict(final_model, newx = (data.frame(Batsman1_T1 = team1_battin
 }
 # Apply threshold correction
 kvec = kvec * 0.5 / final_threshold
-print(paste("Team 1 (Pakistan) win probability: ", round(mean(kvec), 4) * 100, "%"))
+print(paste("Team 1 (New Zealand) win probability: ", round(mean(kvec), 4) * 100, "%"))
 
 
 
