@@ -110,6 +110,12 @@ bowling_impact <- bowling_data %>%
   summarise(TotalBowlingImpact = sum(BowlingImpact, na.rm = TRUE)) %>%
   ungroup()
 
+hist(bowling_impact$TotalBowlingImpact, breaks = 50, main = "Bowling and Batting Impact Distribution", xlab = "Total Impact", col = rgb(0,0,1,1/4))
+hist(batting_impact$TotalBattingImpact, breaks = 50, main = "Batting Impact Distribution", xlab = "Total Batting Impact", col = rgb(1,0,0,1/4), add = TRUE)
+# Perform ANOVA
+anova_result <- aov(TotalBattingImpact ~ bowling_impact$TotalBowlingImpact, data = batting_impact)
+summary(anova_result)
+
 #make bowling impact have batting data mean and sd
 bowling_impact$TotalBowlingImpact = (bowling_impact$TotalBowlingImpact)
 batting_impact$TotalBattingImpact = (batting_impact$TotalBattingImpact)
@@ -120,7 +126,7 @@ team_impact <- batting_impact %>%
   mutate(TotalImpact = TotalBattingImpact + TotalBowlingImpact)
 
 # Merge with Match Data
-# Don't run line 143 on first run, but can be done afterward to reset columns
+# Don't run line 119 on first run, but can be done afterward to reset columns
 # match_data_file_cricinfo[, 10:16] <- list(NULL)
 match_data_file_cricinfo <- match_data_file_cricinfo %>%
   left_join(team_impact, by = c("ID" = "ID", "Team.1" = "Country")) %>%
@@ -135,3 +141,4 @@ match_data_file_cricinfo <- match_data_file_cricinfo %>%
 
 #print the final correlation
 print(paste("Final correlation: ", cor(match_data_file_cricinfo$Impact_Diff, match_data_file_cricinfo$Winner_Team1, use = "complete.obs")))
+rsquared = cor(match_data_file_cricinfo$Impact_Diff, match_data_file_cricinfo$Winner_Team1, use = "complete.obs")^2
