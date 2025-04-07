@@ -18,7 +18,7 @@ To set up and run this project:
    ```
 2. **Install dependencies (for R users):**
    ```r
-   install.packages(c("ggplot2", "dplyr", "caret", "forecast", "pROC", "glmnet"))
+   install.packages(c("ggplot2", "dplyr", "caret", "forecast", "pROC", "glmnet", "e1071", "randomForest"))
    ```
 3. **Run the R scripts** inside the `/code` folder to perform analysis and predictions.
 
