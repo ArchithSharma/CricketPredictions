@@ -38,6 +38,8 @@ The dataset includes:
 CricketPredictions/
 │── code/          # Contains all R scripts for analysis
 │── data/          # Includes datasets used in the project
+│── results/       # Includes figures generated from analysis
+│── paper/         # Includes the research paper and TeX Source
 │── README.md      # Project documentation
 │── LICENSE        # License information
 ```
@@ -48,7 +50,7 @@ This project is licensed under the MIT License.
 ## Contributors
 - **Archith Sharma** *(Project Creator)*
   
-## Images of figures generated in analysis
+## Some images of figures generated in analysis
 ![bat_careerimpact](https://github.com/user-attachments/assets/c2a45d61-f3be-43b9-aee6-5f4b37a2c480)
 ![impact_dist](https://github.com/user-attachments/assets/60f91e04-abc0-4e55-bc1b-13b6b6a66038)
 
