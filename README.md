@@ -38,7 +38,7 @@ The dataset includes:
 CricketPredictions/
 │── code/          # Contains all R scripts for analysis
 │── data/          # Includes datasets used in the project
-│── results/       # Includes figures generated from analysis
+│── results/       # Includes figures generated from analysis and lengthy console outputs
 │── paper/         # Includes the research paper and TeX Source
 │── README.md      # Project documentation
 │── LICENSE        # License information
