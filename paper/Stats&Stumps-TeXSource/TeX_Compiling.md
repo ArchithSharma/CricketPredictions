@@ -1,51 +1,11 @@
-# How to Compile a LaTeX File (Twice!)
-
-When working with LaTeX, elements such as **table of contents**, **cross-references**, **citations**, and **indexes** often require multiple compilation passes to be correctly generated.
-
-This guide walks you through how to compile a LaTeX document (e.g., `main.tex`) such that the output PDF is named `Stats&Stumps_CricketPrediction.pdf`.
-
----
-
-## 📄 Goal
-
-Compile `main.tex` into:
-
-```
-Stats&Stumps_CricketPrediction.pdf
-```
-
----
+# Compiling the TeX files
 
 ## 🛠️ Step-by-step Instructions
 
-### ✅ 1. Using `pdflatex` (Command Line)
 
-Run the following commands:
+### 🤖 1. Use `latexmk` for Automation
 
-```bash
-pdflatex -jobname="Stats&Stumps_CricketPrediction" main.tex
-pdflatex -jobname="Stats&Stumps_CricketPrediction" main.tex
-```
-
-- `-jobname` specifies the name of the output PDF.
-- The second compilation ensures that all cross-references and tables are correctly resolved.
-
-### 📚 2. If You're Using BibTeX (with Citations)
-
-If your LaTeX document contains citations:
-
-```bash
-pdflatex -jobname="Stats&Stumps_CricketPrediction" main.tex
-bibtex Stats&Stumps_CricketPrediction
-pdflatex -jobname="Stats&Stumps_CricketPrediction" main.tex
-pdflatex -jobname="Stats&Stumps_CricketPrediction" main.tex
-```
-
-This will generate the bibliography and resolve all references correctly.
-
-### 🤖 3. Preferred: Use `latexmk` for Automation
-
-If installed, `latexmk` automates the entire process:
+If installed, `[latexmk]([url](https://mgeier.github.io/latexmk.html))` automates the entire process of compiling the tex files:
 
 ```bash
 latexmk -pdf -jobname="Stats&Stumps_CricketPrediction" main.tex
