@@ -43,6 +43,9 @@ CricketPredictions/
 │── README.md      # Project documentation
 │── LICENSE        # License information
 ```
+## Paper compilation if generating from TeX
+
+Instructions can be found in this [markdown file](paper/Stats&Stumps-TeXSource/TeX_Compiling.md) and can be compiled either using latexmk or Overleaf. The PDF file is also included.
 
 ## License
 This project is licensed under the MIT License.
