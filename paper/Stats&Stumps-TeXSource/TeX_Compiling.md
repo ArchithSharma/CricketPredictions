@@ -31,8 +31,6 @@ If you’re using Overleaf (online LaTeX editor), just rename the output in the 
 
 | Tool      | Description                                  |
 |-----------|----------------------------------------------|
-| `pdflatex` | Run **twice** to resolve references          |
-| `bibtex`   | Required if using citations                  |
 | `latexmk`  | Automates multiple compilations              |
 | Overleaf   | Handles everything in the cloud automatically|
 
