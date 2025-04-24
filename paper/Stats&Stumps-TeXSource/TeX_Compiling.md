@@ -5,7 +5,7 @@
 
 ### 🤖 1. Use `latexmk` for Automation
 
-If [installed]([url](https://mgeier.github.io/latexmk.html)), `latexmk` automates the entire process of compiling the tex files:
+If [installed](https://mgeier.github.io/latexmk.html), `latexmk` automates the entire process of compiling the tex files:
 
 ```bash
 latexmk -pdf -jobname="Stats&Stumps_CricketPrediction" main.tex
