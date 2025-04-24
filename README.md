@@ -1,4 +1,4 @@
-# Cricket Predictions
+# Stats & Stumps: Using Machine Learning to Predict T20I Matches with Player and Venue Data
 
 ## Description
 This project analyzes T20I cricket match data to predict match outcomes based on venue factors and player performance metrics. It considers key batting and bowling statistics such as runs, strike rate, boundaries, wickets, maiden overs, and economy rate to assess the impact of players in different venues.
