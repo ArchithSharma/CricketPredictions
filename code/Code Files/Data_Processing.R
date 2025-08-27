@@ -6,13 +6,20 @@ library(glmnet)
 library(ggplot2)
 library(stats)
 library(datasets)
-set.seed(123)
+
+setwd("/Users/archith/Downloads")
+codes = cricsheet_codes
+countries = c("Australia", "India", "South Africa", "England", "New Zealand", "West Indies", "Pakistan", "Sri Lanka", "Afghanistan", "Bangladesh", "Ireland", "Zimbabwe")
 
 
+bowlinginningdata = cricketdata::fetch_cricinfo("t20", "men", "bowling", "innings")
+battinginningdata = cricketdata::fetch_cricinfo("t20", "men", "batting", "innings")
+write.csv(battinginningdata, "battinginningdata.csv", row.names = FALSE)
+write.csv(bowlinginningdata, "bowlinginningdata.csv", row.names = FALSE)
 
 batting_data <- read.csv("battinginningdata.csv")  # Replace with your batting data file name
 bowling_data <- read.csv("bowlinginningdata.csv")  # Replace with your bowling data file name
-match_data_file_cricinfo = read.csv("MatchData-Cricinfo.csv") # Replace with your match data file name
+match_data_file_cricinfo = read.csv("MatchData_Cricinfo.csv") # Replace with your match data file name
 # 1. Data Cleaning and Preparation
 
 country_acronyms <- c(
@@ -71,19 +78,21 @@ bowling_data <- bowling_data %>%
 
 
 # Print some info for debugging
-print("Unique Dates in match_data_file_cricinfo:")
-print(unique(match_data_file_cricinfo$Date))
-print("Unique Dates in batting_data:")
-print(unique(batting_data$Date))
-print("Unique Dates in bowling_data:")
-print(unique(bowling_data$Date))
 
-print("Unique Teams in match_data_file_cricinfo:")
-print(unique(match_data_file_cricinfo$Team))
-print("Unique Teams in batting_data:")
-print(unique(batting_data$Team))
-print("Unique Teams in bowling_data:")
-print(unique(bowling_data$Team))
+#print("Unique Dates in match_data_file_cricinfo:")
+#print(unique(match_data_file_cricinfo$Date))
+#print("Unique Dates in batting_data:")
+#print(unique(batting_data$Date))
+#print("Unique Dates in bowling_data:")
+#print(unique(bowling_data$Date))
+
+#print("Unique Teams in match_data_file_cricinfo:")
+#print(unique(match_data_file_cricinfo$Team))
+#print("Unique Teams in batting_data:")
+#print(unique(batting_data$Team))
+#print("Unique Teams in bowling_data:")
+#print(unique(bowling_data$Team))
+
 # Join
 batting_data <- left_join(batting_data, dplyr::select(match_data_file_cricinfo, ID, Date, Team), by = c("Date", "Team"))
 bowling_data <- left_join(bowling_data, dplyr::select(match_data_file_cricinfo, ID, Date, Team), by = c("Date", "Team"))
@@ -112,11 +121,23 @@ bowling_impact <- bowling_data %>%
 
 hist(bowling_impact$TotalBowlingImpact, breaks = 50, main = "Bowling and Batting Impact Distribution", xlab = "Total Impact", col = rgb(0,0,1,1/4))
 hist(batting_impact$TotalBattingImpact, breaks = 50, main = "Batting Impact Distribution", xlab = "Total Batting Impact", col = rgb(1,0,0,1/4), add = TRUE)
-# Perform ANOVA
-anova_result <- aov(TotalBattingImpact ~ bowling_impact$TotalBowlingImpact, data = batting_impact)
-summary(anova_result)
 
-#make bowling impact have batting data mean and sd
+#Kolmogorov-Smirnov Test with p > 0.05 verifies that we cannot reject the null hypothesis that the two distributions are the same, with almost 0 evidence (p = 0.37)
+ks.test(bowling_impact$TotalBowlingImpact, batting_impact$TotalBattingImpact)
+# QQ Plot to visually compare the distributions
+qqplot(
+  quantile(bowling_impact$TotalBowlingImpact, probs = seq(0.025, 0.975, length.out = 1000)),
+  quantile(batting_impact$TotalBattingImpact, probs = seq(0.025, 0.975, length.out = 1000)),
+  xlab = "Bowling Impact Quantiles",
+  ylab = "Batting Impact Quantiles",
+  main = "QQ Plot: Bowling vs Batting Impact",
+  pch = 19, col = "purple"
+)
+abline(0, 1, col = "red", lwd = 2)  # line of equality
+# Calculate Cohen's d to measure that the effect size is minimal (d < 0.1)
+cohensD(batting_impact$TotalBattingImpact, bowling_impact$TotalBowlingImpact)
+
+# Make bowling impact have batting data mean and sd
 bowling_impact$TotalBowlingImpact = (bowling_impact$TotalBowlingImpact)
 batting_impact$TotalBattingImpact = (batting_impact$TotalBattingImpact)
 
@@ -126,7 +147,7 @@ team_impact <- batting_impact %>%
   mutate(TotalImpact = TotalBattingImpact + TotalBowlingImpact)
 
 # Merge with Match Data
-# Don't run line 119 on first run, but can be done afterward to reset columns
+# Don't run below line on first run, but can be done afterward to reset columns
 # match_data_file_cricinfo[, 10:16] <- list(NULL)
 match_data_file_cricinfo <- match_data_file_cricinfo %>%
   left_join(team_impact, by = c("ID" = "ID", "Team.1" = "Country")) %>%
@@ -139,6 +160,8 @@ match_data_file_cricinfo <- match_data_file_cricinfo %>%
   mutate(Impact_Diff = Impact_Team1 - Impact_Team2,
          Winner_Team1 = ifelse(Winner == Team.1, 1, 0))
 
-#print the final correlation
+# Print the final correlation
 print(paste("Final correlation: ", cor(match_data_file_cricinfo$Impact_Diff, match_data_file_cricinfo$Winner_Team1, use = "complete.obs")))
 rsquared = cor(match_data_file_cricinfo$Impact_Diff, match_data_file_cricinfo$Winner_Team1, use = "complete.obs")^2
+cor.test(match_data_file_cricinfo$Impact_Diff, match_data_file_cricinfo$Winner_Team1, use = "complete.obs")
+print(paste("Final R-squared: ", rsquared))

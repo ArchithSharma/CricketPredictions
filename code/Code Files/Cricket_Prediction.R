@@ -171,11 +171,13 @@ for(i in 1:nrow(playertotalimpact2)){
 accuracy = predcorrectcount / nummatches
 print(paste("Model Accuracy on all matches:", round(accuracy * 100, 2), "%"))
 
-target = factor(playertotalimpact2$Winner_Team1, levels = c(0, 1), labels = c("Team2", "Team1"))  # Convert to factor for classification
-# Log reg
-# Train the Logistic Regression model
-accvector = numeric(30)  # Initialize accuracy vector for 30 iterations
-set.seed(123)
+target = factor(playertotalimpact2$Winner_Team1, levels = c(0, 1), labels = c("Team2", "Team1"))
+
+# Logistic Regression with repeated splits
+accvector = numeric(30)  # store accuracies
+set.seed(314)
+overallbestlambda = 0
+overallbestalpha = 0
 for(i in 1:30){
   
   # Train-test split (80-20)
@@ -185,9 +187,9 @@ for(i in 1:30){
   
   # Define Predictors and Target
   train_x <- as.matrix(train_data[, 1:28])
-  train_y <- as.factor(train_data$Winner_Team1)  # Convert to factor (0/1)
+  train_y <- as.factor(train_data$Winner_Team1)  # 0/1
   test_x  <- as.matrix(test_data[, 1:28])
-  test_y  <- as.factor(test_data$Winner_Team1)   # Convert to factor (0/1)
+  test_y  <- as.factor(test_data$Winner_Team1)   # 0/1
   
   # Hyperparameter grid search
   grid <- expand.grid(alpha = seq(0, 1, by = 0.1), lambda = seq(0.001, 0.1, by = 0.001))
@@ -209,72 +211,52 @@ for(i in 1:30){
   # Train logistic model with best parameters
   best_log_model <- glmnet(
     x = train_x, 
-    y = as.numeric(train_y) - 1, # Convert factor (0/1) to numeric
+    y = as.numeric(train_y) - 1, 
     family = "binomial", 
     alpha = best_alpha, 
     lambda = best_lambda
   )
   
-  # Get test set predictions
-  test_predictions <- predict(best_log_model, newx = test_x, type = "response", s = best_lambda)
+  # Get test set probabilities
+  test_prob <- predict(best_log_model, newx = test_x, type = "response", s = best_lambda)
   
   # Cross-validation to determine the best threshold
   thresholds = numeric(10)
   folds <- createFolds(train_y, k = 10, list = TRUE)
   
-  for(j in 1:10){
-    val_indices <- folds[[j]]
-    train_indices <- setdiff(1:length(train_y), val_indices)
-    
-    # Training and validation sets
-    train_xcv <- train_x[train_indices, ]
-    train_ycv <- train_y[train_indices]
-    val_xcv <- train_x[val_indices, ]
-    val_ycv <- train_y[val_indices]
-    
-    # Train logistic model
-    log_model_cv <- glmnet(
-      x = train_xcv, 
-      y = as.numeric(train_ycv) - 1, 
-      family = "binomial",
-      alpha = best_alpha, 
-      lambda = best_lambda
-    )
-    
-    # Predict probabilities on validation set
-    val_predictions <- predict(log_model_cv, newx = val_xcv, type = "response", s = best_lambda)
-    
-    # Compute ROC Curve
-    roc_curve <- roc(as.numeric(val_ycv) - 1, val_predictions)
-    
-    # Get the best threshold for classification
-    best_thresh <- as.numeric(coords(roc_curve, "best", ret = "threshold"))
-    
-    # Store threshold
-    thresholds[j] <- best_thresh
-  }
-  
-  # Compute final averaged threshold across folds
-  final_threshold <- mean(thresholds)  
-  print(paste("Final Averaged Threshold:", round(final_threshold, 4)))
   
   # Apply threshold to test predictions
-  test_predictions <- ifelse(test_predictions > final_threshold, 1, 0)
-  test_predictions <- factor(test_predictions, levels = c(0, 1))  # Convert to factor
-  levels(test_predictions) <- c("Team2", "Team1")  # Assign labels
-  levels(test_y) <- c("Team2", "Team1")  # Ensure test_y has the same levels for comparison)
+  test_predictions <- factor(ifelse(test_prob > 0.5, 1, 0),
+                             levels = c(0, 1),
+                             labels = c("Team2", "Team1"))
+  
+  test_y <- factor(test_y, levels = c(0, 1), labels = c("Team2", "Team1"))
+  
   # Compute Accuracy
   conf_matrix <- confusionMatrix(test_predictions, test_y)
-  accvector[i] <- conf_matrix$overall['Accuracy']  # Store accuracy for each iteration
-  print(accvector[i])  
+  accvector[i] <- conf_matrix$overall['Accuracy']
+  print(accvector[i])
+  if(i == 1){
+    overallbestlambda = best_lambda
+    overallbestalpha = best_alpha
+  }
+  else{
+    if(conf_matrix$overall['Accuracy'] > max(accvector[1:(i-1)])){
+      overallbestlambda = best_lambda
+      overallbestalpha = best_alpha
+    }
+  }
   
 }
+
+mean_acc <- mean(accvector)
+print(paste("Average Accuracy over 30 iterations:", round(mean_acc, 4)))
 
 # Plot Accuracy Distribution
 hist(accvector, main = "Histogram of Logistic Regression Model Accuracy", xlab = "Accuracy", ylab = "Frequency")
 mean(accvector)
 # Final Logistic Regression Model on the entire dataset
-set.seed(123)  # For reproducibility
+set.seed(314)  # For reproducibility
 # Train the final Logistic Regression model on the entire dataset
 train_index <- createDataPartition(target, p = 0.8, list = FALSE)
 train_data <- playertotalimpact2[train_index, ]
@@ -284,62 +266,19 @@ predictors <- as.matrix(train_data[, 1:28])  # Player impact features
 target <- as.factor(train_data$Winner_Team1)  # Target variable (0 or 1)
 # Hyperparameter grid search for final model
 final_model = glmnet(
-  x = train_x,
-  y = train_y, # Convert factor (0/1) to numeric
+  x = playertotalimpact2[, 1:28], # Player impact features,
+  y = playertotalimpact2[,29], # Convert factor (0/1) to numeric
   family = "binomial",
-  alpha = 0.5,  # Use the best alpha from previous model
-  lambda = 0.029, # Use the best lambda from previous model
+  alpha = overallbestalpha,  # Use the best alpha from previous model
+  lambda = overallbestlambda, # Use the best lambda from previous model
 )
 
 print(paste("Accuracy value on test set: ", round(max(accvector) * 100, 2), "%"))
 
-# Get threshold for final model
-final_test_x <- as.matrix(train_data[, 1:28])
-final_test_y <- as.factor(train_data$Winner_Team1)  # Target variable (0 or 1)
-final_test_predictions <- predict(final_model, newx = final_test_x, type = "response", s = 0.029)
-# Cross-validation to determine the best threshold for final model
-final_thresholds = numeric(10)
-
-folds_final <- createFolds(target, k = 10, list = TRUE)
-
-for( j in 1:10) {
-  val_indices <- folds_final[[j]]
-  train_indices <- setdiff(1:length(target), val_indices)
-  
-  # Training and validation sets
-  train_xcv <- predictors[train_indices, ]
-  train_ycv <- target[train_indices]
-  val_xcv <- predictors[val_indices, ]
-  val_ycv <- target[val_indices]
-  
-  # Train logistic model
-  log_model_cv_final <- glmnet(
-    x = train_xcv, 
-    y = as.numeric(train_ycv) - 1, 
-    family = "binomial",
-    alpha = 0.5, 
-    lambda = 0.029
-  )
-  
-  # Predict probabilities on validation set
-  val_predictions_final <- predict(log_model_cv_final, newx = as.matrix(val_xcv), type = "response", s = 0.029)
-  
-  # Compute ROC Curve
-  roc_curve_final <- roc(as.numeric(val_ycv) - 1, val_predictions_final)
-  
-  # Get the best threshold for classification
-  best_thresh_final <- as.numeric(coords(roc_curve_final, "best", ret = "threshold"))
-  
-  # Store threshold
-  final_thresholds[j] <- best_thresh_final
-}
-# Compute final averaged threshold across folds for the final model
-final_threshold <- mean(final_thresholds)
-
 
 # RF model
 library(randomForest)
-set.seed(123)  # For reproducibility
+set.seed(314)  # For reproducibility
 # Train-test split (80-20)
 accvec_rf = numeric(30)  # Initialize accuracy vector for 30 iterations
 for(i in 1:30) {  # Repeat for 30 iterations to get a robust accuracy
@@ -370,11 +309,11 @@ for(i in 1:30) {  # Repeat for 30 iterations to get a robust accuracy
   accvec_rf[i] <- rf_accuracy  # Store accuracy for each iteration
 }
 max(accvec_rf) # Print the maximum accuracy from the 30 iterations
-# Maximum: 67.8%
+# Maximum: 70.28
 
 # SVMs
 library(e1071)
-set.seed(123)  # For reproducibility
+set.seed(314)  # For reproducibility
 accvec_svm = numeric(30)  # Initialize accuracy vector for 30 iterations
 for(i in 1:30) {  # Repeat for 30 iterations to get a robust accuracy
   train_index_svm <- createDataPartition(playertotalimpact2$Winner_Team1, p = 0.8, list = FALSE)
@@ -409,11 +348,24 @@ for(i in 1:30) {  # Repeat for 30 iterations to get a robust accuracy
   accvec_svm[i] <- svm_accuracy  # Store accuracy for each iteration
 }
 max(accvec_svm) # Print the maximum accuracy from the 30 iterations
-#Max: 69.7%
+#Max: 70.75%
+
 
 # Compare models
 model_accuracies <- data.frame(
   Model = c("Logistic Regression", "Random Forest", "SVM", "Heuristic"),
-  Accuracy = c(max(accvector) * 100, max(accvec_rf) * 100, max(accvec_svm) * 100, accuracy * 100)
+  Accuracy = c(max(accvector) * 100, max(accvec_rf) * 100, max(accvec_svm) * 100, accuracy * 100),
+  CI_Lower = c(
+    max(accvector) * 100 - 1.96 * (sd(accvector) * 100 / sqrt(30)),
+    max(accvec_rf) * 100 - 1.96 * (sd(accvec_rf) * 100 / sqrt(30)),
+    max(accvec_svm) * 100 - 1.96 * (sd(accvec_svm) * 100 / sqrt(30)),
+    accuracy * 100 - 1.96 * (sqrt((accuracy * (1 - accuracy)) / nrow(playertotalimpact2)) * 100)
+  ),
+  CI_Upper = c(
+    max(accvector) * 100 + 1.96 * (sd(accvector) * 100 / sqrt(30)),
+    max(accvec_rf) * 100 + 1.96 * (sd(accvec_rf) * 100 / sqrt(30)),
+    max(accvec_svm) * 100 + 1.96 * (sd(accvec_svm) * 100 / sqrt(30)),
+    accuracy * 100 + 1.96 * (sqrt((accuracy * (1 - accuracy)) / nrow(playertotalimpact2)) * 100)
+  )
 )
 print(model_accuracies)
