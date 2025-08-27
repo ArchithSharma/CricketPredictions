@@ -7,20 +7,22 @@ library(ggplot2)
 library(stats)
 library(datasets)
 
+# Change to your directory
 setwd("/Users/archith/Downloads")
 codes = cricsheet_codes
 countries = c("Australia", "India", "South Africa", "England", "New Zealand", "West Indies", "Pakistan", "Sri Lanka", "Afghanistan", "Bangladesh", "Ireland", "Zimbabwe")
 
+# Can be used to take data from cricinfo, but otherwise not needed as data files are included in /data
 
-bowlinginningdata = cricketdata::fetch_cricinfo("t20", "men", "bowling", "innings")
-battinginningdata = cricketdata::fetch_cricinfo("t20", "men", "batting", "innings")
-write.csv(battinginningdata, "battinginningdata.csv", row.names = FALSE)
-write.csv(bowlinginningdata, "bowlinginningdata.csv", row.names = FALSE)
+#bowlinginningdata = cricketdata::fetch_cricinfo("t20", "men", "bowling", "innings")
+#battinginningdata = cricketdata::fetch_cricinfo("t20", "men", "batting", "innings")
+#write.csv(battinginningdata, "battinginningdata.csv", row.names = FALSE)
+#write.csv(bowlinginningdata, "bowlinginningdata.csv", row.names = FALSE)
 
 batting_data <- read.csv("battinginningdata.csv")  # Replace with your batting data file name
 bowling_data <- read.csv("bowlinginningdata.csv")  # Replace with your bowling data file name
 match_data_file_cricinfo = read.csv("MatchData_Cricinfo.csv") # Replace with your match data file name
-# 1. Data Cleaning and Preparation
+# Data Cleaning and Preparation
 
 country_acronyms <- c(
   "Australia" = "AUS",
