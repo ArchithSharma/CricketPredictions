@@ -41,7 +41,6 @@ CricketPredictions/
 │   │── R Code/                   # R scripts for statistical analysis
 │   │── Markdown File/            # Markdown version available on RPubs, fully reproducible
 │── data/                  # Includes datasets used in the project
-│── results/               # Includes figures and lengthy console outputs
 │── paper/                 # Research paper and TeX source
 │── README.md              # Project documentation
 │── LICENSE                # License information
