@@ -7,6 +7,7 @@ This project analyzes T20I cricket match data to predict match outcomes based on
 - Data-driven analysis of T20I matches
 - Venue factor adjustments for performance predictions
 - Player impact calculation based on batting and bowling statistics
+- R Markdown Version: https://rpubs.com/ArchithS/CricketData
 - Rolling forecasts using statistical models
 
 ## Installation
@@ -36,12 +37,15 @@ The dataset includes:
 ## Repository Structure
 ```
 CricketPredictions/
-│── code/          # Contains all R scripts for analysis
-│── data/          # Includes datasets used in the project
-│── results/       # Includes figures generated from analysis and lengthy console outputs
-│── paper/         # Includes the research paper and TeX Source
-│── README.md      # Project documentation
-│── LICENSE        # License information
+│── code/                  # Contains all project code
+│   │── R Code/                   # R scripts for statistical analysis
+│   │── Markdown File/            # Markdown version available on RPubs, fully reproducible
+│── data/                  # Includes datasets used in the project
+│── results/               # Includes figures and lengthy console outputs
+│── paper/                 # Research paper and TeX source
+│── README.md              # Project documentation
+│── LICENSE                # License information
+
 ```
 ## Paper compilation if generating from TeX
 
@@ -52,11 +56,6 @@ This project is licensed under the MIT License.
 
 ## Contributors
 - **Archith Sharma** *(Project Creator)*
-  
-## Some images of figures generated in analysis
-![bat_careerimpact](https://github.com/user-attachments/assets/c2a45d61-f3be-43b9-aee6-5f4b37a2c480)
-![impact_dist](https://github.com/user-attachments/assets/60f91e04-abc0-4e55-bc1b-13b6b6a66038)
-
 
 ## Contact
 For questions or suggestions, open an issue on GitHub or reach out via email at [archithsharma@gmail.com](url).
