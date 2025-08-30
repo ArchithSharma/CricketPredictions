@@ -21,7 +21,7 @@ library(stats)
 library(knitr)
 library(lsr)
 library(datasets)
-setwd("/Users/archith/Downloads/") # Set your working directory
+setwd(dirname(rstudioapi::getActiveDocumentContext()$path)) # Get working directory of file
 batting_data <- read.csv("battinginningdata.csv")  # Replace with your batting data file name
 bowling_data <- read.csv("bowlinginningdata.csv")  # Replace with your bowling data file name
 match_data_file_cricinfo = read.csv("MatchData-Cricinfo.csv") # Replace with your match data file name
