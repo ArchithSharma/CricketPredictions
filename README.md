@@ -19,14 +19,15 @@ To set up and run this project:
    ```
 2. **Install dependencies (for R users):**
    ```r
-   install.packages(c("ggplot2", "dplyr", "caret", "forecast", "pROC", "glmnet", "e1071", "randomForest"))
+   install.packages(c("cricketdata", "knitr", "lsr", "ggplot2", "dplyr", "caret", "forecast", "pROC", "glmnet", "e1071", "randomForest"))
    ```
-3. **Run the R scripts** inside the `/code` folder to perform analysis and predictions.
+3. **Run the [R markdown file](Markdown_Script/Stats_and_Stumps.Rmd)** inside the `/Markdown_Script` folder to perform analysis and predictions.
 
 ## Usage
 - **Data Processing:** Load and preprocess match and player data.
 - **Analysis & Visualization:** Generate performance insights using `ggplot2` and `dplyr`.
 - **Prediction Models:** Use regression and machine learning techniques to forecast match outcomes.
+- **App Utility:** Predict matches by inputting two playing XIs and a venue in the [ShinyApp](https://archithsharma.shinyapps.io/Cricket-Analyzer/).
 
 ## Data
 The dataset includes:
