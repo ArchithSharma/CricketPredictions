@@ -10,7 +10,7 @@ output:
 
 ## Preprocessing
 Library Loading
-```{r loadlib, echo=-10, results='hide', message=F, warning=F}
+```{r loadlib, echo=-11, results='hide', message=F, warning=F}
 library(cricketdata)
 library(dplyr)
 library(pROC)
@@ -18,6 +18,7 @@ library(caret)
 library(glmnet)
 library(ggplot2)
 library(stats)
+library(knitr)
 library(lsr)
 library(datasets)
 setwd("/Users/archith/Downloads/") # Set your working directory
@@ -1262,4 +1263,39 @@ print(paste(country2, "win probability: ", round((1 - mean(kvec)), 4) * 100, "%"
 
 
 ```
+# Web App for Predicting Games and Player Impact - App.R (located in Shiny_App code folder)
 
+The app is available at: https://archithsharma.shinyapps.io/Cricket-Analyzer/, with three tools: 
+
+- Player Comparison Tool
+
+- Past Match Model Output
+
+- Predict Future Match based on Playing XI
+
+## Player Comparison Tool
+
+The player comparison tool will compare two players based on their batting and bowling impact per game. For all-rounders, it will show the value relative to all-rounders for bowling and batting as well. 
+
+```{r, fig.align='center', fig.cap="Comparison between Hardik Pandya & Shakib al Hasan", echo=FALSE}
+knitr::include_graphics("/Users/archith/Desktop/Example_Comparison.png")
+```
+## Past Match Model Output
+
+The past match model output will show the player impact for both teams in a past match, and the predicted winner based on the logistic regression model.
+```{r, fig.align='center', fig.cap="Past Match Model Output <br> IND vs RSA, T20 WC Final 2024", echo=FALSE}
+knitr::include_graphics("/Users/archith/Desktop/Past_Match_Model_Output.png")
+```
+
+## Predict Future Match based on Playing XI
+
+The predict future match based on playing XI will allow the user to select a playing XI for two teams (any player), and the venue. The model will then predict the win probability for both teams based on the logistic regression model.
+
+An example was tested for the most recent T20I match between Afghanistan and Pakistan. The model's most recent data update was on August 16, 2025, and the match was played on August 29, 2025. The model predicted a 60% win probability for Pakistan, who went on to win the match by 39 runs, further legitimizing the model.
+
+```{r, fig.align='center', fig.cap="Predict Future Match based on Playing XI for AFG vs PAK, T20I, August 29 2025", echo=FALSE} 
+knitr::include_graphics("/Users/archith/Desktop/Future_Match_Prediction.png")
+```
+
+
+The code for the app is located in the Shiny_App folder, in the App.R file. All other code is included in the markdown file or available on github, in https://github.com/ArchithSharma/CricketPredictions/.
