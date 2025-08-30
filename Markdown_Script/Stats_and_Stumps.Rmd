@@ -22,9 +22,9 @@ library(knitr)
 library(lsr)
 library(datasets)
 setwd(dirname(rstudioapi::getActiveDocumentContext()$path)) # Get working directory of file
-batting_data <- read.csv("battinginningdata.csv")  # Replace with your batting data file name
-bowling_data <- read.csv("bowlinginningdata.csv")  # Replace with your bowling data file name
-match_data_file_cricinfo = read.csv("MatchData-Cricinfo.csv") # Replace with your match data file name
+batting_data <- read.csv("../data/battinginningdata.csv")  # Gets from working directory to batting innings data
+bowling_data <- read.csv("../data/bowlinginningdata.csv")  # Gets from working directory to bowling innings data
+match_data_file_cricinfo = read.csv("../data/MatchData-Cricinfo.csv") # Gets match result data from Cricinfo results file
 ```
 
 Create Country Acronym Mapping - 12 Test-playing nations
