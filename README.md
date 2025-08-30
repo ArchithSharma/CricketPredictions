@@ -7,8 +7,9 @@ This project analyzes T20I cricket match data to predict match outcomes based on
 - Data-driven analysis of T20I matches
 - Venue factor adjustments for performance predictions
 - Player impact calculation based on batting and bowling statistics
-- R Markdown Version: https://rpubs.com/ArchithS/CricketData
 - Rolling forecasts using statistical models
+- R Markdown Version for easy reproducibility: https://rpubs.com/ArchithS/CricketData
+- ShinyApp for player comparison, past match model output, and future match prediction by inputting playing XI: https://archithsharma.shinyapps.io/Cricket-Analyzer/
 
 ## Installation
 To set up and run this project:
@@ -38,10 +39,10 @@ The dataset includes:
 ## Repository Structure
 ```
 CricketPredictions/
-│── code/                  # Contains all project code
-│   │── R Code/                   # R scripts for statistical analysis
-│   │── Markdown File/            # Markdown version available on RPubs, fully reproducible
+│── code/                  # Contains R code that was used in designing project          
 │── data/                  # Includes datasets used in the project
+│── Markdown_Script/       # Markdown version available on RPubs, fully reproducible
+│── Shiny_App/             # Includes Source Code for Shiny App                 
 │── paper/                 # Research paper and TeX source
 │── README.md              # Project documentation
 │── LICENSE                # License information
