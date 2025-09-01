@@ -466,8 +466,8 @@ bowlingranking = venue_factors %>%
 battingranking
 bowlingranking
 
-hist(battingranking$BattingScale2, col = "blue", main = "Venue Batting Scale Distribution")
-hist(bowlingranking$BowlingScale2, col = "red", main = "Venue Bowling Scale Distribution")
+hist(battingranking$BattingScale2, col = "blue", main = "Venue Batting Scale Distribution", xlab = "Batting Scale")
+hist(bowlingranking$BowlingScale2, col = "red", main = "Venue Bowling Scale Distribution", xlab = "Bowling Scale")
 
 ```
 
@@ -1267,21 +1267,13 @@ The app is available at: https://archithsharma.shinyapps.io/Cricket-Analyzer/, w
 The player comparison tool will compare two players based on their batting and bowling impact per game. For all-rounders, it will show the value relative to all-rounders for bowling and batting as well. 
 
 ```{r, fig.align='center', fig.cap="Comparison between Hardik Pandya & Shakib al Hasan", echo=FALSE}
-<<<<<<< HEAD
-knitr::include_graphics("../images/Users/archith/Desktop/Example_Comparison.png")
-=======
 knitr::include_graphics("../images/app/Example_Comparison.png")
->>>>>>> 0f2cba1 (Addition of image files for easy figure access and markdown knit)
 ```
 ## Past Match Model Output
 
 The past match model output will show the player impact for both teams in a past match, and the predicted winner based on the logistic regression model.
 ```{r, fig.align='center', fig.cap="Past Match Model Output <br> IND vs RSA, T20 WC Final 2024", echo=FALSE}
-<<<<<<< HEAD
-knitr::include_graphics("../images/Past_Match_Model_Output.png")
-=======
 knitr::include_graphics("../images/app/Past_Match_Model_Output.png")
->>>>>>> 0f2cba1 (Addition of image files for easy figure access and markdown knit)
 ```
 
 ## Predict Future Match based on Playing XI
@@ -1291,11 +1283,7 @@ The predict future match based on playing XI will allow the user to select a pla
 An example was tested for the most recent T20I match between Afghanistan and Pakistan. The model's most recent data update was on August 16, 2025, and the match was played on August 29, 2025. The model predicted a 60% win probability for Pakistan, who went on to win the match by 39 runs, further legitimizing the model.
 
 ```{r, fig.align='center', fig.cap="Predict Future Match based on Playing XI for AFG vs PAK, T20I, August 29 2025", echo=FALSE} 
-<<<<<<< HEAD
-knitr::include_graphics("../images/Future_Match_Prediction.png")
-=======
 knitr::include_graphics("../images/app/Future_Match_Prediction.png")
->>>>>>> 0f2cba1 (Addition of image files for easy figure access and markdown knit)
 ```
 
 
