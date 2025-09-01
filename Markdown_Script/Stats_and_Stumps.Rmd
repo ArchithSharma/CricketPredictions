@@ -315,16 +315,15 @@ player_rankings_2$BowlImpactperGame = player_rankings_2$CareerBowlImpact / playe
 player_rankings_2$BowlImpactperGame_Z = (player_rankings_2$BowlImpactperGame - mean(player_rankings_2$BowlImpactperGame, na.rm = TRUE)) / sd(player_rankings_2$BowlImpactperGame, na.rm = TRUE)
 player_rankings_2$TotalImpactperGame = player_rankings_2$TotalImpact / player_rankings_2$MatchesPlayed
 player_rankings_2$TotalImpactperGame_Z = player_rankings_2$BatImpactperGame_Z + player_rankings_2$BowlImpactperGame_Z
-player_rankings_2 = player_rankings_2 %>% arrange(desc(TotalImpactperGame)) #Model all matches
+player_rankings_2 = player_rankings_2 %>% arrange(desc(MatchesPlayed)) #Model all matches
 player_rankings_display = player_rankings_2 %>% filter(MatchesPlayed >= 20)
 player_database = player_rankings_2 %>% filter(MatchesPlayed >= 5)
 bowlimpactmedian = quantile(player_rankings_display$BowlImpactperGame, 5/11)
 batimpactmedian = quantile(player_rankings_display$BatImpactperGame, 3.5/11)
 player_rankings_display2 = player_rankings_display %>% dplyr::filter(BowlImpactperGame > bowlimpactmedian)
 allrounderranking = player_rankings_display2 %>% dplyr::filter(BatImpactperGame > batimpactmedian)
-View(player_rankings_2)
-View(player_rankings_display)
-View(allrounderranking)
+allrounderranking = allrounderranking %>% arrange(desc(TotalImpactperGame))
+(player_rankings_display)
 
 ```
 
@@ -425,7 +424,6 @@ ggplot(top_bowlers_per_game, aes(x = reorder(Player, BowlImpactperGame), y = Bow
   theme_minimal() +
   geom_text(aes(label = round(BowlImpactperGame, 2)), hjust = 1.4, color = "black", size = 3) # Add labels for clarity
 
-print(player_rankings_display)
 ```
 
 # Venue Impact Factors and Team Rankings - Venue_Team_Rankings.R
@@ -469,7 +467,7 @@ battingranking
 bowlingranking
 
 hist(battingranking$BattingScale2, col = "blue", main = "Venue Batting Scale Distribution")
-hist(bowlingranking$BowlingScale2, col = "red")
+hist(bowlingranking$BowlingScale2, col = "red", main = "Venue Bowling Scale Distribution")
 
 ```
 
@@ -523,7 +521,7 @@ team_ranking_recent <- team_impact %>%
   mutate(TotalImpact_perGame = TotalImpact / nMatches) %>%
   arrange(desc(TotalImpact))
 
-print(team_ranking_recent)
+(team_ranking_recent)
 ```
 
 Plot team rankings
@@ -822,16 +820,7 @@ for(i in 1:30){
   }
   
 }
-
-mean_acc <- mean(accvector)
 ```
-
-Plot Accuracy Distribution
-```{r}
-hist(accvector, main = "Histogram of Logistic Regression Model Accuracy", xlab = "Accuracy", ylab = "Frequency")
-mean(accvector)
-```
-
 
 
 Train the final Logistic Regression model on the entire dataset
@@ -1278,13 +1267,21 @@ The app is available at: https://archithsharma.shinyapps.io/Cricket-Analyzer/, w
 The player comparison tool will compare two players based on their batting and bowling impact per game. For all-rounders, it will show the value relative to all-rounders for bowling and batting as well. 
 
 ```{r, fig.align='center', fig.cap="Comparison between Hardik Pandya & Shakib al Hasan", echo=FALSE}
+<<<<<<< HEAD
 knitr::include_graphics("../images/Users/archith/Desktop/Example_Comparison.png")
+=======
+knitr::include_graphics("../images/app/Example_Comparison.png")
+>>>>>>> 0f2cba1 (Addition of image files for easy figure access and markdown knit)
 ```
 ## Past Match Model Output
 
 The past match model output will show the player impact for both teams in a past match, and the predicted winner based on the logistic regression model.
 ```{r, fig.align='center', fig.cap="Past Match Model Output <br> IND vs RSA, T20 WC Final 2024", echo=FALSE}
+<<<<<<< HEAD
 knitr::include_graphics("../images/Past_Match_Model_Output.png")
+=======
+knitr::include_graphics("../images/app/Past_Match_Model_Output.png")
+>>>>>>> 0f2cba1 (Addition of image files for easy figure access and markdown knit)
 ```
 
 ## Predict Future Match based on Playing XI
@@ -1294,7 +1291,11 @@ The predict future match based on playing XI will allow the user to select a pla
 An example was tested for the most recent T20I match between Afghanistan and Pakistan. The model's most recent data update was on August 16, 2025, and the match was played on August 29, 2025. The model predicted a 60% win probability for Pakistan, who went on to win the match by 39 runs, further legitimizing the model.
 
 ```{r, fig.align='center', fig.cap="Predict Future Match based on Playing XI for AFG vs PAK, T20I, August 29 2025", echo=FALSE} 
+<<<<<<< HEAD
 knitr::include_graphics("../images/Future_Match_Prediction.png")
+=======
+knitr::include_graphics("../images/app/Future_Match_Prediction.png")
+>>>>>>> 0f2cba1 (Addition of image files for easy figure access and markdown knit)
 ```
 
 
