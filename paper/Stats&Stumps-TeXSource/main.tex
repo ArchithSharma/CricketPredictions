@@ -47,12 +47,12 @@
 
 \maketitle
 \begin{abstract}
-Cricket’s fastest-growing format, Twenty20 Internationals (T20Is), presents unique challenges for evaluating players and predicting match outcomes. Team selectors often justify decisions based on “experience”, yet performance in other formats (e.g., Test cricket) does not reliably translate to T20s. This project builds quantitative, venue-adjusted impact metrics from batting and bowling statistics (runs, strike rate, boundaries, wickets, economy, maiden overs) to provide objective alternatives for player and team evaluation. Using a dataset of 1,061 T20Is, four approaches were tested: a heuristic, logistic regression with regularization, random forests, and support vector machines (SVMs). Logistic regression and SVMs achieved the best accuracy (\textasciitilde72\%), remaining interpretable while balancing RMSE and Log-Loss. The final model was backtested on the 2024 T20 World Cup, correctly characterizing the close India–South Africa final. An interactive app enables player comparison, model backtesting of all historical matches, and match predictions for a user-generated game. Overall, the framework shows how statistical modeling can complement selection decisions and improve T20I outcome prediction.
+Cricket’s fastest-growing format, Twenty20 Internationals (T20Is), presents unique challenges for evaluating players and predicting match outcomes. Team selectors often justify decisions based on “experience”, yet performance in other formats (e.g., Test cricket) does not reliably translate to T20s. This project builds quantitative, venue-adjusted impact metrics from batting and bowling statistics (runs, strike rate, boundaries, wickets, economy, maiden overs) to provide objective alternatives for player and team evaluation. Using a dataset of 1,061 T20Is, four approaches were tested: a heuristic, logistic regression with regularization, random forests, and support vector machines (SVMs). Logistic regression and SVMs achieved the best accuracy (\textasciitilde72\%), remaining interpretable while balancing RMSE and Log-Loss. The final model was backtested on the 2024 T20 World Cup, correctly characterizing the close India–South Africa final. An interactive app enables player comparison, model backtesting of all historical matches, and match predictions for a user-simulated game that takes into account player characteristics at a specific venue. Custom XIs can be tested for future and hypothetical matchups. Overall, the framework shows how statistical modeling can complement selection decisions and improve T20I outcome prediction.
 \end{abstract}
 \textit{Keywords:} \\
 T20I, Cricket, Machine Learning, Player Impact, Cricket Analytics, Venue Adjustment, Regression
 \\
-\\\label{reproducibility}\textbf{Reproducibility Statement:} The code used in this project is available in Github, at \\ \href{https://github.com/ArchithSharma/CricketPredictions}{https://github.com/ArchithSharma/CricketPredictions}. In addition, a published version of the R Markdown used to generate figures and conduct analysis is present at \href{https://rpubs.com/ArchithS/CricketData}{https://rpubs.com/ArchithS/CricketData}. The current version of the code is in the \textbf{Markdown\_Script} folder in the Github repository.
+\\\label{reproducibility}\textbf{Reproducibility Statement:} The code used in this project is available in Github, at \\ \href{https://github.com/ArchithSharma/CricketPredictions}{https://github.com/ArchithSharma/CricketPredictions}. In addition, a published version of the R Markdown used to conduct the analysis is present at \href{https://archithsharma.github.io/CricketPredictions/}{https://archithsharma.github.io/CricketPredictions/}. The current version of the code is located in the \textbf{Markdown\_Script} folder in the Github repository.
 \\
 \\
 \textbf{Web Application}: \href{https://archithsharma.shinyapps.io/Cricket-Analyzer}{https://archithsharma.shinyapps.io/Cricket-Analyzer}
@@ -89,7 +89,7 @@ The data is then filtered to only include T20Is between the test-playing full IC
 
 \subsection{Derivation of Impact Factor}
 
-At the core of this analysis is the novel impact factor used in comparing batting and bowling impacts. To determine the formula for batting and bowling impact, correlation to the target metric between the total impact of both teams was prioritized in addition to similarity in the distribution of the impact factors each game.
+At the core of this analysis is the novel impact factor used in comparing batting and bowling impacts. To determine the formula for both, responsiveness to the match output between the total impact of both teams was prioritized in addition to similarity in the distribution of the impact factors each game.
 
 The impact factor was manually tuned to a quantity that sufficiently addressed both criteria. They are defined below in \Autoref{eq:1} \& \Autoref{eq:2}:
 
@@ -218,7 +218,7 @@ In summary, the impact factors in this methodology are derived from a combinatio
 
 \section{Modeling} \label{sec:model}
 
-To predict T20I match outcomes based on player-level performance metrics, several classification models were implemented and evaluated using a dataset where each match was represented by the total impact scores of the top 8 batsmen and 6 bowlers per team. Even though there are only 11 players, there is overlap between these categories (all-rounders). There are 28 data cells, 8 batsmen and bowlers per team. As a baseline, a simple heuristic predicted the team with the higher cumulative impact score as the winner:  
+To predict T20I outcomes based on player-level performance metrics, several classification models were implemented and evaluated. Even though there are only 11 players, there is overlap between these categories. There are 28 data cells, 8 batsmen and 6 bowlers per team. At least 3 players per team will be in both categories as an all-rounder. As a baseline, a simple heuristic predicted the team with the higher cumulative impact score as the winner:  
 
 \begin{equation}
 \hat{y} =
@@ -286,13 +286,13 @@ Overall, logistic regression with elastic net regularization offered the stronge
 \section{Results} \label{sec:results}
 
 \subsection{Player and Venue visualizations}
-Now that the impact factors are clearly defined, they can be used to construct rankings of players by batting, bowling, or all-around play and venue factors. Similarly, teams can be ranked by their recent impact factors. The full visualizations of the Top 15 in Career Impact and Impact per Game for batsmen are found in the images file in the GitHub repository, and can be generated from the R markdown. 
+Now that the impact factors are clearly defined, they can be used to construct rankings of players by batting, bowling, or all-around play and venue factors. Similarly, teams can be ranked by their recent impact factors. The full visualizations of the top 15 in Career Impact and Impact per Game for batsmen are found in the images file in the GitHub repository, and can be generated from the R markdown. 
 
 All-rounders are defined as individuals in the top two-thirds of all players in batting and in the top third percentile of all players in bowling. The average venue impact was also min-max scaled to be used as a multiplier in the predictive modeling phase. Note the inclusion of players on multiple lists, such as Rashid Khan, Shakib al Hasan, and Wanindu Hasaranga being top all-rounders due to their bowling, and Virat Kohli consistently accumulating impact at a rapid pace over his career with the highest career impact and $3^{\text{rd}}$ highest per game batting impact.
 
 
 
-\Autoref{tab:batimpact} and \Autoref{tab:bowlimpact} include the Top 5 in Batting Impact, Bowling Impact over the span of a career, in addition to the Top 5 in those categories per game. The total impact of all-rounders is also calculated and displayed in \Autoref{tab:allroundimpact}. Lastly, the top 5 venues for Bowling and Batting are in \Autoref{tab:venues}. 
+\Autoref{tab:batimpact} and \Autoref{tab:bowlimpact} include the top 5 in Batting Impact, Bowling Impact over the span of a career, in addition to the top 5 in those categories per game. The total impact of all-rounders is also calculated and displayed in \Autoref{tab:allroundimpact}. Lastly, the top 5 venues for Bowling and Batting are in \Autoref{tab:venues}. 
 
 
 
@@ -356,7 +356,7 @@ All-rounders are defined as individuals in the top two-thirds of all players in 
 \end{table}
 
 \subsection{Model Results}
-The modeling results are organized below in \Autoref{tab:model-performance}.
+The modeling results are organized below in \Autoref{tab:model-performance}. Note the composite score of all three models.
 \begin{table}[!h]
 \centering
 \resizebox{\textwidth}{!}{%
@@ -429,13 +429,13 @@ I developed an application to compare players and show how the model can make pr
 
 \begin{figure}[!h]
     \centering
-    \includegraphics[width=0.8\linewidth]{Example_Comparison.png}
+    \includegraphics[width=0.79\linewidth]{Example_Comparison.png}
     \caption{Comparison between Hardik Pandya \& Shakib al Hasan in Web App}
     \label{fig:comparison}
 \end{figure}
 \begin{figure}[!h]
     \centering
-    \includegraphics[width=0.8\linewidth]{Past_Match_Model_Output.png}
+    \includegraphics[width=0.79\linewidth]{Past_Match_Model_Output.png}
     \caption{Past Match Model Output\\IND vs RSA, T20 WC Final 2024}
     \label{fig:pastmatch}
 \end{figure}
@@ -446,7 +446,7 @@ Lastly, to predict future matches or custom matches, the last tab of the app wil
 
 \begin{figure}[!h]
     \centering
-    \includegraphics[width=0.8\linewidth]{Future_Match_Prediction.png}
+    \includegraphics[width=0.79\linewidth]{Future_Match_Prediction.png}
     \caption{Predict Future Match based on Playing XI\\AFG vs PAK, T20I, August 29 2025}
     \label{fig:custom}
 \end{figure}
@@ -459,7 +459,7 @@ The app is available at:
 
 \section{Conclusions and Future Work} \label{sec:conclusion}
 
-This paper has been maximizing the value of a simple model in T20I prediction. More complex models can consider strategy with the toss before matches, as many pitches get better to bat on because of the dew in the night, meaning there is a significant advantage in batting second. \parencite{krishnaswamy_2022_the} Recent player form can change the parameter passed into the logistic regression. For example, Virat Kohli was in a bad run of form during the T20 World Cup, only crossing 10 runs twice in the 7 matches before the final. Specific bowler-batsman combinations are not considered either, such as the Indian top order's issues with left arm pace bowlers. \parencite{iyer_2023_why} In addition, win probability could be mapped to a margin of victory as determined by the impact factor difference. Overall, however, this paper's methods have had high accuracy in predictions and an explainable impact factor that can be used to quantify team performance. This framework can streamline cricket analysis and objectively pit players and teams against each other through the power of data.
+This paper has been maximizing the value of a simple model in T20I prediction. More complex models can consider strategy with the toss before matches, as many pitches get better to bat on because of the dew in the night, meaning there is a significant advantage in batting second. \parencite{krishnaswamy_2022_the} Weather is also signficant in day matches, as the sun beating down on the pitch helps batsmen. Cloudy conditions and wind would help the ball move for the bowlers. Recent player form can change the parameter passed into the logistic regression. For example, Virat Kohli was in a bad run of form during the T20 World Cup, only crossing 10 runs twice in the 7 matches before the final. Specific bowler-batsman combinations are not considered either, such as the Indian top order's issues with left arm pace bowlers. \parencite{iyer_2023_why} In addition, win probability could be mapped to a margin of victory as determined by the impact factor difference. Overall, however, this paper's methods have had high accuracy in predictions and an explainable impact factor that can be used to quantify team performance. This framework can streamline cricket analysis and objectively pit players and teams against each other through the power of data.
 
 
 
