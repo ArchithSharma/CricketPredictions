@@ -1,0 +1,504 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>5 Model Evaluation (Human Eye Check) on Real Games - T20_Final_Example.R | Cricket Data Analysis</title>
+  <meta name="description" content="5 Model Evaluation (Human Eye Check) on Real Games - T20_Final_Example.R | Cricket Data Analysis" />
+  <meta name="generator" content="bookdown 0.43 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="5 Model Evaluation (Human Eye Check) on Real Games - T20_Final_Example.R | Cricket Data Analysis" />
+  <meta property="og:type" content="book" />
+  
+  
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="5 Model Evaluation (Human Eye Check) on Real Games - T20_Final_Example.R | Cricket Data Analysis" />
+  
+  
+  
+
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="model-training-and-evaluation---cricket_prediction.html"/>
+<link rel="next" href="web-app-for-predicting-games-and-player-impact---app.r-located-in-shiny_app-code-folder.html"/>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<style type="text/css">
+  
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+</style>
+
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Data Processing - Data_Processing.R</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="index.html"><a href="index.html#preprocessing"><i class="fa fa-check"></i><b>1.1</b> Preprocessing</a></li>
+<li class="chapter" data-level="1.2" data-path="index.html"><a href="index.html#distribution-comparison---verify-batting-and-bowling-impact-are-similar"><i class="fa fa-check"></i><b>1.2</b> Distribution Comparison - Verify Batting and Bowling Impact are Similar</a></li>
+<li class="chapter" data-level="1.3" data-path="index.html"><a href="index.html#merge-with-match-data-and-measure-correlation-with-match-outcome"><i class="fa fa-check"></i><b>1.3</b> Merge with Match Data and Measure Correlation with Match Outcome</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="creating-player-rankings---player_rankings.html"><a href="creating-player-rankings---player_rankings.html"><i class="fa fa-check"></i><b>2</b> Creating Player Rankings - Player_Rankings.R</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="creating-player-rankings---player_rankings.html"><a href="creating-player-rankings---player_rankings.html#summarize-impact-by-player"><i class="fa fa-check"></i><b>2.1</b> Summarize Impact by Player</a></li>
+<li class="chapter" data-level="2.2" data-path="creating-player-rankings---player_rankings.html"><a href="creating-player-rankings---player_rankings.html#player-comparison-and-visualization"><i class="fa fa-check"></i><b>2.2</b> Player Comparison and Visualization</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="venue-impact-factors-and-team-rankings---venue_team_rankings.html"><a href="venue-impact-factors-and-team-rankings---venue_team_rankings.html"><i class="fa fa-check"></i><b>3</b> Venue Impact Factors and Team Rankings - Venue_Team_Rankings.R</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="venue-impact-factors-and-team-rankings---venue_team_rankings.html"><a href="venue-impact-factors-and-team-rankings---venue_team_rankings.html#venue-impact"><i class="fa fa-check"></i><b>3.1</b> Venue Impact</a></li>
+<li class="chapter" data-level="3.2" data-path="venue-impact-factors-and-team-rankings---venue_team_rankings.html"><a href="venue-impact-factors-and-team-rankings---venue_team_rankings.html#team-ranking"><i class="fa fa-check"></i><b>3.2</b> Team Ranking</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="model-training-and-evaluation---cricket_prediction.html"><a href="model-training-and-evaluation---cricket_prediction.html"><i class="fa fa-check"></i><b>4</b> Model Training and Evaluation - Cricket_Prediction.R</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="model-training-and-evaluation---cricket_prediction.html"><a href="model-training-and-evaluation---cricket_prediction.html#creating-training-dataset"><i class="fa fa-check"></i><b>4.1</b> Creating Training Dataset</a></li>
+<li class="chapter" data-level="4.2" data-path="model-training-and-evaluation---cricket_prediction.html"><a href="model-training-and-evaluation---cricket_prediction.html#heuristic-if-team-1-has-greater-total-impact-predict-team-1-wins-else-team-2-wins"><i class="fa fa-check"></i><b>4.2</b> Heuristic: If Team 1 has greater total impact, predict Team 1 wins, else Team 2 wins</a></li>
+<li class="chapter" data-level="4.3" data-path="model-training-and-evaluation---cricket_prediction.html"><a href="model-training-and-evaluation---cricket_prediction.html#logistic-regression-with-repeated-splits"><i class="fa fa-check"></i><b>4.3</b> Logistic Regression with repeated splits</a></li>
+<li class="chapter" data-level="4.4" data-path="model-training-and-evaluation---cricket_prediction.html"><a href="model-training-and-evaluation---cricket_prediction.html#rf-model"><i class="fa fa-check"></i><b>4.4</b> RF model</a></li>
+<li class="chapter" data-level="4.5" data-path="model-training-and-evaluation---cricket_prediction.html"><a href="model-training-and-evaluation---cricket_prediction.html#svms"><i class="fa fa-check"></i><b>4.5</b> SVMs</a></li>
+<li class="chapter" data-level="4.6" data-path="model-training-and-evaluation---cricket_prediction.html"><a href="model-training-and-evaluation---cricket_prediction.html#model-comparison"><i class="fa fa-check"></i><b>4.6</b> Model Comparison</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="model-evaluation-human-eye-check-on-real-games---t20_final_example.html"><a href="model-evaluation-human-eye-check-on-real-games---t20_final_example.html"><i class="fa fa-check"></i><b>5</b> Model Evaluation (Human Eye Check) on Real Games - T20_Final_Example.R</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="model-evaluation-human-eye-check-on-real-games---t20_final_example.html"><a href="model-evaluation-human-eye-check-on-real-games---t20_final_example.html#example-match-india-vs-south-africa-t20-world-cup-final-2024-at-bridgetown"><i class="fa fa-check"></i><b>5.1</b> Example Match: India vs South Africa, T20 World Cup Final 2024 at Bridgetown</a></li>
+<li class="chapter" data-level="5.2" data-path="model-evaluation-human-eye-check-on-real-games---t20_final_example.html"><a href="model-evaluation-human-eye-check-on-real-games---t20_final_example.html#with-random-effect-correction-based-on-number-of-matches-played"><i class="fa fa-check"></i><b>5.2</b> With random effect correction based on number of matches played</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="web-app-for-predicting-games-and-player-impact---app.r-located-in-shiny_app-code-folder.html"><a href="web-app-for-predicting-games-and-player-impact---app.r-located-in-shiny_app-code-folder.html"><i class="fa fa-check"></i><b>6</b> Web App for Predicting Games and Player Impact - App.R (located in Shiny_App code folder)</a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="web-app-for-predicting-games-and-player-impact---app.r-located-in-shiny_app-code-folder.html"><a href="web-app-for-predicting-games-and-player-impact---app.r-located-in-shiny_app-code-folder.html#player-comparison-tool"><i class="fa fa-check"></i><b>6.1</b> Player Comparison Tool</a></li>
+<li class="chapter" data-level="6.2" data-path="web-app-for-predicting-games-and-player-impact---app.r-located-in-shiny_app-code-folder.html"><a href="web-app-for-predicting-games-and-player-impact---app.r-located-in-shiny_app-code-folder.html#past-match-model-output"><i class="fa fa-check"></i><b>6.2</b> Past Match Model Output</a></li>
+<li class="chapter" data-level="6.3" data-path="web-app-for-predicting-games-and-player-impact---app.r-located-in-shiny_app-code-folder.html"><a href="web-app-for-predicting-games-and-player-impact---app.r-located-in-shiny_app-code-folder.html#predict-future-match-based-on-playing-xi"><i class="fa fa-check"></i><b>6.3</b> Predict Future Match based on Playing XI</a></li>
+</ul></li>
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Cricket Data Analysis</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="model-evaluation-human-eye-check-on-real-games---t20_final_example.r" class="section level1 hasAnchor" number="5">
+<h1><span class="header-section-number">5</span> Model Evaluation (Human Eye Check) on Real Games - T20_Final_Example.R<a href="model-evaluation-human-eye-check-on-real-games---t20_final_example.html#model-evaluation-human-eye-check-on-real-games---t20_final_example.r" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<div id="example-match-india-vs-south-africa-t20-world-cup-final-2024-at-bridgetown" class="section level2 hasAnchor" number="5.1">
+<h2><span class="header-section-number">5.1</span> Example Match: India vs South Africa, T20 World Cup Final 2024 at Bridgetown<a href="model-evaluation-human-eye-check-on-real-games---t20_final_example.html#example-match-india-vs-south-africa-t20-world-cup-final-2024-at-bridgetown" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Get the playing XI for both teams</p>
+<div class="sourceCode" id="cb83"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb83-1"><a href="model-evaluation-human-eye-check-on-real-games---t20_final_example.html#cb83-1" tabindex="-1"></a>team1_playingxi <span class="ot">=</span> player_data <span class="sc">%&gt;%</span> <span class="fu">filter</span>(ID <span class="sc">==</span> <span class="dv">2729</span>)</span>
+<span id="cb83-2"><a href="model-evaluation-human-eye-check-on-real-games---t20_final_example.html#cb83-2" tabindex="-1"></a>team1_playingxi <span class="ot">=</span> team1_playingxi[<span class="dv">1</span><span class="sc">:</span><span class="dv">22</span>,]</span>
+<span id="cb83-3"><a href="model-evaluation-human-eye-check-on-real-games---t20_final_example.html#cb83-3" tabindex="-1"></a>team1_playingxi <span class="ot">=</span> team1_playingxi <span class="sc">%&gt;%</span> <span class="fu">filter</span>(Country <span class="sc">==</span> <span class="st">&quot;IND&quot;</span>)</span>
+<span id="cb83-4"><a href="model-evaluation-human-eye-check-on-real-games---t20_final_example.html#cb83-4" tabindex="-1"></a>team1_playingxi <span class="ot">=</span> team1_playingxi<span class="sc">$</span>Player</span>
+<span id="cb83-5"><a href="model-evaluation-human-eye-check-on-real-games---t20_final_example.html#cb83-5" tabindex="-1"></a></span>
+<span id="cb83-6"><a href="model-evaluation-human-eye-check-on-real-games---t20_final_example.html#cb83-6" tabindex="-1"></a>team2_playingxi <span class="ot">=</span> player_data <span class="sc">%&gt;%</span> <span class="fu">filter</span>(ID <span class="sc">==</span> <span class="dv">2729</span>)</span>
+<span id="cb83-7"><a href="model-evaluation-human-eye-check-on-real-games---t20_final_example.html#cb83-7" tabindex="-1"></a>team2_playingxi <span class="ot">=</span> team2_playingxi[<span class="dv">1</span><span class="sc">:</span><span class="dv">22</span>,]</span>
+<span id="cb83-8"><a href="model-evaluation-human-eye-check-on-real-games---t20_final_example.html#cb83-8" tabindex="-1"></a>team2_playingxi <span class="ot">=</span> team2_playingxi <span class="sc">%&gt;%</span> <span class="fu">filter</span>(Country <span class="sc">==</span> <span class="st">&quot;RSA&quot;</span>)</span>
+<span id="cb83-9"><a href="model-evaluation-human-eye-check-on-real-games---t20_final_example.html#cb83-9" tabindex="-1"></a>team2_playingxi <span class="ot">=</span> team2_playingxi<span class="sc">$</span>Player</span></code></pre></div>
+<p>Get the ground buffs</p>
+<div class="sourceCode" id="cb84"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb84-1"><a href="model-evaluation-human-eye-check-on-real-games---t20_final_example.html#cb84-1" tabindex="-1"></a>ground_buffs <span class="ot">=</span> venue_factors <span class="sc">%&gt;%</span> <span class="fu">filter</span>(Ground <span class="sc">==</span> <span class="st">&quot;Bridgetown&quot;</span>)</span></code></pre></div>
+<p>Get the player ratings per match for the playing xi</p>
+<div class="sourceCode" id="cb85"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb85-1"><a href="model-evaluation-human-eye-check-on-real-games---t20_final_example.html#cb85-1" tabindex="-1"></a>team1_playingxi_ratings <span class="ot">=</span> player_rankings_2 <span class="sc">%&gt;%</span> <span class="fu">filter</span>(Player <span class="sc">%in%</span> team1_playingxi)</span>
+<span id="cb85-2"><a href="model-evaluation-human-eye-check-on-real-games---t20_final_example.html#cb85-2" tabindex="-1"></a>team2_playingxi_ratings <span class="ot">=</span> player_rankings_2 <span class="sc">%&gt;%</span> <span class="fu">filter</span>(Player <span class="sc">%in%</span> team2_playingxi)</span></code></pre></div>
+<p>Multiply the ground buffs
+Weight it by batter rating, ie if the batter rating is higher, the ground buffs will have more impact</p>
+<div class="sourceCode" id="cb86"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb86-1"><a href="model-evaluation-human-eye-check-on-real-games---t20_final_example.html#cb86-1" tabindex="-1"></a>team1_playingxi_ratings<span class="sc">$</span>BatImpactperGame_2 <span class="ot">=</span> <span class="dv">0</span></span>
+<span id="cb86-2"><a href="model-evaluation-human-eye-check-on-real-games---t20_final_example.html#cb86-2" tabindex="-1"></a>team2_playingxi_ratings<span class="sc">$</span>BatImpactperGame_2 <span class="ot">=</span> <span class="dv">0</span></span>
+<span id="cb86-3"><a href="model-evaluation-human-eye-check-on-real-games---t20_final_example.html#cb86-3" tabindex="-1"></a>team1_playingxi_ratings<span class="sc">$</span>BowlImpactperGame_2 <span class="ot">=</span> <span class="dv">0</span></span>
+<span id="cb86-4"><a href="model-evaluation-human-eye-check-on-real-games---t20_final_example.html#cb86-4" tabindex="-1"></a>team2_playingxi_ratings<span class="sc">$</span>BowlImpactperGame_2 <span class="ot">=</span> <span class="dv">0</span></span></code></pre></div>
+<p>Evaluate player performance in Team 1 according to their ratings and ground conditions</p>
+<div class="sourceCode" id="cb87"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb87-1"><a href="model-evaluation-human-eye-check-on-real-games---t20_final_example.html#cb87-1" tabindex="-1"></a><span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">nrow</span>(team1_playingxi_ratings)){</span>
+<span id="cb87-2"><a href="model-evaluation-human-eye-check-on-real-games---t20_final_example.html#cb87-2" tabindex="-1"></a>  <span class="co"># Sort by batting rating</span></span>
+<span id="cb87-3"><a href="model-evaluation-human-eye-check-on-real-games---t20_final_example.html#cb87-3" tabindex="-1"></a>  team1_playingxi_ratings <span class="ot">=</span> team1_playingxi_ratings <span class="sc">%&gt;%</span> <span class="fu">arrange</span>(<span class="fu">desc</span>(BatImpactperGame))</span>
+<span id="cb87-4"><a href="model-evaluation-human-eye-check-on-real-games---t20_final_example.html#cb87-4" tabindex="-1"></a>  <span class="co"># Divide by appropriate factor, assume only 8 batsmen will play</span></span>
+<span id="cb87-5"><a href="model-evaluation-human-eye-check-on-real-games---t20_final_example.html#cb87-5" tabindex="-1"></a>  <span class="cf">if</span>(i <span class="sc">&lt;</span> <span class="dv">9</span>){</span>
+<span id="cb87-6"><a href="model-evaluation-human-eye-check-on-real-games---t20_final_example.html#cb87-6" tabindex="-1"></a>    team1_avg <span class="ot">=</span> team1_playingxi_ratings<span class="sc">$</span>BatImpactperGame[i] <span class="sc">*</span> (<span class="dv">1</span> <span class="sc">/</span> <span class="fu">median</span>(venue_factors<span class="sc">$</span>BattingScale2)) <span class="sc">*</span> ground_buffs<span class="sc">$</span>BattingScale2[<span class="dv">1</span>] <span class="sc">*</span> ((<span class="dv">9</span><span class="sc">-</span>i)<span class="sc">/</span>(<span class="dv">10</span><span class="sc">-</span>i))</span>
+<span id="cb87-7"><a href="model-evaluation-human-eye-check-on-real-games---t20_final_example.html#cb87-7" tabindex="-1"></a>    team1_playingxi_ratings<span class="sc">$</span>BatImpactperGame_2[i] <span class="ot">=</span> team1_avg</span>
+<span id="cb87-8"><a href="model-evaluation-human-eye-check-on-real-games---t20_final_example.html#cb87-8" tabindex="-1"></a>  }</span>
+<span id="cb87-9"><a href="model-evaluation-human-eye-check-on-real-games---t20_final_example.html#cb87-9" tabindex="-1"></a>  <span class="cf">else</span> {</span>
+<span id="cb87-10"><a href="model-evaluation-human-eye-check-on-real-games---t20_final_example.html#cb87-10" tabindex="-1"></a>    <span class="co"># Bottom batsmen don&#39;t get a buff and don&#39;t play as much</span></span>
+<span id="cb87-11"><a href="model-evaluation-human-eye-check-on-real-games---t20_final_example.html#cb87-11" tabindex="-1"></a>    team1_avg <span class="ot">=</span> team1_playingxi_ratings<span class="sc">$</span>BatImpactperGame[i] <span class="sc">/</span> <span class="dv">5</span></span>
+<span id="cb87-12"><a href="model-evaluation-human-eye-check-on-real-games---t20_final_example.html#cb87-12" tabindex="-1"></a>    team1_playingxi_ratings<span class="sc">$</span>BatImpactperGame_2[i] <span class="ot">=</span> team1_avg</span>
+<span id="cb87-13"><a href="model-evaluation-human-eye-check-on-real-games---t20_final_example.html#cb87-13" tabindex="-1"></a>  }</span>
+<span id="cb87-14"><a href="model-evaluation-human-eye-check-on-real-games---t20_final_example.html#cb87-14" tabindex="-1"></a>  </span>
+<span id="cb87-15"><a href="model-evaluation-human-eye-check-on-real-games---t20_final_example.html#cb87-15" tabindex="-1"></a>  team1_playingxi_ratings <span class="ot">=</span> team1_playingxi_ratings <span class="sc">%&gt;%</span> <span class="fu">arrange</span>(<span class="fu">desc</span>(BowlImpactperGame))</span>
+<span id="cb87-16"><a href="model-evaluation-human-eye-check-on-real-games---t20_final_example.html#cb87-16" tabindex="-1"></a>  <span class="cf">if</span>(i <span class="sc">&lt;</span> <span class="dv">7</span>) {</span>
+<span id="cb87-17"><a href="model-evaluation-human-eye-check-on-real-games---t20_final_example.html#cb87-17" tabindex="-1"></a>    team1_avg <span class="ot">=</span> team1_playingxi_ratings<span class="sc">$</span>BowlImpactperGame[i] <span class="sc">*</span> (<span class="dv">1</span> <span class="sc">/</span> <span class="fu">median</span>(venue_factors<span class="sc">$</span>BowlingScale2)) <span class="sc">*</span> ground_buffs<span class="sc">$</span>BowlingScale2[<span class="dv">1</span>] <span class="sc">*</span> ((<span class="dv">8</span><span class="sc">-</span>i)<span class="sc">/</span>(<span class="dv">9</span><span class="sc">-</span>i))</span>
+<span id="cb87-18"><a href="model-evaluation-human-eye-check-on-real-games---t20_final_example.html#cb87-18" tabindex="-1"></a>    team1_playingxi_ratings<span class="sc">$</span>BowlImpactperGame_2[i] <span class="ot">=</span> team1_avg</span>
+<span id="cb87-19"><a href="model-evaluation-human-eye-check-on-real-games---t20_final_example.html#cb87-19" tabindex="-1"></a>  }</span>
+<span id="cb87-20"><a href="model-evaluation-human-eye-check-on-real-games---t20_final_example.html#cb87-20" tabindex="-1"></a>  <span class="cf">else</span> {</span>
+<span id="cb87-21"><a href="model-evaluation-human-eye-check-on-real-games---t20_final_example.html#cb87-21" tabindex="-1"></a>    <span class="co"># Bottom bowlers don&#39;t bowl in the game</span></span>
+<span id="cb87-22"><a href="model-evaluation-human-eye-check-on-real-games---t20_final_example.html#cb87-22" tabindex="-1"></a>    team1_playingxi_ratings<span class="sc">$</span>BowlImpactperGame_2[i] <span class="ot">=</span> <span class="dv">0</span> </span>
+<span id="cb87-23"><a href="model-evaluation-human-eye-check-on-real-games---t20_final_example.html#cb87-23" tabindex="-1"></a>  }</span>
+<span id="cb87-24"><a href="model-evaluation-human-eye-check-on-real-games---t20_final_example.html#cb87-24" tabindex="-1"></a>  </span>
+<span id="cb87-25"><a href="model-evaluation-human-eye-check-on-real-games---t20_final_example.html#cb87-25" tabindex="-1"></a>}</span></code></pre></div>
+<p>Evaluate player performance in Team 2 according to their ratings and ground conditions</p>
+<div class="sourceCode" id="cb88"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb88-1"><a href="model-evaluation-human-eye-check-on-real-games---t20_final_example.html#cb88-1" tabindex="-1"></a><span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">nrow</span>(team2_playingxi_ratings)){</span>
+<span id="cb88-2"><a href="model-evaluation-human-eye-check-on-real-games---t20_final_example.html#cb88-2" tabindex="-1"></a>  team2_playingxi_ratings <span class="ot">=</span> team2_playingxi_ratings <span class="sc">%&gt;%</span> <span class="fu">arrange</span>(<span class="fu">desc</span>(BatImpactperGame))</span>
+<span id="cb88-3"><a href="model-evaluation-human-eye-check-on-real-games---t20_final_example.html#cb88-3" tabindex="-1"></a>  <span class="co"># Divide by appropriate factor, assume only 8 batsmen will play</span></span>
+<span id="cb88-4"><a href="model-evaluation-human-eye-check-on-real-games---t20_final_example.html#cb88-4" tabindex="-1"></a>  <span class="cf">if</span>(i <span class="sc">&lt;</span> <span class="dv">9</span>){</span>
+<span id="cb88-5"><a href="model-evaluation-human-eye-check-on-real-games---t20_final_example.html#cb88-5" tabindex="-1"></a>    team2_avg <span class="ot">=</span> team2_playingxi_ratings<span class="sc">$</span>BatImpactperGame[i] <span class="sc">*</span> (<span class="dv">1</span> <span class="sc">/</span> <span class="fu">median</span>(venue_factors<span class="sc">$</span>BattingScale2)) <span class="sc">*</span> ground_buffs<span class="sc">$</span>BattingScale2[<span class="dv">1</span>] <span class="sc">*</span> ((<span class="dv">9</span><span class="sc">-</span>i)<span class="sc">/</span>(<span class="dv">10</span><span class="sc">-</span>i))</span>
+<span id="cb88-6"><a href="model-evaluation-human-eye-check-on-real-games---t20_final_example.html#cb88-6" tabindex="-1"></a>    team2_playingxi_ratings<span class="sc">$</span>BatImpactperGame_2[i] <span class="ot">=</span> team2_avg</span>
+<span id="cb88-7"><a href="model-evaluation-human-eye-check-on-real-games---t20_final_example.html#cb88-7" tabindex="-1"></a>  }</span>
+<span id="cb88-8"><a href="model-evaluation-human-eye-check-on-real-games---t20_final_example.html#cb88-8" tabindex="-1"></a>  <span class="cf">else</span>{</span>
+<span id="cb88-9"><a href="model-evaluation-human-eye-check-on-real-games---t20_final_example.html#cb88-9" tabindex="-1"></a>    <span class="co"># Bottom batsmen don&#39;t get a buff and don&#39;t play as much</span></span>
+<span id="cb88-10"><a href="model-evaluation-human-eye-check-on-real-games---t20_final_example.html#cb88-10" tabindex="-1"></a>    team2_avg <span class="ot">=</span> team2_playingxi_ratings<span class="sc">$</span>BatImpactperGame[i] <span class="sc">/</span> <span class="dv">5</span></span>
+<span id="cb88-11"><a href="model-evaluation-human-eye-check-on-real-games---t20_final_example.html#cb88-11" tabindex="-1"></a>    team2_playingxi_ratings<span class="sc">$</span>BatImpactperGame_2[i] <span class="ot">=</span> team2_avg</span>
+<span id="cb88-12"><a href="model-evaluation-human-eye-check-on-real-games---t20_final_example.html#cb88-12" tabindex="-1"></a>  }</span>
+<span id="cb88-13"><a href="model-evaluation-human-eye-check-on-real-games---t20_final_example.html#cb88-13" tabindex="-1"></a>  </span>
+<span id="cb88-14"><a href="model-evaluation-human-eye-check-on-real-games---t20_final_example.html#cb88-14" tabindex="-1"></a>  team2_playingxi_ratings <span class="ot">=</span> team2_playingxi_ratings <span class="sc">%&gt;%</span> <span class="fu">arrange</span>(<span class="fu">desc</span>(BowlImpactperGame))</span>
+<span id="cb88-15"><a href="model-evaluation-human-eye-check-on-real-games---t20_final_example.html#cb88-15" tabindex="-1"></a>  <span class="cf">if</span>(i <span class="sc">&lt;</span> <span class="dv">7</span>){</span>
+<span id="cb88-16"><a href="model-evaluation-human-eye-check-on-real-games---t20_final_example.html#cb88-16" tabindex="-1"></a>    team2_avg <span class="ot">=</span> team2_playingxi_ratings<span class="sc">$</span>BowlImpactperGame[i] <span class="sc">*</span> (<span class="dv">1</span> <span class="sc">/</span> <span class="fu">median</span>(venue_factors<span class="sc">$</span>BowlingScale2)) <span class="sc">*</span> ground_buffs<span class="sc">$</span>BowlingScale2[<span class="dv">1</span>] <span class="sc">*</span> ((<span class="dv">8</span><span class="sc">-</span>i)<span class="sc">/</span>(<span class="dv">9</span><span class="sc">-</span>i))</span>
+<span id="cb88-17"><a href="model-evaluation-human-eye-check-on-real-games---t20_final_example.html#cb88-17" tabindex="-1"></a>    team2_playingxi_ratings<span class="sc">$</span>BowlImpactperGame_2[i] <span class="ot">=</span> team2_avg</span>
+<span id="cb88-18"><a href="model-evaluation-human-eye-check-on-real-games---t20_final_example.html#cb88-18" tabindex="-1"></a>  }</span>
+<span id="cb88-19"><a href="model-evaluation-human-eye-check-on-real-games---t20_final_example.html#cb88-19" tabindex="-1"></a>  <span class="cf">else</span>{</span>
+<span id="cb88-20"><a href="model-evaluation-human-eye-check-on-real-games---t20_final_example.html#cb88-20" tabindex="-1"></a>    <span class="co"># Bottom bowlers don&#39;t bowl in the game</span></span>
+<span id="cb88-21"><a href="model-evaluation-human-eye-check-on-real-games---t20_final_example.html#cb88-21" tabindex="-1"></a>    team2_playingxi_ratings<span class="sc">$</span>BowlImpactperGame_2[i] <span class="ot">=</span> <span class="dv">0</span> </span>
+<span id="cb88-22"><a href="model-evaluation-human-eye-check-on-real-games---t20_final_example.html#cb88-22" tabindex="-1"></a>  }</span>
+<span id="cb88-23"><a href="model-evaluation-human-eye-check-on-real-games---t20_final_example.html#cb88-23" tabindex="-1"></a>  </span>
+<span id="cb88-24"><a href="model-evaluation-human-eye-check-on-real-games---t20_final_example.html#cb88-24" tabindex="-1"></a>}</span></code></pre></div>
+<p>Rearrange data to make sure 11 batting rankings correct</p>
+<div class="sourceCode" id="cb89"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb89-1"><a href="model-evaluation-human-eye-check-on-real-games---t20_final_example.html#cb89-1" tabindex="-1"></a>team1_batting <span class="ot">=</span> (team1_playingxi_ratings <span class="sc">%&gt;%</span> <span class="fu">arrange</span>(<span class="fu">desc</span>(BatImpactperGame_2)))<span class="sc">$</span>BatImpactperGame_2</span>
+<span id="cb89-2"><a href="model-evaluation-human-eye-check-on-real-games---t20_final_example.html#cb89-2" tabindex="-1"></a>team2_batting <span class="ot">=</span> (team2_playingxi_ratings <span class="sc">%&gt;%</span> <span class="fu">arrange</span>(<span class="fu">desc</span>(BatImpactperGame_2)))<span class="sc">$</span>BatImpactperGame_2</span>
+<span id="cb89-3"><a href="model-evaluation-human-eye-check-on-real-games---t20_final_example.html#cb89-3" tabindex="-1"></a>team1_bowling <span class="ot">=</span> (team1_playingxi_ratings <span class="sc">%&gt;%</span> <span class="fu">arrange</span>(<span class="fu">desc</span>(BowlImpactperGame_2)))<span class="sc">$</span>BowlImpactperGame_2</span>
+<span id="cb89-4"><a href="model-evaluation-human-eye-check-on-real-games---t20_final_example.html#cb89-4" tabindex="-1"></a>team2_bowling <span class="ot">=</span> (team2_playingxi_ratings <span class="sc">%&gt;%</span> <span class="fu">arrange</span>(<span class="fu">desc</span>(BowlImpactperGame_2)))<span class="sc">$</span>BowlImpactperGame_2</span></code></pre></div>
+<p>Calculate win probability</p>
+<div class="sourceCode" id="cb90"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb90-1"><a href="model-evaluation-human-eye-check-on-real-games---t20_final_example.html#cb90-1" tabindex="-1"></a>ind_winprob <span class="ot">=</span> <span class="fu">predict</span>(final_model, <span class="at">newx =</span> (<span class="fu">data.frame</span>(<span class="at">Batsman1_T1 =</span> team1_batting[<span class="dv">1</span>],</span>
+<span id="cb90-2"><a href="model-evaluation-human-eye-check-on-real-games---t20_final_example.html#cb90-2" tabindex="-1"></a>                                    <span class="at">Batsman2_T1 =</span> team1_batting[<span class="dv">2</span>],</span>
+<span id="cb90-3"><a href="model-evaluation-human-eye-check-on-real-games---t20_final_example.html#cb90-3" tabindex="-1"></a>                                    <span class="at">Batsman3_T1 =</span> team1_batting[<span class="dv">3</span>],</span>
+<span id="cb90-4"><a href="model-evaluation-human-eye-check-on-real-games---t20_final_example.html#cb90-4" tabindex="-1"></a>                                    <span class="at">Batsman4_T1 =</span> team1_batting[<span class="dv">4</span>],</span>
+<span id="cb90-5"><a href="model-evaluation-human-eye-check-on-real-games---t20_final_example.html#cb90-5" tabindex="-1"></a>                                    <span class="at">Batsman5_T1 =</span> team1_batting[<span class="dv">5</span>],</span>
+<span id="cb90-6"><a href="model-evaluation-human-eye-check-on-real-games---t20_final_example.html#cb90-6" tabindex="-1"></a>                                    <span class="at">Batsman6_T1 =</span> team1_batting[<span class="dv">6</span>],</span>
+<span id="cb90-7"><a href="model-evaluation-human-eye-check-on-real-games---t20_final_example.html#cb90-7" tabindex="-1"></a>                                    <span class="at">Batsman7_T1 =</span> team1_batting[<span class="dv">7</span>], </span>
+<span id="cb90-8"><a href="model-evaluation-human-eye-check-on-real-games---t20_final_example.html#cb90-8" tabindex="-1"></a>                                    <span class="at">Batsman8_T1 =</span> team1_batting[<span class="dv">8</span>], </span>
+<span id="cb90-9"><a href="model-evaluation-human-eye-check-on-real-games---t20_final_example.html#cb90-9" tabindex="-1"></a>                                    <span class="at">Bowler1_T1 =</span> team1_bowling[<span class="dv">1</span>],</span>
+<span id="cb90-10"><a href="model-evaluation-human-eye-check-on-real-games---t20_final_example.html#cb90-10" tabindex="-1"></a>                                    <span class="at">Bowler2_T1 =</span> team1_bowling[<span class="dv">2</span>],</span>
+<span id="cb90-11"><a href="model-evaluation-human-eye-check-on-real-games---t20_final_example.html#cb90-11" tabindex="-1"></a>                                    <span class="at">Bowler3_T1 =</span> team1_bowling[<span class="dv">3</span>],</span>
+<span id="cb90-12"><a href="model-evaluation-human-eye-check-on-real-games---t20_final_example.html#cb90-12" tabindex="-1"></a>                                    <span class="at">Bowler4_T1 =</span> team1_bowling[<span class="dv">4</span>],</span>
+<span id="cb90-13"><a href="model-evaluation-human-eye-check-on-real-games---t20_final_example.html#cb90-13" tabindex="-1"></a>                                    <span class="at">Bowler5_T1 =</span> team1_bowling[<span class="dv">5</span>],</span>
+<span id="cb90-14"><a href="model-evaluation-human-eye-check-on-real-games---t20_final_example.html#cb90-14" tabindex="-1"></a>                                    <span class="at">Bowler6_T1 =</span> team1_bowling[<span class="dv">6</span>],</span>
+<span id="cb90-15"><a href="model-evaluation-human-eye-check-on-real-games---t20_final_example.html#cb90-15" tabindex="-1"></a>                                    <span class="at">Batsman1_T2 =</span> team2_batting[<span class="dv">1</span>],</span>
+<span id="cb90-16"><a href="model-evaluation-human-eye-check-on-real-games---t20_final_example.html#cb90-16" tabindex="-1"></a>                                    <span class="at">Batsman2_T2 =</span> team2_batting[<span class="dv">2</span>],</span>
+<span id="cb90-17"><a href="model-evaluation-human-eye-check-on-real-games---t20_final_example.html#cb90-17" tabindex="-1"></a>                                    <span class="at">Batsman3_T2 =</span> team2_batting[<span class="dv">3</span>],</span>
+<span id="cb90-18"><a href="model-evaluation-human-eye-check-on-real-games---t20_final_example.html#cb90-18" tabindex="-1"></a>                                    <span class="at">Batsman4_T2 =</span> team2_batting[<span class="dv">4</span>],</span>
+<span id="cb90-19"><a href="model-evaluation-human-eye-check-on-real-games---t20_final_example.html#cb90-19" tabindex="-1"></a>                                    <span class="at">Batsman5_T2 =</span> team2_batting[<span class="dv">5</span>],</span>
+<span id="cb90-20"><a href="model-evaluation-human-eye-check-on-real-games---t20_final_example.html#cb90-20" tabindex="-1"></a>                                    <span class="at">Batsman6_T2 =</span> team2_batting[<span class="dv">6</span>],</span>
+<span id="cb90-21"><a href="model-evaluation-human-eye-check-on-real-games---t20_final_example.html#cb90-21" tabindex="-1"></a>                                    <span class="at">Batsman7_T2 =</span> team2_batting[<span class="dv">7</span>],</span>
+<span id="cb90-22"><a href="model-evaluation-human-eye-check-on-real-games---t20_final_example.html#cb90-22" tabindex="-1"></a>                                    <span class="at">Batsman8_T2 =</span> team2_batting[<span class="dv">8</span>],</span>
+<span id="cb90-23"><a href="model-evaluation-human-eye-check-on-real-games---t20_final_example.html#cb90-23" tabindex="-1"></a>                                    <span class="at">Bowler1_T2 =</span> team2_bowling[<span class="dv">1</span>],</span>
+<span id="cb90-24"><a href="model-evaluation-human-eye-check-on-real-games---t20_final_example.html#cb90-24" tabindex="-1"></a>                                    <span class="at">Bowler2_T2 =</span> team2_bowling[<span class="dv">2</span>],</span>
+<span id="cb90-25"><a href="model-evaluation-human-eye-check-on-real-games---t20_final_example.html#cb90-25" tabindex="-1"></a>                                    <span class="at">Bowler3_T2 =</span> team2_bowling[<span class="dv">3</span>],</span>
+<span id="cb90-26"><a href="model-evaluation-human-eye-check-on-real-games---t20_final_example.html#cb90-26" tabindex="-1"></a>                                    <span class="at">Bowler4_T2 =</span> team2_bowling[<span class="dv">4</span>],</span>
+<span id="cb90-27"><a href="model-evaluation-human-eye-check-on-real-games---t20_final_example.html#cb90-27" tabindex="-1"></a>                                    <span class="at">Bowler5_T2 =</span> team2_bowling[<span class="dv">5</span>],</span>
+<span id="cb90-28"><a href="model-evaluation-human-eye-check-on-real-games---t20_final_example.html#cb90-28" tabindex="-1"></a>                                    <span class="at">Bowler6_T2 =</span> team2_bowling[<span class="dv">6</span>]))</span>
+<span id="cb90-29"><a href="model-evaluation-human-eye-check-on-real-games---t20_final_example.html#cb90-29" tabindex="-1"></a>                                    , <span class="at">type =</span> <span class="st">&quot;response&quot;</span>)</span>
+<span id="cb90-30"><a href="model-evaluation-human-eye-check-on-real-games---t20_final_example.html#cb90-30" tabindex="-1"></a>ind_winprob <span class="ot">=</span> ind_winprob </span>
+<span id="cb90-31"><a href="model-evaluation-human-eye-check-on-real-games---t20_final_example.html#cb90-31" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">paste</span>(<span class="st">&quot;India win probability: &quot;</span>, <span class="fu">round</span>(ind_winprob, <span class="dv">4</span>) <span class="sc">*</span> <span class="dv">100</span>, <span class="st">&quot;%&quot;</span>))</span></code></pre></div>
+<pre><code>## [1] &quot;India win probability:  53.3 %&quot;</code></pre>
+<div class="sourceCode" id="cb92"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb92-1"><a href="model-evaluation-human-eye-check-on-real-games---t20_final_example.html#cb92-1" tabindex="-1"></a>rsa_winprob <span class="ot">=</span> <span class="dv">1</span> <span class="sc">-</span> ind_winprob</span>
+<span id="cb92-2"><a href="model-evaluation-human-eye-check-on-real-games---t20_final_example.html#cb92-2" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">paste</span>(<span class="st">&quot;South Africa win probability: &quot;</span>, <span class="fu">round</span>(rsa_winprob, <span class="dv">4</span>) <span class="sc">*</span> <span class="dv">100</span>, <span class="st">&quot;%&quot;</span>))</span></code></pre></div>
+<pre><code>## [1] &quot;South Africa win probability:  46.7 %&quot;</code></pre>
+</div>
+<div id="with-random-effect-correction-based-on-number-of-matches-played" class="section level2 hasAnchor" number="5.2">
+<h2><span class="header-section-number">5.2</span> With random effect correction based on number of matches played<a href="model-evaluation-human-eye-check-on-real-games---t20_final_example.html#with-random-effect-correction-based-on-number-of-matches-played" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Predict the T20 World Cup Final 2024 with random effect as well, or
+any game you’d like</p>
+<p>Select games that can be passed into model with easy access; check Match_Data-Cricinfo file for more:</p>
+<p><strong>IND vs SL, 2014 T20 WC final</strong> (SL won by 6 wickets, Mirpur) Match ID 400</p>
+<p><strong>AFG vs WI, 2016 T20 WC match</strong> (AFG won by 6 runs, Nagpur) Match ID 552</p>
+<p><strong>AUS vs NZL, 2021 T20 WC final</strong> (AUS won by 8 wickets, Dubai (DICS)) Match ID 1428</p>
+<p><strong>ENG vs PAK, 2022 T20 WC final</strong> (ENG won by 5 wickets, Melbourne) Match ID 1879</p>
+<p><strong>IND vs PAK, 2024 T20 WC match</strong> (IND won by 6 runs, New York) Match ID 2658 - This example, the model got wrong</p>
+<p>Most recent T20I: <strong>AUS vs RSA at Cairns</strong> (AUS won by 2 wickets, August 16 2025) Match ID 3407</p>
+<div class="sourceCode" id="cb94"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb94-1"><a href="model-evaluation-human-eye-check-on-real-games---t20_final_example.html#cb94-1" tabindex="-1"></a>country1 <span class="ot">=</span> <span class="st">&quot;AUS&quot;</span></span>
+<span id="cb94-2"><a href="model-evaluation-human-eye-check-on-real-games---t20_final_example.html#cb94-2" tabindex="-1"></a>country2 <span class="ot">=</span> <span class="st">&quot;RSA&quot;</span></span>
+<span id="cb94-3"><a href="model-evaluation-human-eye-check-on-real-games---t20_final_example.html#cb94-3" tabindex="-1"></a>Venue <span class="ot">=</span> <span class="st">&quot;Cairns&quot;</span></span>
+<span id="cb94-4"><a href="model-evaluation-human-eye-check-on-real-games---t20_final_example.html#cb94-4" tabindex="-1"></a>MatchID <span class="ot">=</span> <span class="dv">3407</span></span>
+<span id="cb94-5"><a href="model-evaluation-human-eye-check-on-real-games---t20_final_example.html#cb94-5" tabindex="-1"></a></span>
+<span id="cb94-6"><a href="model-evaluation-human-eye-check-on-real-games---t20_final_example.html#cb94-6" tabindex="-1"></a>team1_playingxi <span class="ot">=</span> player_data <span class="sc">%&gt;%</span> <span class="fu">filter</span>(ID <span class="sc">==</span> MatchID) </span>
+<span id="cb94-7"><a href="model-evaluation-human-eye-check-on-real-games---t20_final_example.html#cb94-7" tabindex="-1"></a>team1_playingxi <span class="ot">=</span> team1_playingxi[<span class="dv">1</span><span class="sc">:</span><span class="dv">22</span>,]</span>
+<span id="cb94-8"><a href="model-evaluation-human-eye-check-on-real-games---t20_final_example.html#cb94-8" tabindex="-1"></a>team1_playingxi <span class="ot">=</span> team1_playingxi <span class="sc">%&gt;%</span> <span class="fu">filter</span>(Country <span class="sc">==</span> country1)</span>
+<span id="cb94-9"><a href="model-evaluation-human-eye-check-on-real-games---t20_final_example.html#cb94-9" tabindex="-1"></a>team1_playingxi <span class="ot">=</span> team1_playingxi<span class="sc">$</span>Player</span>
+<span id="cb94-10"><a href="model-evaluation-human-eye-check-on-real-games---t20_final_example.html#cb94-10" tabindex="-1"></a></span>
+<span id="cb94-11"><a href="model-evaluation-human-eye-check-on-real-games---t20_final_example.html#cb94-11" tabindex="-1"></a>team2_playingxi <span class="ot">=</span> player_data <span class="sc">%&gt;%</span> <span class="fu">filter</span>(ID <span class="sc">==</span> MatchID)</span>
+<span id="cb94-12"><a href="model-evaluation-human-eye-check-on-real-games---t20_final_example.html#cb94-12" tabindex="-1"></a>team2_playingxi <span class="ot">=</span> team2_playingxi[<span class="dv">1</span><span class="sc">:</span><span class="dv">22</span>,]</span>
+<span id="cb94-13"><a href="model-evaluation-human-eye-check-on-real-games---t20_final_example.html#cb94-13" tabindex="-1"></a>team2_playingxi <span class="ot">=</span> team2_playingxi <span class="sc">%&gt;%</span> <span class="fu">filter</span>(Country <span class="sc">==</span> country2) </span>
+<span id="cb94-14"><a href="model-evaluation-human-eye-check-on-real-games---t20_final_example.html#cb94-14" tabindex="-1"></a>team2_playingxi <span class="ot">=</span> team2_playingxi<span class="sc">$</span>Player</span></code></pre></div>
+<p>Get the ground buffs and the player ratings per match for the playing xi</p>
+<div class="sourceCode" id="cb95"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb95-1"><a href="model-evaluation-human-eye-check-on-real-games---t20_final_example.html#cb95-1" tabindex="-1"></a>ground_buffs <span class="ot">=</span> venue_factors <span class="sc">%&gt;%</span> <span class="fu">filter</span>(Ground <span class="sc">==</span> Venue) </span>
+<span id="cb95-2"><a href="model-evaluation-human-eye-check-on-real-games---t20_final_example.html#cb95-2" tabindex="-1"></a>team1_playingxi_ratings <span class="ot">=</span> player_rankings_2 <span class="sc">%&gt;%</span> <span class="fu">filter</span>(Player <span class="sc">%in%</span> team1_playingxi)</span>
+<span id="cb95-3"><a href="model-evaluation-human-eye-check-on-real-games---t20_final_example.html#cb95-3" tabindex="-1"></a>team2_playingxi_ratings <span class="ot">=</span> player_rankings_2 <span class="sc">%&gt;%</span> <span class="fu">filter</span>(Player <span class="sc">%in%</span> team2_playingxi)</span></code></pre></div>
+<p>Multiply the ground buffs
+Weight it by batter rating, ie if the batter rating is higher, the ground buffs will have more impact</p>
+<div class="sourceCode" id="cb96"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb96-1"><a href="model-evaluation-human-eye-check-on-real-games---t20_final_example.html#cb96-1" tabindex="-1"></a>team1_playingxi_ratings<span class="sc">$</span>BatImpactperGame_2 <span class="ot">=</span> <span class="dv">0</span></span>
+<span id="cb96-2"><a href="model-evaluation-human-eye-check-on-real-games---t20_final_example.html#cb96-2" tabindex="-1"></a>team2_playingxi_ratings<span class="sc">$</span>BatImpactperGame_2 <span class="ot">=</span> <span class="dv">0</span></span>
+<span id="cb96-3"><a href="model-evaluation-human-eye-check-on-real-games---t20_final_example.html#cb96-3" tabindex="-1"></a>team1_playingxi_ratings<span class="sc">$</span>BowlImpactperGame_2 <span class="ot">=</span> <span class="dv">0</span></span>
+<span id="cb96-4"><a href="model-evaluation-human-eye-check-on-real-games---t20_final_example.html#cb96-4" tabindex="-1"></a>team2_playingxi_ratings<span class="sc">$</span>BowlImpactperGame_2 <span class="ot">=</span> <span class="dv">0</span></span></code></pre></div>
+<p>Simulate 20 times to get a better idea of win probability with random effects</p>
+<div class="sourceCode" id="cb97"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb97-1"><a href="model-evaluation-human-eye-check-on-real-games---t20_final_example.html#cb97-1" tabindex="-1"></a>kvec <span class="ot">=</span> <span class="fu">numeric</span>(<span class="dv">20</span>)</span>
+<span id="cb97-2"><a href="model-evaluation-human-eye-check-on-real-games---t20_final_example.html#cb97-2" tabindex="-1"></a><span class="cf">for</span>(k <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">20</span>){</span>
+<span id="cb97-3"><a href="model-evaluation-human-eye-check-on-real-games---t20_final_example.html#cb97-3" tabindex="-1"></a>  <span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">nrow</span>(team1_playingxi_ratings)){</span>
+<span id="cb97-4"><a href="model-evaluation-human-eye-check-on-real-games---t20_final_example.html#cb97-4" tabindex="-1"></a>    <span class="co">#sort by batting rating</span></span>
+<span id="cb97-5"><a href="model-evaluation-human-eye-check-on-real-games---t20_final_example.html#cb97-5" tabindex="-1"></a>    team1_playingxi_ratings <span class="ot">=</span> team1_playingxi_ratings <span class="sc">%&gt;%</span> <span class="fu">arrange</span>(<span class="fu">desc</span>(BatImpactperGame))</span>
+<span id="cb97-6"><a href="model-evaluation-human-eye-check-on-real-games---t20_final_example.html#cb97-6" tabindex="-1"></a>    <span class="co">#divide by appropriate factor, assume only 8 batsmen will play</span></span>
+<span id="cb97-7"><a href="model-evaluation-human-eye-check-on-real-games---t20_final_example.html#cb97-7" tabindex="-1"></a>    <span class="cf">if</span>(i <span class="sc">&lt;</span> <span class="dv">9</span>){</span>
+<span id="cb97-8"><a href="model-evaluation-human-eye-check-on-real-games---t20_final_example.html#cb97-8" tabindex="-1"></a>      team1_avg <span class="ot">=</span> team1_playingxi_ratings<span class="sc">$</span>BatImpactperGame[i] <span class="sc">*</span> (<span class="dv">1</span> <span class="sc">/</span> <span class="fu">median</span>(venue_factors<span class="sc">$</span>BattingScale2)) <span class="sc">*</span> ground_buffs<span class="sc">$</span>BattingScale2[<span class="dv">1</span>] <span class="sc">*</span> ((<span class="dv">9</span><span class="sc">-</span>i)<span class="sc">/</span>(<span class="dv">10</span><span class="sc">-</span>i))</span>
+<span id="cb97-9"><a href="model-evaluation-human-eye-check-on-real-games---t20_final_example.html#cb97-9" tabindex="-1"></a>      team1_playingxi_ratings<span class="sc">$</span>BatImpactperGame_2[i] <span class="ot">=</span> <span class="fu">rnorm</span>(<span class="dv">1</span>, team1_avg, <span class="fu">abs</span>(team1_avg <span class="sc">/</span> team1_playingxi_ratings<span class="sc">$</span>MatchesPlayed[i])) <span class="co"># Random process</span></span>
+<span id="cb97-10"><a href="model-evaluation-human-eye-check-on-real-games---t20_final_example.html#cb97-10" tabindex="-1"></a>    }</span>
+<span id="cb97-11"><a href="model-evaluation-human-eye-check-on-real-games---t20_final_example.html#cb97-11" tabindex="-1"></a>    <span class="cf">else</span> {</span>
+<span id="cb97-12"><a href="model-evaluation-human-eye-check-on-real-games---t20_final_example.html#cb97-12" tabindex="-1"></a>      <span class="co">#Bottom batsmen don&#39;t get a buff and don&#39;t play as much</span></span>
+<span id="cb97-13"><a href="model-evaluation-human-eye-check-on-real-games---t20_final_example.html#cb97-13" tabindex="-1"></a>      team1_avg <span class="ot">=</span> team1_playingxi_ratings<span class="sc">$</span>BatImpactperGame[i] <span class="sc">/</span> <span class="dv">5</span></span>
+<span id="cb97-14"><a href="model-evaluation-human-eye-check-on-real-games---t20_final_example.html#cb97-14" tabindex="-1"></a>      team1_playingxi_ratings<span class="sc">$</span>BatImpactperGame_2[i] <span class="ot">=</span> <span class="fu">rnorm</span>(<span class="dv">1</span>, team1_avg, <span class="fu">abs</span>(team1_avg <span class="sc">/</span> team1_playingxi_ratings<span class="sc">$</span>MatchesPlayed[i])) <span class="co"># Random process</span></span>
+<span id="cb97-15"><a href="model-evaluation-human-eye-check-on-real-games---t20_final_example.html#cb97-15" tabindex="-1"></a>      <span class="co">#team1_playingxi_ratings$BatImpactperGame_2[i] = team1_avg</span></span>
+<span id="cb97-16"><a href="model-evaluation-human-eye-check-on-real-games---t20_final_example.html#cb97-16" tabindex="-1"></a>    }</span>
+<span id="cb97-17"><a href="model-evaluation-human-eye-check-on-real-games---t20_final_example.html#cb97-17" tabindex="-1"></a>    </span>
+<span id="cb97-18"><a href="model-evaluation-human-eye-check-on-real-games---t20_final_example.html#cb97-18" tabindex="-1"></a>    team1_playingxi_ratings <span class="ot">=</span> team1_playingxi_ratings <span class="sc">%&gt;%</span> <span class="fu">arrange</span>(<span class="fu">desc</span>(BowlImpactperGame))</span>
+<span id="cb97-19"><a href="model-evaluation-human-eye-check-on-real-games---t20_final_example.html#cb97-19" tabindex="-1"></a>    <span class="cf">if</span>(i <span class="sc">&lt;</span> <span class="dv">7</span>) {</span>
+<span id="cb97-20"><a href="model-evaluation-human-eye-check-on-real-games---t20_final_example.html#cb97-20" tabindex="-1"></a>      team1_avg <span class="ot">=</span> team1_playingxi_ratings<span class="sc">$</span>BowlImpactperGame[i] <span class="sc">*</span> (<span class="dv">1</span> <span class="sc">/</span> <span class="fu">median</span>(venue_factors<span class="sc">$</span>BowlingScale2)) <span class="sc">*</span> ground_buffs<span class="sc">$</span>BowlingScale2[<span class="dv">1</span>] <span class="sc">*</span> ((<span class="dv">8</span><span class="sc">-</span>i)<span class="sc">/</span>(<span class="dv">9</span><span class="sc">-</span>i))</span>
+<span id="cb97-21"><a href="model-evaluation-human-eye-check-on-real-games---t20_final_example.html#cb97-21" tabindex="-1"></a>      team1_playingxi_ratings<span class="sc">$</span>BowlImpactperGame_2[i] <span class="ot">=</span> <span class="fu">rnorm</span>(<span class="dv">1</span>, team1_avg, <span class="fu">abs</span>(team1_avg <span class="sc">/</span> team1_playingxi_ratings<span class="sc">$</span>MatchesPlayed[i])) <span class="co"># Random process</span></span>
+<span id="cb97-22"><a href="model-evaluation-human-eye-check-on-real-games---t20_final_example.html#cb97-22" tabindex="-1"></a>      <span class="co">#team1_playingxi_ratings$BowlImpactperGame_2[i] = team1_avg</span></span>
+<span id="cb97-23"><a href="model-evaluation-human-eye-check-on-real-games---t20_final_example.html#cb97-23" tabindex="-1"></a>    }</span>
+<span id="cb97-24"><a href="model-evaluation-human-eye-check-on-real-games---t20_final_example.html#cb97-24" tabindex="-1"></a>    <span class="cf">else</span> {</span>
+<span id="cb97-25"><a href="model-evaluation-human-eye-check-on-real-games---t20_final_example.html#cb97-25" tabindex="-1"></a>      <span class="co">#Bottom bowlers don&#39;t bowl in the game</span></span>
+<span id="cb97-26"><a href="model-evaluation-human-eye-check-on-real-games---t20_final_example.html#cb97-26" tabindex="-1"></a>      team1_playingxi_ratings<span class="sc">$</span>BowlImpactperGame_2[i] <span class="ot">=</span> <span class="dv">0</span> </span>
+<span id="cb97-27"><a href="model-evaluation-human-eye-check-on-real-games---t20_final_example.html#cb97-27" tabindex="-1"></a>    }</span>
+<span id="cb97-28"><a href="model-evaluation-human-eye-check-on-real-games---t20_final_example.html#cb97-28" tabindex="-1"></a>    </span>
+<span id="cb97-29"><a href="model-evaluation-human-eye-check-on-real-games---t20_final_example.html#cb97-29" tabindex="-1"></a>  }</span>
+<span id="cb97-30"><a href="model-evaluation-human-eye-check-on-real-games---t20_final_example.html#cb97-30" tabindex="-1"></a>  <span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">nrow</span>(team2_playingxi_ratings)){</span>
+<span id="cb97-31"><a href="model-evaluation-human-eye-check-on-real-games---t20_final_example.html#cb97-31" tabindex="-1"></a>    team2_playingxi_ratings <span class="ot">=</span> team2_playingxi_ratings <span class="sc">%&gt;%</span> <span class="fu">arrange</span>(<span class="fu">desc</span>(BatImpactperGame))</span>
+<span id="cb97-32"><a href="model-evaluation-human-eye-check-on-real-games---t20_final_example.html#cb97-32" tabindex="-1"></a>    <span class="co">#divide by appropriate factor, assume only 8 batsmen will play</span></span>
+<span id="cb97-33"><a href="model-evaluation-human-eye-check-on-real-games---t20_final_example.html#cb97-33" tabindex="-1"></a>    <span class="cf">if</span>(i <span class="sc">&lt;</span> <span class="dv">9</span>){</span>
+<span id="cb97-34"><a href="model-evaluation-human-eye-check-on-real-games---t20_final_example.html#cb97-34" tabindex="-1"></a>      team2_avg <span class="ot">=</span> team2_playingxi_ratings<span class="sc">$</span>BatImpactperGame[i] <span class="sc">*</span> (<span class="dv">1</span> <span class="sc">/</span> <span class="fu">median</span>(venue_factors<span class="sc">$</span>BattingScale2)) <span class="sc">*</span> ground_buffs<span class="sc">$</span>BattingScale2[<span class="dv">1</span>] <span class="sc">*</span> ((<span class="dv">9</span><span class="sc">-</span>i)<span class="sc">/</span>(<span class="dv">10</span><span class="sc">-</span>i))</span>
+<span id="cb97-35"><a href="model-evaluation-human-eye-check-on-real-games---t20_final_example.html#cb97-35" tabindex="-1"></a>      team2_playingxi_ratings<span class="sc">$</span>BatImpactperGame_2[i] <span class="ot">=</span> <span class="fu">rnorm</span>(<span class="dv">1</span>, team2_avg, <span class="fu">abs</span>(team2_avg <span class="sc">/</span> team2_playingxi_ratings<span class="sc">$</span>MatchesPlayed[i])) <span class="co"># Random process</span></span>
+<span id="cb97-36"><a href="model-evaluation-human-eye-check-on-real-games---t20_final_example.html#cb97-36" tabindex="-1"></a>    }</span>
+<span id="cb97-37"><a href="model-evaluation-human-eye-check-on-real-games---t20_final_example.html#cb97-37" tabindex="-1"></a>    <span class="cf">else</span>{</span>
+<span id="cb97-38"><a href="model-evaluation-human-eye-check-on-real-games---t20_final_example.html#cb97-38" tabindex="-1"></a>      <span class="co">#Bottom batsmen don&#39;t get a buff and don&#39;t play as much</span></span>
+<span id="cb97-39"><a href="model-evaluation-human-eye-check-on-real-games---t20_final_example.html#cb97-39" tabindex="-1"></a>      team2_avg <span class="ot">=</span> team2_playingxi_ratings<span class="sc">$</span>BatImpactperGame[i] <span class="sc">/</span> <span class="dv">5</span></span>
+<span id="cb97-40"><a href="model-evaluation-human-eye-check-on-real-games---t20_final_example.html#cb97-40" tabindex="-1"></a>      team2_playingxi_ratings<span class="sc">$</span>BatImpactperGame_2[i] <span class="ot">=</span> <span class="fu">rnorm</span>(<span class="dv">1</span>, team2_avg, <span class="fu">abs</span>(team2_avg <span class="sc">/</span> team2_playingxi_ratings<span class="sc">$</span>MatchesPlayed[i])) <span class="co"># Random process</span></span>
+<span id="cb97-41"><a href="model-evaluation-human-eye-check-on-real-games---t20_final_example.html#cb97-41" tabindex="-1"></a>    }</span>
+<span id="cb97-42"><a href="model-evaluation-human-eye-check-on-real-games---t20_final_example.html#cb97-42" tabindex="-1"></a>    </span>
+<span id="cb97-43"><a href="model-evaluation-human-eye-check-on-real-games---t20_final_example.html#cb97-43" tabindex="-1"></a>    team2_playingxi_ratings <span class="ot">=</span> team2_playingxi_ratings <span class="sc">%&gt;%</span> <span class="fu">arrange</span>(<span class="fu">desc</span>(BowlImpactperGame))</span>
+<span id="cb97-44"><a href="model-evaluation-human-eye-check-on-real-games---t20_final_example.html#cb97-44" tabindex="-1"></a>    <span class="cf">if</span>(i <span class="sc">&lt;</span> <span class="dv">7</span>){</span>
+<span id="cb97-45"><a href="model-evaluation-human-eye-check-on-real-games---t20_final_example.html#cb97-45" tabindex="-1"></a>      team2_avg <span class="ot">=</span> team2_playingxi_ratings<span class="sc">$</span>BowlImpactperGame[i] <span class="sc">*</span> (<span class="dv">1</span> <span class="sc">/</span> <span class="fu">median</span>(venue_factors<span class="sc">$</span>BowlingScale2)) <span class="sc">*</span> ground_buffs<span class="sc">$</span>BowlingScale2[<span class="dv">1</span>] <span class="sc">*</span> ((<span class="dv">8</span><span class="sc">-</span>i)<span class="sc">/</span>(<span class="dv">9</span><span class="sc">-</span>i))</span>
+<span id="cb97-46"><a href="model-evaluation-human-eye-check-on-real-games---t20_final_example.html#cb97-46" tabindex="-1"></a>      team2_playingxi_ratings<span class="sc">$</span>BowlImpactperGame_2[i] <span class="ot">=</span> <span class="fu">rnorm</span>(<span class="dv">1</span>, team2_avg, <span class="fu">abs</span>(team2_avg <span class="sc">/</span> team2_playingxi_ratings<span class="sc">$</span>MatchesPlayed[i])) <span class="co"># Random process</span></span>
+<span id="cb97-47"><a href="model-evaluation-human-eye-check-on-real-games---t20_final_example.html#cb97-47" tabindex="-1"></a>    }</span>
+<span id="cb97-48"><a href="model-evaluation-human-eye-check-on-real-games---t20_final_example.html#cb97-48" tabindex="-1"></a>    <span class="cf">else</span>{</span>
+<span id="cb97-49"><a href="model-evaluation-human-eye-check-on-real-games---t20_final_example.html#cb97-49" tabindex="-1"></a>      <span class="co">#Bottom bowlers don&#39;t bowl in the game</span></span>
+<span id="cb97-50"><a href="model-evaluation-human-eye-check-on-real-games---t20_final_example.html#cb97-50" tabindex="-1"></a>      team2_playingxi_ratings<span class="sc">$</span>BowlImpactperGame_2[i] <span class="ot">=</span> <span class="dv">0</span> </span>
+<span id="cb97-51"><a href="model-evaluation-human-eye-check-on-real-games---t20_final_example.html#cb97-51" tabindex="-1"></a>    }</span>
+<span id="cb97-52"><a href="model-evaluation-human-eye-check-on-real-games---t20_final_example.html#cb97-52" tabindex="-1"></a>    </span>
+<span id="cb97-53"><a href="model-evaluation-human-eye-check-on-real-games---t20_final_example.html#cb97-53" tabindex="-1"></a>  </span>
+<span id="cb97-54"><a href="model-evaluation-human-eye-check-on-real-games---t20_final_example.html#cb97-54" tabindex="-1"></a>}</span>
+<span id="cb97-55"><a href="model-evaluation-human-eye-check-on-real-games---t20_final_example.html#cb97-55" tabindex="-1"></a><span class="co"># Rearrange data to make sure 11 batting rankings correct</span></span>
+<span id="cb97-56"><a href="model-evaluation-human-eye-check-on-real-games---t20_final_example.html#cb97-56" tabindex="-1"></a>team1_batting <span class="ot">=</span> (team1_playingxi_ratings <span class="sc">%&gt;%</span> <span class="fu">arrange</span>(<span class="fu">desc</span>(BatImpactperGame_2)))<span class="sc">$</span>BatImpactperGame_2</span>
+<span id="cb97-57"><a href="model-evaluation-human-eye-check-on-real-games---t20_final_example.html#cb97-57" tabindex="-1"></a>team2_batting <span class="ot">=</span> (team2_playingxi_ratings <span class="sc">%&gt;%</span> <span class="fu">arrange</span>(<span class="fu">desc</span>(BatImpactperGame_2)))<span class="sc">$</span>BatImpactperGame_2</span>
+<span id="cb97-58"><a href="model-evaluation-human-eye-check-on-real-games---t20_final_example.html#cb97-58" tabindex="-1"></a>team1_bowling <span class="ot">=</span> (team1_playingxi_ratings <span class="sc">%&gt;%</span> <span class="fu">arrange</span>(<span class="fu">desc</span>(BowlImpactperGame_2)))<span class="sc">$</span>BowlImpactperGame_2</span>
+<span id="cb97-59"><a href="model-evaluation-human-eye-check-on-real-games---t20_final_example.html#cb97-59" tabindex="-1"></a>team2_bowling <span class="ot">=</span> (team2_playingxi_ratings <span class="sc">%&gt;%</span> <span class="fu">arrange</span>(<span class="fu">desc</span>(BowlImpactperGame_2)))<span class="sc">$</span>BowlImpactperGame_2</span>
+<span id="cb97-60"><a href="model-evaluation-human-eye-check-on-real-games---t20_final_example.html#cb97-60" tabindex="-1"></a></span>
+<span id="cb97-61"><a href="model-evaluation-human-eye-check-on-real-games---t20_final_example.html#cb97-61" tabindex="-1"></a>winprob <span class="ot">=</span> <span class="fu">predict</span>(final_model, <span class="at">newx =</span> (<span class="fu">data.frame</span>(<span class="at">Batsman1_T1 =</span> team1_batting[<span class="dv">1</span>],</span>
+<span id="cb97-62"><a href="model-evaluation-human-eye-check-on-real-games---t20_final_example.html#cb97-62" tabindex="-1"></a>                                                      <span class="at">Batsman2_T1 =</span> team1_batting[<span class="dv">2</span>],</span>
+<span id="cb97-63"><a href="model-evaluation-human-eye-check-on-real-games---t20_final_example.html#cb97-63" tabindex="-1"></a>                                                      <span class="at">Batsman3_T1 =</span> team1_batting[<span class="dv">3</span>],</span>
+<span id="cb97-64"><a href="model-evaluation-human-eye-check-on-real-games---t20_final_example.html#cb97-64" tabindex="-1"></a>                                                      <span class="at">Batsman4_T1 =</span> team1_batting[<span class="dv">4</span>],</span>
+<span id="cb97-65"><a href="model-evaluation-human-eye-check-on-real-games---t20_final_example.html#cb97-65" tabindex="-1"></a>                                                      <span class="at">Batsman5_T1 =</span> team1_batting[<span class="dv">5</span>],</span>
+<span id="cb97-66"><a href="model-evaluation-human-eye-check-on-real-games---t20_final_example.html#cb97-66" tabindex="-1"></a>                                                      <span class="at">Batsman6_T1 =</span> team1_batting[<span class="dv">6</span>],</span>
+<span id="cb97-67"><a href="model-evaluation-human-eye-check-on-real-games---t20_final_example.html#cb97-67" tabindex="-1"></a>                                                      <span class="at">Batsman7_T1 =</span> team1_batting[<span class="dv">7</span>], </span>
+<span id="cb97-68"><a href="model-evaluation-human-eye-check-on-real-games---t20_final_example.html#cb97-68" tabindex="-1"></a>                                                      <span class="at">Batsman8_T1 =</span> team1_batting[<span class="dv">8</span>], </span>
+<span id="cb97-69"><a href="model-evaluation-human-eye-check-on-real-games---t20_final_example.html#cb97-69" tabindex="-1"></a>                                                      <span class="at">Bowler1_T1 =</span> team1_bowling[<span class="dv">1</span>],</span>
+<span id="cb97-70"><a href="model-evaluation-human-eye-check-on-real-games---t20_final_example.html#cb97-70" tabindex="-1"></a>                                                      <span class="at">Bowler2_T1 =</span> team1_bowling[<span class="dv">2</span>],</span>
+<span id="cb97-71"><a href="model-evaluation-human-eye-check-on-real-games---t20_final_example.html#cb97-71" tabindex="-1"></a>                                                      <span class="at">Bowler3_T1 =</span> team1_bowling[<span class="dv">3</span>],</span>
+<span id="cb97-72"><a href="model-evaluation-human-eye-check-on-real-games---t20_final_example.html#cb97-72" tabindex="-1"></a>                                                      <span class="at">Bowler4_T1 =</span> team1_bowling[<span class="dv">4</span>],</span>
+<span id="cb97-73"><a href="model-evaluation-human-eye-check-on-real-games---t20_final_example.html#cb97-73" tabindex="-1"></a>                                                      <span class="at">Bowler5_T1 =</span> team1_bowling[<span class="dv">5</span>],</span>
+<span id="cb97-74"><a href="model-evaluation-human-eye-check-on-real-games---t20_final_example.html#cb97-74" tabindex="-1"></a>                                                      <span class="at">Bowler6_T1 =</span> team1_bowling[<span class="dv">6</span>],</span>
+<span id="cb97-75"><a href="model-evaluation-human-eye-check-on-real-games---t20_final_example.html#cb97-75" tabindex="-1"></a>                                                      <span class="at">Batsman1_T2 =</span> team2_batting[<span class="dv">1</span>],</span>
+<span id="cb97-76"><a href="model-evaluation-human-eye-check-on-real-games---t20_final_example.html#cb97-76" tabindex="-1"></a>                                                      <span class="at">Batsman2_T2 =</span> team2_batting[<span class="dv">2</span>],</span>
+<span id="cb97-77"><a href="model-evaluation-human-eye-check-on-real-games---t20_final_example.html#cb97-77" tabindex="-1"></a>                                                      <span class="at">Batsman3_T2 =</span> team2_batting[<span class="dv">3</span>],</span>
+<span id="cb97-78"><a href="model-evaluation-human-eye-check-on-real-games---t20_final_example.html#cb97-78" tabindex="-1"></a>                                                      <span class="at">Batsman4_T2 =</span> team2_batting[<span class="dv">4</span>],</span>
+<span id="cb97-79"><a href="model-evaluation-human-eye-check-on-real-games---t20_final_example.html#cb97-79" tabindex="-1"></a>                                                      <span class="at">Batsman5_T2 =</span> team2_batting[<span class="dv">5</span>],</span>
+<span id="cb97-80"><a href="model-evaluation-human-eye-check-on-real-games---t20_final_example.html#cb97-80" tabindex="-1"></a>                                                      <span class="at">Batsman6_T2 =</span> team2_batting[<span class="dv">6</span>],</span>
+<span id="cb97-81"><a href="model-evaluation-human-eye-check-on-real-games---t20_final_example.html#cb97-81" tabindex="-1"></a>                                                      <span class="at">Batsman7_T2 =</span> team2_batting[<span class="dv">7</span>],</span>
+<span id="cb97-82"><a href="model-evaluation-human-eye-check-on-real-games---t20_final_example.html#cb97-82" tabindex="-1"></a>                                                      <span class="at">Batsman8_T2 =</span> team2_batting[<span class="dv">8</span>],</span>
+<span id="cb97-83"><a href="model-evaluation-human-eye-check-on-real-games---t20_final_example.html#cb97-83" tabindex="-1"></a>                                                      <span class="at">Bowler1_T2 =</span> team2_bowling[<span class="dv">1</span>],</span>
+<span id="cb97-84"><a href="model-evaluation-human-eye-check-on-real-games---t20_final_example.html#cb97-84" tabindex="-1"></a>                                                      <span class="at">Bowler2_T2 =</span> team2_bowling[<span class="dv">2</span>],</span>
+<span id="cb97-85"><a href="model-evaluation-human-eye-check-on-real-games---t20_final_example.html#cb97-85" tabindex="-1"></a>                                                      <span class="at">Bowler3_T2 =</span> team2_bowling[<span class="dv">3</span>],</span>
+<span id="cb97-86"><a href="model-evaluation-human-eye-check-on-real-games---t20_final_example.html#cb97-86" tabindex="-1"></a>                                                      <span class="at">Bowler4_T2 =</span> team2_bowling[<span class="dv">4</span>],</span>
+<span id="cb97-87"><a href="model-evaluation-human-eye-check-on-real-games---t20_final_example.html#cb97-87" tabindex="-1"></a>                                                      <span class="at">Bowler5_T2 =</span> team2_bowling[<span class="dv">5</span>],</span>
+<span id="cb97-88"><a href="model-evaluation-human-eye-check-on-real-games---t20_final_example.html#cb97-88" tabindex="-1"></a>                                                      <span class="at">Bowler6_T2 =</span> team2_bowling[<span class="dv">6</span>]))</span>
+<span id="cb97-89"><a href="model-evaluation-human-eye-check-on-real-games---t20_final_example.html#cb97-89" tabindex="-1"></a>                      , <span class="at">type =</span> <span class="st">&quot;response&quot;</span>)</span>
+<span id="cb97-90"><a href="model-evaluation-human-eye-check-on-real-games---t20_final_example.html#cb97-90" tabindex="-1"></a> kvec[k] <span class="ot">=</span> winprob</span>
+<span id="cb97-91"><a href="model-evaluation-human-eye-check-on-real-games---t20_final_example.html#cb97-91" tabindex="-1"></a>}</span>
+<span id="cb97-92"><a href="model-evaluation-human-eye-check-on-real-games---t20_final_example.html#cb97-92" tabindex="-1"></a>kvec <span class="ot">=</span> kvec</span>
+<span id="cb97-93"><a href="model-evaluation-human-eye-check-on-real-games---t20_final_example.html#cb97-93" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">paste</span>(country1, <span class="st">&quot;win probability: &quot;</span>, <span class="fu">round</span>(<span class="fu">mean</span>(kvec), <span class="dv">4</span>) <span class="sc">*</span> <span class="dv">100</span>, <span class="st">&quot;%&quot;</span>))</span></code></pre></div>
+<pre><code>## [1] &quot;AUS win probability:  65.59 %&quot;</code></pre>
+<div class="sourceCode" id="cb99"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb99-1"><a href="model-evaluation-human-eye-check-on-real-games---t20_final_example.html#cb99-1" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">paste</span>(country2, <span class="st">&quot;win probability: &quot;</span>, <span class="fu">round</span>((<span class="dv">1</span> <span class="sc">-</span> <span class="fu">mean</span>(kvec)), <span class="dv">4</span>) <span class="sc">*</span> <span class="dv">100</span>, <span class="st">&quot;%&quot;</span>))</span></code></pre></div>
+<pre><code>## [1] &quot;RSA win probability:  34.41 %&quot;</code></pre>
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="model-training-and-evaluation---cricket_prediction.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="web-app-for-predicting-games-and-player-impact---app.r-located-in-shiny_app-code-folder.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+  "sharing": {
+    "github": false,
+    "facebook": true,
+    "twitter": true,
+    "linkedin": false,
+    "weibo": false,
+    "instapaper": false,
+    "vk": false,
+    "whatsapp": false,
+    "all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+  },
+  "fontsettings": {
+    "theme": "white",
+    "family": "sans",
+    "size": 2
+  },
+  "edit": {
+    "link": null,
+    "text": null
+  },
+  "history": {
+    "link": null,
+    "text": null
+  },
+  "view": {
+    "link": null,
+    "text": null
+  },
+  "download": null,
+  "search": {
+    "engine": "fuse",
+    "options": null
+  },
+  "toc": {
+    "collapse": "subsection"
+  }
+});
+});
+</script>
+
+</body>
+
+</html>
