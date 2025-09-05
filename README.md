@@ -9,7 +9,7 @@ This project analyzes T20I cricket match data to predict match outcomes based on
 - Player impact calculation based on batting and bowling statistics
 - Rolling forecasts using statistical models
 - R Markdown Version for easy reproducibility: https://anonymous.4open.science/w/CricketPredictions-8D84/
-- ShinyApp for player comparison, past match model output, and future match prediction by inputting playing XI: https://archithsharma.shinyapps.io/Cricket-Analyzer/
+- ShinyApp for player comparison, past match model output, and future match prediction by inputting playing XI: https://anonymouscricket.shinyapps.io/Cricket-Analyzer/
 
 ## Installation
 To set up and run this project:
@@ -28,7 +28,7 @@ To set up and run this project:
 - **Data Processing:** Load and preprocess match and player data.
 - **Analysis & Visualization:** Generate performance insights using `ggplot2` and `dplyr`.
 - **Prediction Models:** Use regression and machine learning techniques to forecast match outcomes.
-- **App Utility:** Predict matches by inputting two playing XIs and a venue in the [ShinyApp](https://archithsharma.shinyapps.io/Cricket-Analyzer/).
+- **App Utility:** Predict matches by inputting two playing XIs and a venue in the [ShinyApp](https://anonymouscricket.shinyapps.io/Cricket-Analyzer/).
 
 ## Data
 The dataset includes:
