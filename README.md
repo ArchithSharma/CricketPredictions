@@ -52,7 +52,7 @@ CricketPredictions/
 This project is licensed under the MIT License.
 
 ## Contributors
-- **Archith Sharma** *(Project Creator)*
+- **Anonymous Cricket** *(Project Creator)*
 
 ## Contact
 For questions or suggestions, open an issue on GitHub.
