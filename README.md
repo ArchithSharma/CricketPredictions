@@ -1,4 +1,4 @@
-# Stats & Stumps: Using Machine Learning to Predict T20I Matches with Player and Venue Data
+# Stats & Stumps: A Novel Impact Factor for Player Comparison and Match Prediction in Cricket
 
 ## Description
 This project analyzes T20I cricket match data to predict match outcomes based on venue factors and player performance metrics. It considers key batting and bowling statistics such as runs, strike rate, boundaries, wickets, maiden overs, and economy rate to assess the impact of players in different venues.
@@ -8,7 +8,7 @@ This project analyzes T20I cricket match data to predict match outcomes based on
 - Venue factor adjustments for performance predictions
 - Player impact calculation based on batting and bowling statistics
 - Rolling forecasts using statistical models
-- R Markdown Version for easy reproducibility: https://archithsharma.github.io/CricketPredictions
+- R Markdown Version for easy reproducibility: https://anonymous.4open.science/w/CricketPredictions-8D84/
 - ShinyApp for player comparison, past match model output, and future match prediction by inputting playing XI: https://archithsharma.shinyapps.io/Cricket-Analyzer/
 
 ## Installation
