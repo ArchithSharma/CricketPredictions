@@ -4,18 +4,18 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>6 Web App for Predicting Games and Player Impact - App.R (located in Shiny_App code folder) | Cricket Data Analysis</title>
-  <meta name="description" content="6 Web App for Predicting Games and Player Impact - App.R (located in Shiny_App code folder) | Cricket Data Analysis" />
+  <title>Page not found | Cricket Data Analysis</title>
+  <meta name="description" content="Page not found | Cricket Data Analysis" />
   <meta name="generator" content="bookdown 0.43 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="6 Web App for Predicting Games and Player Impact - App.R (located in Shiny_App code folder) | Cricket Data Analysis" />
+  <meta property="og:title" content="Page not found | Cricket Data Analysis" />
   <meta property="og:type" content="book" />
   
   
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="6 Web App for Predicting Games and Player Impact - App.R (located in Shiny_App code folder) | Cricket Data Analysis" />
+  <meta name="twitter:title" content="Page not found | Cricket Data Analysis" />
   
   
   
@@ -28,7 +28,7 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="model-evaluation-human-eye-check-on-real-games---t20_final_example.html"/>
+
 
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
@@ -187,54 +187,18 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="web-app-for-predicting-games-and-player-impact---app.r-located-in-shiny_app-code-folder" class="section level1 hasAnchor" number="6">
-<h1><span class="header-section-number">6</span> Web App for Predicting Games and Player Impact - App.R (located in Shiny_App code folder)<a href="web-app-for-predicting-games-and-player-impact---app.r-located-in-shiny_app-code-folder.html#web-app-for-predicting-games-and-player-impact---app.r-located-in-shiny_app-code-folder" class="anchor-section" aria-label="Anchor link to header"></a></h1>
-<p>The app is available at: <a href="https://archithsharma.shinyapps.io/Cricket-Analyzer/" class="uri">https://archithsharma.shinyapps.io/Cricket-Analyzer/</a>, with three tools:</p>
-<ul>
-<li><p>Player Comparison Tool</p></li>
-<li><p>Past Match Model Output</p></li>
-<li><p>Predict Future Match based on Playing XI</p></li>
-</ul>
-<div id="player-comparison-tool" class="section level2 hasAnchor" number="6.1">
-<h2><span class="header-section-number">6.1</span> Player Comparison Tool<a href="web-app-for-predicting-games-and-player-impact---app.r-located-in-shiny_app-code-folder.html#player-comparison-tool" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>The player comparison tool will compare two players based on their batting and bowling impact per game. For all-rounders, it will show the value relative to all-rounders for bowling and batting as well.</p>
-<div class="figure" style="text-align: center"><span style="display:block;" id="fig:unnamed-chunk-67"></span>
-<img src="../images/app/Example_Comparison.png" alt="Comparison between Hardik Pandya &amp; Shakib al Hasan" width="1495" />
-<p class="caption">
-Figure 6.1: Comparison between Hardik Pandya &amp; Shakib al Hasan
-</p>
-</div>
-</div>
-<div id="past-match-model-output" class="section level2 hasAnchor" number="6.2">
-<h2><span class="header-section-number">6.2</span> Past Match Model Output<a href="web-app-for-predicting-games-and-player-impact---app.r-located-in-shiny_app-code-folder.html#past-match-model-output" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-The past match model output will show the player impact for both teams in a past match, and the predicted winner based on the logistic regression model.
-<div class="figure" style="text-align: center"><span style="display:block;" id="fig:unnamed-chunk-68"></span>
-<img src="../images/app/Past_Match_Model_Output.png" alt="Past Match Model Output &lt;br&gt; IND vs RSA, T20 WC Final 2024" width="1491" />
-<p class="caption">
-Figure 6.2: Past Match Model Output <br> IND vs RSA, T20 WC Final 2024
-</p>
-</div>
-</div>
-<div id="predict-future-match-based-on-playing-xi" class="section level2 hasAnchor" number="6.3">
-<h2><span class="header-section-number">6.3</span> Predict Future Match based on Playing XI<a href="web-app-for-predicting-games-and-player-impact---app.r-located-in-shiny_app-code-folder.html#predict-future-match-based-on-playing-xi" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>The predict future match based on playing XI will allow the user to select a playing XI for two teams (any player), and the venue. The model will then predict the win probability for both teams based on the logistic regression model.</p>
-<p>An example was tested for the most recent T20I match between Afghanistan and Pakistan. The model’s most recent data update was on August 16, 2025, and the match was played on August 29, 2025. The model predicted a 60% win probability for Pakistan, who went on to win the match by 39 runs, further legitimizing the model.</p>
-<div class="figure" style="text-align: center"><span style="display:block;" id="fig:unnamed-chunk-69"></span>
-<img src="../images/app/Future_Match_Prediction.png" alt="Predict Future Match based on Playing XI for AFG vs PAK, T20I, August 29 2025" width="1491" />
-<p class="caption">
-Figure 6.3: Predict Future Match based on Playing XI for AFG vs PAK, T20I, August 29 2025
-</p>
-</div>
-<p>The code for the app is located in the Shiny_App folder, in the App.R file. All other code is included in the markdown file or available on github, in <a href="https://github.com/ArchithSharma/CricketPredictions/" class="uri">https://github.com/ArchithSharma/CricketPredictions/</a>.</p>
-
-</div>
+<div id="page-not-found" class="section level1">
+<h1>Page not found</h1>
+<p>The page you requested cannot be found (perhaps it was moved or renamed).</p>
+<p>You may want to try searching to find the page's new location, or use
+the table of contents to find the page you are looking for.</p>
 </div>
             </section>
 
           </div>
         </div>
       </div>
-<a href="model-evaluation-human-eye-check-on-real-games---t20_final_example.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+
 
     </div>
   </div>

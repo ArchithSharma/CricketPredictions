@@ -249,9 +249,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## # ℹ 97 more rows
 ## # ℹ 1 more variable: BowlingScale2 &lt;dbl&gt;</code></pre>
 <div class="sourceCode" id="cb46"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb46-1"><a href="venue-impact-factors-and-team-rankings---venue_team_rankings.html#cb46-1" tabindex="-1"></a><span class="fu">hist</span>(battingranking<span class="sc">$</span>BattingScale2, <span class="at">col =</span> <span class="st">&quot;blue&quot;</span>, <span class="at">main =</span> <span class="st">&quot;Venue Batting Scale Distribution&quot;</span>, <span class="at">xlab =</span> <span class="st">&quot;Batting Scale&quot;</span>)</span></code></pre></div>
-<p><img src="_main_files/figure-html/unnamed-chunk-33-1.png" width="672" /></p>
+<p><img src="cricket-predictions_files/figure-html/unnamed-chunk-33-1.png" width="672" /></p>
 <div class="sourceCode" id="cb47"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb47-1"><a href="venue-impact-factors-and-team-rankings---venue_team_rankings.html#cb47-1" tabindex="-1"></a><span class="fu">hist</span>(bowlingranking<span class="sc">$</span>BowlingScale2, <span class="at">col =</span> <span class="st">&quot;red&quot;</span>, <span class="at">main =</span> <span class="st">&quot;Venue Bowling Scale Distribution&quot;</span>, <span class="at">xlab =</span> <span class="st">&quot;Bowling Scale&quot;</span>)</span></code></pre></div>
-<p><img src="_main_files/figure-html/unnamed-chunk-33-2.png" width="672" /></p>
+<p><img src="cricket-predictions_files/figure-html/unnamed-chunk-33-2.png" width="672" /></p>
 <p>Plot Bowling - Batting Impact top 15 for best bowling grounds</p>
 <div class="sourceCode" id="cb48"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb48-1"><a href="venue-impact-factors-and-team-rankings---venue_team_rankings.html#cb48-1" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
 <span id="cb48-2"><a href="venue-impact-factors-and-team-rankings---venue_team_rankings.html#cb48-2" tabindex="-1"></a><span class="fu">ggplot</span>(bowlingranking[<span class="dv">1</span><span class="sc">:</span><span class="dv">15</span>, ], <span class="fu">aes</span>(<span class="at">x =</span> <span class="fu">reorder</span>(Ground, BowlingScale2 <span class="sc">-</span> BattingScale2), <span class="at">y =</span> BowlingScale2 <span class="sc">-</span> BattingScale2)) <span class="sc">+</span></span>
@@ -261,7 +261,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb48-6"><a href="venue-impact-factors-and-team-rankings---venue_team_rankings.html#cb48-6" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">&quot;Venue&quot;</span>,</span>
 <span id="cb48-7"><a href="venue-impact-factors-and-team-rankings---venue_team_rankings.html#cb48-7" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">&quot;Bowling - Batting Impact&quot;</span>) <span class="sc">+</span></span>
 <span id="cb48-8"><a href="venue-impact-factors-and-team-rankings---venue_team_rankings.html#cb48-8" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code></pre></div>
-<p><img src="_main_files/figure-html/unnamed-chunk-34-1.png" width="672" /></p>
+<p><img src="cricket-predictions_files/figure-html/unnamed-chunk-34-1.png" width="672" /></p>
 <p>Plot Batting - Bowling Impact top 15 for best batting grounds</p>
 <div class="sourceCode" id="cb49"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb49-1"><a href="venue-impact-factors-and-team-rankings---venue_team_rankings.html#cb49-1" tabindex="-1"></a><span class="fu">ggplot</span>(battingranking[<span class="dv">1</span><span class="sc">:</span><span class="dv">15</span>, ], <span class="fu">aes</span>(<span class="at">x =</span> <span class="fu">reorder</span>(Ground, BattingScale2 <span class="sc">-</span> BowlingScale2), <span class="at">y =</span> BattingScale2 <span class="sc">-</span> BowlingScale2)) <span class="sc">+</span></span>
 <span id="cb49-2"><a href="venue-impact-factors-and-team-rankings---venue_team_rankings.html#cb49-2" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="at">stat =</span> <span class="st">&quot;identity&quot;</span>, <span class="at">fill =</span> <span class="st">&quot;blue&quot;</span>) <span class="sc">+</span></span>
@@ -270,7 +270,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb49-5"><a href="venue-impact-factors-and-team-rankings---venue_team_rankings.html#cb49-5" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">&quot;Venue&quot;</span>,</span>
 <span id="cb49-6"><a href="venue-impact-factors-and-team-rankings---venue_team_rankings.html#cb49-6" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">&quot;Batting - Bowling Impact&quot;</span>) <span class="sc">+</span></span>
 <span id="cb49-7"><a href="venue-impact-factors-and-team-rankings---venue_team_rankings.html#cb49-7" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code></pre></div>
-<p><img src="_main_files/figure-html/unnamed-chunk-35-1.png" width="672" /></p>
+<p><img src="cricket-predictions_files/figure-html/unnamed-chunk-35-1.png" width="672" /></p>
 </div>
 <div id="team-ranking" class="section level2 hasAnchor" number="3.2">
 <h2><span class="header-section-number">3.2</span> Team Ranking<a href="venue-impact-factors-and-team-rankings---venue_team_rankings.html#team-ranking" class="anchor-section" aria-label="Anchor link to header"></a></h2>
@@ -322,7 +322,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb52-6"><a href="venue-impact-factors-and-team-rankings---venue_team_rankings.html#cb52-6" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">&quot;Country&quot;</span>,</span>
 <span id="cb52-7"><a href="venue-impact-factors-and-team-rankings---venue_team_rankings.html#cb52-7" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">&quot;Total Impact&quot;</span>) <span class="sc">+</span></span>
 <span id="cb52-8"><a href="venue-impact-factors-and-team-rankings---venue_team_rankings.html#cb52-8" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code></pre></div>
-<p><img src="_main_files/figure-html/unnamed-chunk-37-1.png" width="672" /></p>
+<p><img src="cricket-predictions_files/figure-html/unnamed-chunk-37-1.png" width="672" /></p>
 <p>Get data for Lord’s</p>
 <div class="sourceCode" id="cb53"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb53-1"><a href="venue-impact-factors-and-team-rankings---venue_team_rankings.html#cb53-1" tabindex="-1"></a>battingranking[<span class="dv">80</span>,]</span></code></pre></div>
 <pre><code>## # A tibble: 1 × 7

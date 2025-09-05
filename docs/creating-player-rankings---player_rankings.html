@@ -305,7 +305,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb34-12"><a href="creating-player-rankings---player_rankings.html#cb34-12" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">&quot;Career Batting Impact&quot;</span>) <span class="sc">+</span></span>
 <span id="cb34-13"><a href="creating-player-rankings---player_rankings.html#cb34-13" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
 <span id="cb34-14"><a href="creating-player-rankings---player_rankings.html#cb34-14" tabindex="-1"></a>  <span class="fu">geom_text</span>(<span class="fu">aes</span>(<span class="at">label =</span> <span class="fu">round</span>(CareerBatImpact, <span class="dv">2</span>)), <span class="at">hjust =</span> <span class="fl">1.4</span>, <span class="at">color =</span> <span class="st">&quot;black&quot;</span>, <span class="at">size =</span> <span class="dv">3</span>) <span class="co"># Add labels for clarity</span></span></code></pre></div>
-<p><img src="_main_files/figure-html/unnamed-chunk-25-1.png" width="672" /></p>
+<p><img src="cricket-predictions_files/figure-html/unnamed-chunk-25-1.png" width="672" /></p>
 <p>Plot top 15 bowlers by career bowl impact</p>
 <div class="sourceCode" id="cb35"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb35-1"><a href="creating-player-rankings---player_rankings.html#cb35-1" tabindex="-1"></a>top_bowlers <span class="ot">&lt;-</span> player_rankings_display <span class="sc">%&gt;%</span></span>
 <span id="cb35-2"><a href="creating-player-rankings---player_rankings.html#cb35-2" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(CareerBowlImpact)) <span class="sc">%&gt;%</span></span>
@@ -318,7 +318,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb35-9"><a href="creating-player-rankings---player_rankings.html#cb35-9" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">&quot;Career Bowling Impact&quot;</span>) <span class="sc">+</span></span>
 <span id="cb35-10"><a href="creating-player-rankings---player_rankings.html#cb35-10" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
 <span id="cb35-11"><a href="creating-player-rankings---player_rankings.html#cb35-11" tabindex="-1"></a>  <span class="fu">geom_text</span>(<span class="fu">aes</span>(<span class="at">label =</span> <span class="fu">round</span>(CareerBowlImpact, <span class="dv">2</span>)), <span class="at">hjust =</span> <span class="fl">1.4</span>, <span class="at">color =</span> <span class="st">&quot;black&quot;</span>, <span class="at">size =</span> <span class="dv">3</span>) <span class="co"># Add labels for clarity</span></span></code></pre></div>
-<p><img src="_main_files/figure-html/unnamed-chunk-26-1.png" width="672" /></p>
+<p><img src="cricket-predictions_files/figure-html/unnamed-chunk-26-1.png" width="672" /></p>
 <p>Plot top 15 all-rounders by total impact, partitioning the batting and bowling section</p>
 <div class="sourceCode" id="cb36"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb36-1"><a href="creating-player-rankings---player_rankings.html#cb36-1" tabindex="-1"></a>top_allrounders <span class="ot">&lt;-</span> allrounderranking <span class="sc">%&gt;%</span></span>
 <span id="cb36-2"><a href="creating-player-rankings---player_rankings.html#cb36-2" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(TotalImpact)) <span class="sc">%&gt;%</span></span>
@@ -331,7 +331,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb36-9"><a href="creating-player-rankings---player_rankings.html#cb36-9" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">&quot;Total Impact&quot;</span>) <span class="sc">+</span></span>
 <span id="cb36-10"><a href="creating-player-rankings---player_rankings.html#cb36-10" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
 <span id="cb36-11"><a href="creating-player-rankings---player_rankings.html#cb36-11" tabindex="-1"></a>  <span class="fu">geom_text</span>(<span class="fu">aes</span>(<span class="at">label =</span> <span class="fu">round</span>(TotalImpact, <span class="dv">2</span>)), <span class="at">hjust =</span> <span class="fl">1.4</span>, <span class="at">color =</span> <span class="st">&quot;black&quot;</span>, <span class="at">size =</span> <span class="dv">3</span>) <span class="co"># Add labels for clarity</span></span></code></pre></div>
-<p><img src="_main_files/figure-html/unnamed-chunk-27-1.png" width="672" /></p>
+<p><img src="cricket-predictions_files/figure-html/unnamed-chunk-27-1.png" width="672" /></p>
 <p>Plot top 15 all-rounders by Batting and Bowling Impact per Game</p>
 <div class="sourceCode" id="cb37"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb37-1"><a href="creating-player-rankings---player_rankings.html#cb37-1" tabindex="-1"></a>top_allrounders_per_game <span class="ot">&lt;-</span> allrounderranking <span class="sc">%&gt;%</span></span>
 <span id="cb37-2"><a href="creating-player-rankings---player_rankings.html#cb37-2" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(TotalImpactperGame)) <span class="sc">%&gt;%</span></span>
@@ -344,7 +344,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb37-9"><a href="creating-player-rankings---player_rankings.html#cb37-9" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">&quot;Total Impact per Game&quot;</span>) <span class="sc">+</span></span>
 <span id="cb37-10"><a href="creating-player-rankings---player_rankings.html#cb37-10" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
 <span id="cb37-11"><a href="creating-player-rankings---player_rankings.html#cb37-11" tabindex="-1"></a>  <span class="fu">geom_text</span>(<span class="fu">aes</span>(<span class="at">label =</span> <span class="fu">round</span>(TotalImpactperGame, <span class="dv">2</span>)), <span class="at">hjust =</span> <span class="fl">1.4</span>, <span class="at">color =</span> <span class="st">&quot;black&quot;</span>, <span class="at">size =</span> <span class="dv">3</span>) <span class="co"># Add labels for clarity</span></span></code></pre></div>
-<p><img src="_main_files/figure-html/unnamed-chunk-28-1.png" width="672" /></p>
+<p><img src="cricket-predictions_files/figure-html/unnamed-chunk-28-1.png" width="672" /></p>
 <p>Plot top 15 Batsman by Batting Impact per Game</p>
 <div class="sourceCode" id="cb38"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb38-1"><a href="creating-player-rankings---player_rankings.html#cb38-1" tabindex="-1"></a>top_batsmen_per_game <span class="ot">&lt;-</span> player_rankings_display <span class="sc">%&gt;%</span></span>
 <span id="cb38-2"><a href="creating-player-rankings---player_rankings.html#cb38-2" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(BatImpactperGame)) <span class="sc">%&gt;%</span></span>
@@ -357,7 +357,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb38-9"><a href="creating-player-rankings---player_rankings.html#cb38-9" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">&quot;Batting Impact per Game&quot;</span>) <span class="sc">+</span></span>
 <span id="cb38-10"><a href="creating-player-rankings---player_rankings.html#cb38-10" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
 <span id="cb38-11"><a href="creating-player-rankings---player_rankings.html#cb38-11" tabindex="-1"></a>  <span class="fu">geom_text</span>(<span class="fu">aes</span>(<span class="at">label =</span> <span class="fu">round</span>(BatImpactperGame, <span class="dv">2</span>)), <span class="at">hjust =</span> <span class="fl">1.4</span>, <span class="at">color =</span> <span class="st">&quot;black&quot;</span>, <span class="at">size =</span> <span class="dv">3</span>) <span class="co"># Add labels for clarity</span></span></code></pre></div>
-<p><img src="_main_files/figure-html/unnamed-chunk-29-1.png" width="672" /></p>
+<p><img src="cricket-predictions_files/figure-html/unnamed-chunk-29-1.png" width="672" /></p>
 <p>Plot top 15 Bowlers by Bowling Impact per Game</p>
 <div class="sourceCode" id="cb39"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb39-1"><a href="creating-player-rankings---player_rankings.html#cb39-1" tabindex="-1"></a>top_bowlers_per_game <span class="ot">&lt;-</span> player_rankings_display <span class="sc">%&gt;%</span></span>
 <span id="cb39-2"><a href="creating-player-rankings---player_rankings.html#cb39-2" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(BowlImpactperGame)) <span class="sc">%&gt;%</span></span>
@@ -370,7 +370,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb39-9"><a href="creating-player-rankings---player_rankings.html#cb39-9" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">&quot;Bowling Impact per Game&quot;</span>) <span class="sc">+</span></span>
 <span id="cb39-10"><a href="creating-player-rankings---player_rankings.html#cb39-10" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
 <span id="cb39-11"><a href="creating-player-rankings---player_rankings.html#cb39-11" tabindex="-1"></a>  <span class="fu">geom_text</span>(<span class="fu">aes</span>(<span class="at">label =</span> <span class="fu">round</span>(BowlImpactperGame, <span class="dv">2</span>)), <span class="at">hjust =</span> <span class="fl">1.4</span>, <span class="at">color =</span> <span class="st">&quot;black&quot;</span>, <span class="at">size =</span> <span class="dv">3</span>) <span class="co"># Add labels for clarity</span></span></code></pre></div>
-<p><img src="_main_files/figure-html/unnamed-chunk-30-1.png" width="672" /></p>
+<p><img src="cricket-predictions_files/figure-html/unnamed-chunk-30-1.png" width="672" /></p>
 </div>
 </div>
             </section>
