@@ -1,0 +1,19 @@
+[0] Config.pm:308> INFO - This is Biber 2.20
+[0] Config.pm:311> INFO - Logfile is 'StatsStumps.blg'
+[25] biber-darwin:340> INFO - === Fri Sep  5, 2025, 01:42:38
+[32] Biber.pm:420> INFO - Reading 'StatsStumps.bcf'
+[67] Biber.pm:994> INFO - Found 16 citekeys in bib section 0
+[75] Biber.pm:4463> INFO - Processing section 0
+[80] Biber.pm:4654> INFO - Looking for bibtex file 'Bibliograph.bib' for section 0
+[80] bibtex.pm:1713> INFO - LaTeX decoding ...
+[86] bibtex.pm:1519> INFO - Found BibTeX data source 'Bibliograph.bib'
+[135] UCollate.pm:68> INFO - Overriding locale 'en-US' defaults 'normalization = NFD' with 'normalization = prenormalized'
+[135] UCollate.pm:68> INFO - Overriding locale 'en-US' defaults 'variable = shifted' with 'variable = non-ignorable'
+[135] Biber.pm:4283> INFO - Sorting list 'nyt/apasortcite//global/global/global' of type 'entry' with template 'nyt' and locale 'en-US'
+[135] Biber.pm:4289> INFO - No sort tailoring available for locale 'en-US'
+[150] UCollate.pm:68> INFO - Overriding locale 'en-US' defaults 'normalization = NFD' with 'normalization = prenormalized'
+[150] UCollate.pm:68> INFO - Overriding locale 'en-US' defaults 'variable = shifted' with 'variable = non-ignorable'
+[150] Biber.pm:4283> INFO - Sorting list 'nyt/global//global/global/global' of type 'entry' with template 'nyt' and locale 'en-US'
+[150] Biber.pm:4289> INFO - No sort tailoring available for locale 'en-US'
+[159] bbl.pm:676> INFO - Writing 'StatsStumps.bbl' with encoding 'UTF-8'
+[165] bbl.pm:779> INFO - Output to StatsStumps.bbl

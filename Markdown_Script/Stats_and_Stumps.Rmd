@@ -746,10 +746,16 @@ print(paste("Heuristic Accuracy on all matches:", round(accuracy * 100, 2), "%")
 ```{r}
 target = factor(playertotalimpact2$Winner_Team1, levels = c(0, 1), labels = c("Team2", "Team1"))
 
-accvector = numeric(30)  # store accuracies
+accvector_lr = numeric(30)       # store accuracies
+rmsevector_lr = numeric(30)      # store rmse
+loglossvector_lr = numeric(30)   # store log loss
+compvector_lr = numeric(30)      # store composite score
+
 set.seed(314)
 overallbestlambda = 0
 overallbestalpha = 0
+best_composite_lr = Inf           # initialize to large value
+
 for(i in 1:30){
   
   # Train-test split (80-20)
@@ -792,34 +798,49 @@ for(i in 1:30){
   # Get test set probabilities
   test_prob <- predict(best_log_model, newx = test_x, type = "response", s = best_lambda)
   
-  # Cross-validation to determine the best threshold
-  thresholds = numeric(10)
-  folds <- createFolds(train_y, k = 10, list = TRUE)
-  
-  
   # Apply threshold to test predictions
   test_predictions <- factor(ifelse(test_prob > 0.5, 1, 0),
                              levels = c(0, 1),
                              labels = c("Team2", "Team1"))
   
+  # Compute metrics
+  test_rmse = sqrt(mean((as.numeric(test_y) - 1 - (as.numeric(test_prob)))^2))
+  test_logloss = -mean(ifelse(test_y == "1", log(test_prob), log(1 - test_prob)))
   test_y <- factor(test_y, levels = c(0, 1), labels = c("Team2", "Team1"))
-  
-  # Compute Accuracy
   conf_matrix <- confusionMatrix(test_predictions, test_y)
-  accvector[i] <- conf_matrix$overall['Accuracy']
-  print(accvector[i])
-  if(i == 1){
+  test_acc = conf_matrix$overall['Accuracy']
+  
+  # Store metrics
+  accvector_lr[i] <- test_acc
+  rmsevector_lr[i] <- test_rmse
+  loglossvector_lr[i] <- test_logloss
+  
+  # Composite score
+  compvector_lr[i] <- (1 - test_acc) + test_rmse + test_logloss
+  print(paste("Iter", i, 
+              "- Accuracy:", round(test_acc, 4),
+              "RMSE:", round(test_rmse, 4),
+              "LogLoss:", round(test_logloss, 4),
+              "Composite:", round(compvector_lr[i], 4)))
+  
+  # Update best model by composite score
+  if(compvector_lr[i] < best_composite_lr){
+    best_composite_lr = compvector_lr[i]
+    best_acc_lr = accvector_lr[i]
+    best_rmse_lr = rmsevector_lr[i]
+    best_logloss_lr = loglossvector_lr[i]
     overallbestlambda = best_lambda
     overallbestalpha = best_alpha
   }
-  else{
-    if(conf_matrix$overall['Accuracy'] > max(accvector[1:(i-1)])){
-      overallbestlambda = best_lambda
-      overallbestalpha = best_alpha
-    }
-  }
-  
 }
+
+print(paste("Best Lambda:", round(overallbestlambda, 4), 
+            "Best Alpha:", round(overallbestalpha, 4),
+            "with Composite Score:", round(best_composite_lr, 4), 
+            "Accuracy:", round(best_acc_lr, 4),
+            "RMSE:", round(best_rmse_lr, 4),
+            "LogLoss:", round(best_logloss_lr, 4)))
+
 ```
 
 
@@ -847,111 +868,225 @@ final_model = glmnet(
   lambda = overallbestlambda, # Use the best lambda from previous model
 )
 
-print(paste("Accuracy value on test set: ", round(max(accvector) * 100, 2), "%"))
+print(paste("Accuracy value on test set: ", round(best_acc_lr * 100, 2), "%"))
 
 
 ```
 
 ## RF model
-```{r}
-set.seed(314)  # For reproducibility
-```
 
 Train-test split (80-20)
 ```{r}
-accvec_rf = numeric(30)  # Initialize accuracy vector for 30 iterations
-for(i in 1:30) {  # Repeat for 30 iterations to get a robust accuracy
+set.seed(314)  # For reproducibility
+
+# Store RF results in their own vectors
+accvec_rf = numeric(30)       # accuracy vector
+rmsevec_rf = numeric(30)      # rmse vector
+loglossvec_rf = numeric(30)   # log loss vector
+compvec_rf = numeric(30)      # composite score vector
+
+best_composite_rf = Inf
+overallbestmtry_rf = 0
+overallbestntree_rf = 500
+
+set.seed(314)
+for(i in 1:30) {  # Repeat for 30 iterations
+  
+  # Train-test split (80-20)
   train_index_rf <- createDataPartition(playertotalimpact2$Winner_Team1, p = 0.8, list = FALSE)
   train_data_rf <- playertotalimpact2[train_index_rf, ]
   test_data_rf  <- playertotalimpact2[-train_index_rf, ]
-  # Define Predictors and Target for RF model
-  train_x_rf <- train_data_rf[, 1:28]  # Player impact features
-  train_y_rf <- as.factor(train_data_rf$Winner_Team1)  # Target variable (0 or 1)
+  
+  # Define Predictors and Target
+  train_x_rf <- train_data_rf[, 1:28]  
+  train_y_rf <- as.factor(train_data_rf$Winner_Team1)  
   test_x_rf  <- test_data_rf[, 1:28]
-  test_y_rf  <- as.factor(test_data_rf$Winner_Team1)  # Target variable (0 or 1)
-  # Train the Random Forest model
+  test_y_rf  <- as.factor(test_data_rf$Winner_Team1)  
+  
+  # Train RF with caret::train (5-fold CV, tuning mtry automatically)
   rf_model <- train(
     x = train_x_rf,
     y = train_y_rf,
     method = "rf",
     trControl = trainControl(method = "cv", number = 5),
-    tuneLength = 5,  # Number of different mtry values to try
-    ntree = 500,  # Number of trees
-    importance = TRUE
+    tuneLength = 5,
+    ntree = 500,
+    importance = TRUE,
+    metric = "Accuracy"
   )
-  # Get accuracy
+  
+  # Best tuning param
+  best_mtry_rf <- rf_model$bestTune$mtry
+  
+  # Predictions (class + probs)
   rf_predictions <- predict(rf_model, newdata = test_x_rf)
-  # Compute Accuracy
+  rf_prob <- predict(rf_model, newdata = test_x_rf, type = "prob")[,2]
+  
+  # Accuracy
   rf_conf_matrix <- confusionMatrix(rf_predictions, test_y_rf)
   rf_accuracy <- rf_conf_matrix$overall['Accuracy']
-  print(paste("Random Forest Model Accuracy on Test Set: ", round(rf_accuracy * 100, 2), "%"))
-  accvec_rf[i] <- rf_accuracy  # Store accuracy for each iteration
+  
+  # RMSE (probability vs actual outcome)
+  rf_rmse <- sqrt(mean((as.numeric(test_y_rf) - 1 - rf_prob)^2))
+  
+  # Log Loss
+  rf_logloss <- -mean(ifelse(test_y_rf == "1", log(rf_prob), log(1 - rf_prob)))
+  
+  # Composite Score
+  rf_composite <- (1 - rf_accuracy) + rf_rmse + rf_logloss
+  
+  # Store metrics
+  accvec_rf[i] <- rf_accuracy
+  rmsevec_rf[i] <- rf_rmse
+  loglossvec_rf[i] <- rf_logloss
+  compvec_rf[i] <- rf_composite
+  
+  # Print metrics
+  print(paste("Iter", i, 
+              "- Acc:", round(rf_accuracy, 4),
+              "RMSE:", round(rf_rmse, 4),
+              "LogLoss:", round(rf_logloss, 4),
+              "Composite:", round(rf_composite, 4)))
+  
+  # Track best composite
+  if(rf_composite < best_composite_rf){
+    best_composite_rf = rf_composite
+    best_acc_rf = accvec_rf[i]
+    best_rmse_rf = rmsevec_rf[i]
+    best_logloss_rf = loglossvec_rf[i]
+    overallbestmtry_rf = best_mtry_rf
+  }
 }
-# Maximum: 70.28
-max(accvec_rf) # Print the maximum accuracy from the 30 iterations
+
+print(paste("Best RF model - mtry:", overallbestmtry_rf, 
+            "ntree:", overallbestntree_rf, 
+            "with Composite Score:", round(best_composite_rf, 4),
+            " Accuracy:", round(best_acc_rf, 4),
+            " RMSE:", round(best_rmse_rf, 4),
+            " LogLoss:", round(best_logloss_rf, 4)))
+
 ```
 
 
 ## SVMs
 ```{r}
-library(e1071)
-set.seed(314)  # For reproducibility
-accvec_svm = numeric(30)  # Initialize accuracy vector for 30 iterations
-for(i in 1:30) {  # Repeat for 30 iterations to get a robust accuracy
+# Store SVM results in their own vectors
+accvec_svm = numeric(30)       # accuracy vector
+rmsevec_svm = numeric(30)      # rmse vector
+loglossvec_svm = numeric(30)   # log loss vector
+compvec_svm = numeric(30)      # composite score vector
+
+best_composite_svm = Inf
+overallbestC_svm = NA
+
+set.seed(314)
+for(i in 1:30) {  # Repeat for 30 iterations
+  
+  # Train-test split (80-20)
   train_index_svm <- createDataPartition(playertotalimpact2$Winner_Team1, p = 0.8, list = FALSE)
   train_data_svm <- playertotalimpact2[train_index_svm, ]
   test_data_svm  <- playertotalimpact2[-train_index_svm, ]
   
-  # Define Predictors and Target for SVM model
-  train_x_svm <- train_data_svm[, 1:28]  # Player impact features
-  train_y_svm <- as.factor(train_data_svm$Winner_Team1)  # Target variable (0 or 1)
+  # Define Predictors and Target
+  train_x_svm <- train_data_svm[, 1:28]  
+  train_y_svm <- as.factor(train_data_svm$Winner_Team1)  
   test_x_svm  <- test_data_svm[, 1:28]
-  test_y_svm  <- as.factor(test_data_svm$Winner_Team1)  # Target variable (0 or 1)
+  test_y_svm  <- as.factor(test_data_svm$Winner_Team1)  
   
-  # Train the SVM model
-  grid_svm <- expand.grid(C = 2^(-5:5))  # Hyperparameter grid for SVM
+  # Hyperparameter grid for SVM (linear kernel)
+  grid_svm <- expand.grid(C = 2^(-5:5))
+  
+  # Train SVM with caret::train
   svm_model <- train(
     x = train_x_svm,
     y = train_y_svm,
     method = "svmLinear",
     trControl = trainControl(method = "cv", number = 5),
     tunegrid = grid_svm,
+    prob.model = TRUE
   )
   
-  # Get accuracy
-  svm_predictions <- predict(svm_model, newdata = test_x_svm)
+  # Best C
+  best_C_svm <- svm_model$bestTune$C
   
-  # Compute Accuracy
+  # Predictions
+  svm_predictions <- predict(svm_model, newdata = test_x_svm)
+  svm_prob <- predict(svm_model, newdata = test_x_svm, type = "prob")[,2]
+  
+  # Accuracy
   svm_conf_matrix <- confusionMatrix(svm_predictions, test_y_svm)
   svm_accuracy <- svm_conf_matrix$overall['Accuracy']
   
-  print(paste("SVM Model Accuracy on Test Set: ", round(svm_accuracy * 100, 2), "%"))
+  # RMSE (probability vs actual outcome)
+  svm_rmse <- sqrt(mean((as.numeric(test_y_svm) - 1 - svm_prob)^2))
   
-  accvec_svm[i] <- svm_accuracy  # Store accuracy for each iteration
+  # Log Loss
+  svm_logloss <- -mean(ifelse(test_y_svm == "1", log(svm_prob), log(1 - svm_prob)))
+  
+  # Composite Score (lower is better)
+  svm_composite <- (1 - svm_accuracy) + svm_rmse + svm_logloss
+  
+  # Store metrics
+  accvec_svm[i] <- svm_accuracy
+  rmsevec_svm[i] <- svm_rmse
+  loglossvec_svm[i] <- svm_logloss
+  compvec_svm[i] <- svm_composite
+  
+  # Print metrics
+  print(paste("Iter", i, 
+              "- Acc:", round(svm_accuracy, 4),
+              "RMSE:", round(svm_rmse, 4),
+              "LogLoss:", round(svm_logloss, 4),
+              "Composite:", round(svm_composite, 4)))
+  
+  # Track best composite
+  if(svm_composite < best_composite_svm){
+    best_composite_svm = svm_composite
+    best_acc_svm = accvec_svm[i]
+    best_rmse_svm = rmsevec_svm[i]
+    best_logloss_svm = loglossvec_svm[i]
+    overallbestC_svm = best_C_svm
+  }
 }
-# Maximum: 70.75
-max(accvec_svm) # Print the maximum accuracy from the 30 iterations
+
+print(paste("Best SVM model - C:", overallbestC_svm, 
+            "with Composite Score:", round(best_composite_svm, 4),
+            " Accuracy:", round(best_acc_svm, 4),
+            " RMSE:", round(best_rmse_svm, 4),
+            " LogLoss:", round(best_logloss_svm, 4)))
+
 ```
 
 ## Model Comparison
 ```{r}
-model_accuracies <- data.frame(
-  Model = c("Logistic Regression", "Random Forest", "SVM", "Heuristic"),
-  Accuracy = c(max(accvector) * 100, max(accvec_rf) * 100, max(accvec_svm) * 100, accuracy * 100),
-  CI_Lower = c(
-    max(accvector) * 100 - 1.96 * (sd(accvector) * 100 / sqrt(30)),
-    max(accvec_rf) * 100 - 1.96 * (sd(accvec_rf) * 100 / sqrt(30)),
-    max(accvec_svm) * 100 - 1.96 * (sd(accvec_svm) * 100 / sqrt(30)),
-    accuracy * 100 - 1.96 * (sqrt((accuracy * (1 - accuracy)) / nrow(playertotalimpact2)) * 100)
-  ),
-  CI_Upper = c(
-    max(accvector) * 100 + 1.96 * (sd(accvector) * 100 / sqrt(30)),
-    max(accvec_rf) * 100 + 1.96 * (sd(accvec_rf) * 100 / sqrt(30)),
-    max(accvec_svm) * 100 + 1.96 * (sd(accvec_svm) * 100 / sqrt(30)),
-    accuracy * 100 + 1.96 * (sqrt((accuracy * (1 - accuracy)) / nrow(playertotalimpact2)) * 100)
+
+model_scores <- data.frame(
+  Model = c("Heuristic", "Logistic Regression", "Random Forest", "SVM"),
+  Accuracy = c(round(accuracy, 4), round(best_acc_lr, 4), round(best_acc_rf, 4), round(best_acc_svm, 4)),
+  RMSE = c(NA, round(best_rmse_lr, 4), round(best_rmse_rf, 4), round(best_rmse_svm, 4)),
+  LogLoss = c(NA, round(best_logloss_lr, 4), round(best_logloss_rf, 4), round(best_logloss_svm, 4)),
+  CompositeScore = c(NA, round(best_composite_lr, 4), round(best_composite_rf, 4), round(best_composite_svm, 4)),
+  Conf_Interval = c(
+    NA, 
+    paste0("(", round(best_composite_lr - 1.96 * sd(compvector_lr) / sqrt(30), 4), ", ", 
+                round(best_composite_lr + 1.96 * sd(compvector_lr) / sqrt(30), 4), ")"),
+    paste0("(", round(best_composite_rf - 1.96 * sd(compvec_rf) / sqrt(30), 4), ", ", 
+                round(best_composite_rf + 1.96 * sd(compvec_rf) / sqrt(30), 4), ")"),
+    paste0("(", round(best_composite_svm - 1.96 * sd(compvec_svm) / sqrt(30), 4), ", ", 
+                round(best_composite_svm + 1.96 * sd(compvec_svm) / sqrt(30), 4), ")")
   )
 )
-print(model_accuracies)
+
+# Print with nice column labels
+(setNames(model_scores, c(
+  "Model",
+  "Accuracy",
+  "RMSE",
+  "Log-Loss",
+  "Composite Score",
+  "95% Confidence Interval"
+)))
+
 ```
 
 # Model Evaluation (Human Eye Check) on Real Games - T20_Final_Example.R

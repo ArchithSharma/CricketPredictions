@@ -19,6 +19,88 @@
 
 \refsection{0}
   \datalist[entry]{nyt/apasortcite//global/global/global}
+    \entry{berger_2014_kolmogorovsmirnov}{article}{}{}
+      \name{author}{2}{}{%
+        {{un=0,uniquepart=base,hash=efabed5d6abf5e58c6992d9470b9b9d0}{%
+           family={Berger},
+           familyi={B\bibinitperiod},
+           given={Vance\bibnamedelima W.},
+           giveni={V\bibinitperiod\bibinitdelim W\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=b49bef06f190111f600e9f9c8c0c5133}{%
+           family={Zhou},
+           familyi={Z\bibinitperiod},
+           given={YanYan},
+           giveni={Y\bibinitperiod},
+           givenun=0}}%
+      }
+      \strng{namehash}{f4b2252876e6b9ff7b730c8d36fb083e}
+      \strng{fullhash}{f4b2252876e6b9ff7b730c8d36fb083e}
+      \strng{fullhashraw}{f4b2252876e6b9ff7b730c8d36fb083e}
+      \strng{bibnamehash}{f4b2252876e6b9ff7b730c8d36fb083e}
+      \strng{authorbibnamehash}{f4b2252876e6b9ff7b730c8d36fb083e}
+      \strng{authornamehash}{f4b2252876e6b9ff7b730c8d36fb083e}
+      \strng{authorfullhash}{f4b2252876e6b9ff7b730c8d36fb083e}
+      \strng{authorfullhashraw}{f4b2252876e6b9ff7b730c8d36fb083e}
+      \field{sortinit}{B}
+      \field{sortinithash}{d7095fff47cda75ca2589920aae98399}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \true{uniqueprimaryauthor}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Wiley StatsRef: Statistics Reference Online}
+      \field{month}{09}
+      \field{title}{Kolmogorov-Smirnov Test: Overview}
+      \field{year}{2014}
+      \verb{doi}
+      \verb 10.1002/9781118445112.stat06558
+      \endverb
+    \endentry
+    \entry{cohen_1988_statistical}{book}{}{}
+      \name{author}{1}{}{%
+        {{un=0,uniquepart=base,hash=eaad07ee1c6ef93a9308150f12c3c2eb}{%
+           family={Cohen},
+           familyi={C\bibinitperiod},
+           given={Jacob},
+           giveni={J\bibinitperiod},
+           givenun=0}}%
+      }
+      \list{publisher}{1}{%
+        {Routledge}%
+      }
+      \strng{namehash}{eaad07ee1c6ef93a9308150f12c3c2eb}
+      \strng{fullhash}{eaad07ee1c6ef93a9308150f12c3c2eb}
+      \strng{fullhashraw}{eaad07ee1c6ef93a9308150f12c3c2eb}
+      \strng{bibnamehash}{eaad07ee1c6ef93a9308150f12c3c2eb}
+      \strng{authorbibnamehash}{eaad07ee1c6ef93a9308150f12c3c2eb}
+      \strng{authornamehash}{eaad07ee1c6ef93a9308150f12c3c2eb}
+      \strng{authorfullhash}{eaad07ee1c6ef93a9308150f12c3c2eb}
+      \strng{authorfullhashraw}{eaad07ee1c6ef93a9308150f12c3c2eb}
+      \field{sortinit}{C}
+      \field{sortinithash}{4d103a86280481745c9c897c925753c0}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \true{uniqueprimaryauthor}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{edition}{2}
+      \field{title}{Statistical Power Analysis for the Behavioral Sciences}
+      \field{urlday}{30}
+      \field{urlmonth}{8}
+      \field{urlyear}{2025}
+      \field{year}{1988}
+      \field{urldateera}{ce}
+      \verb{doi}
+      \verb 10.4324/9780203771587
+      \endverb
+      \verb{urlraw}
+      \verb https://www.taylorfrancis.com/books/mono/10.4324/9780203771587/statistical-power-analysis-behavioral-sciences-jacob-cohen
+      \endverb
+      \verb{url}
+      \verb https://www.taylorfrancis.com/books/mono/10.4324/9780203771587/statistical-power-analysis-behavioral-sciences-jacob-cohen
+      \endverb
+    \endentry
     \entry{cricbuzz_2025_ajantha}{misc}{}{}
       \name{author}{1}{}{%
         {{un=0,uniquepart=base,hash=520bd4f2276493d6c93a8b4d496a6d0c}{%
@@ -319,6 +401,49 @@
       \verb https://www.espncricinfo.com/story/ipl-2022-pbks-vs-kkr-the-undew-advantage-what-choice-do-teams-batting-first-have-1308698
       \endverb
     \endentry
+    \entry{kuhn_2008_building}{article}{}{}
+      \name{author}{1}{}{%
+        {{un=0,uniquepart=base,hash=3305789acf03200ed22f154007d4fab9}{%
+           family={Kuhn},
+           familyi={K\bibinitperiod},
+           given={Max},
+           giveni={M\bibinitperiod},
+           givenun=0}}%
+      }
+      \strng{namehash}{3305789acf03200ed22f154007d4fab9}
+      \strng{fullhash}{3305789acf03200ed22f154007d4fab9}
+      \strng{fullhashraw}{3305789acf03200ed22f154007d4fab9}
+      \strng{bibnamehash}{3305789acf03200ed22f154007d4fab9}
+      \strng{authorbibnamehash}{3305789acf03200ed22f154007d4fab9}
+      \strng{authornamehash}{3305789acf03200ed22f154007d4fab9}
+      \strng{authorfullhash}{3305789acf03200ed22f154007d4fab9}
+      \strng{authorfullhashraw}{3305789acf03200ed22f154007d4fab9}
+      \field{sortinit}{K}
+      \field{sortinithash}{c02bf6bff1c488450c352b40f5d853ab}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \true{uniqueprimaryauthor}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Journal of Statistical Software}
+      \field{month}{11}
+      \field{title}{Building predictive models in R using the caret package}
+      \field{urlday}{5}
+      \field{urlmonth}{9}
+      \field{urlyear}{2025}
+      \field{volume}{28}
+      \field{year}{2008}
+      \field{urldateera}{ce}
+      \verb{doi}
+      \verb 10.18637/jss.v028.i05
+      \endverb
+      \verb{urlraw}
+      \verb https://www.jstatsoft.org/article/view/v028i05
+      \endverb
+      \verb{url}
+      \verb https://www.jstatsoft.org/article/view/v028i05
+      \endverb
+    \endentry
     \entry{e1071}{manual}{}{}
       \name{author}{5}{}{%
         {{un=0,uniquepart=base,hash=8b8264d1ec124bc1b7e8110d3c084941}{%
@@ -412,73 +537,6 @@
       \verb{url}
       \verb https://www.R-project.org/
       \endverb
-    \endentry
-    \entry{pROC_package}{article}{}{}
-      \name{author}{7}{}{%
-        {{un=0,uniquepart=base,hash=eddb2d35bb86970a3b620919032872f2}{%
-           family={Robin},
-           familyi={R\bibinitperiod},
-           given={Xavier},
-           giveni={X\bibinitperiod},
-           givenun=0}}%
-        {{un=0,uniquepart=base,hash=a515bb6a9d253d799ec6dd12f3879c67}{%
-           family={Turck},
-           familyi={T\bibinitperiod},
-           given={Natacha},
-           giveni={N\bibinitperiod},
-           givenun=0}}%
-        {{un=0,uniquepart=base,hash=80459c015d86c296cbe6721f80470c41}{%
-           family={Hainard},
-           familyi={H\bibinitperiod},
-           given={Alexandre},
-           giveni={A\bibinitperiod},
-           givenun=0}}%
-        {{un=0,uniquepart=base,hash=9c7c12ff1cf878cb71a42cc0496c0b0d}{%
-           family={Tiberti},
-           familyi={T\bibinitperiod},
-           given={Natalia},
-           giveni={N\bibinitperiod},
-           givenun=0}}%
-        {{un=0,uniquepart=base,hash=7d0aaccffe7b26dc63f4dc4244e13c92}{%
-           family={Lisacek},
-           familyi={L\bibinitperiod},
-           given={Frédérique},
-           giveni={F\bibinitperiod},
-           givenun=0}}%
-        {{un=0,uniquepart=base,hash=8b4958618472f5d053fd537916d0069f}{%
-           family={Sanchez},
-           familyi={S\bibinitperiod},
-           given={Jean-Charles},
-           giveni={J\bibinithyphendelim C\bibinitperiod},
-           givenun=0}}%
-        {{un=0,uniquepart=base,hash=a72c3487103e77ffaf5aed3be8bcf625}{%
-           family={Müller},
-           familyi={M\bibinitperiod},
-           given={Markus},
-           giveni={M\bibinitperiod},
-           givenun=0}}%
-      }
-      \strng{namehash}{b791d00f9a2d0465d669dc5e4b98078e}
-      \strng{fullhash}{62460c953243f4e080a6d4518342efce}
-      \strng{fullhashraw}{62460c953243f4e080a6d4518342efce}
-      \strng{bibnamehash}{62460c953243f4e080a6d4518342efce}
-      \strng{authorbibnamehash}{62460c953243f4e080a6d4518342efce}
-      \strng{authornamehash}{b791d00f9a2d0465d669dc5e4b98078e}
-      \strng{authorfullhash}{62460c953243f4e080a6d4518342efce}
-      \strng{authorfullhashraw}{62460c953243f4e080a6d4518342efce}
-      \field{sortinit}{R}
-      \field{sortinithash}{5e1c39a9d46ffb6bebd8f801023a9486}
-      \field{extradatescope}{labelyear}
-      \field{labeldatesource}{}
-      \true{uniqueprimaryauthor}
-      \field{labelnamesource}{author}
-      \field{labeltitlesource}{title}
-      \field{journaltitle}{BMC Bioinformatics}
-      \field{title}{pROC: an open-source package for R and S+ to analyze and compare ROC curves}
-      \field{volume}{12}
-      \field{year}{2011}
-      \field{pages}{77}
-      \range{pages}{1}
     \endentry
     \entry{statsguru_2025_total}{misc}{}{}
       \name{author}{1}{}{%
@@ -656,6 +714,88 @@
     \endentry
   \enddatalist
   \datalist[entry]{nyt/global//global/global/global}
+    \entry{berger_2014_kolmogorovsmirnov}{article}{}{}
+      \name{author}{2}{}{%
+        {{un=0,uniquepart=base,hash=efabed5d6abf5e58c6992d9470b9b9d0}{%
+           family={Berger},
+           familyi={B\bibinitperiod},
+           given={Vance\bibnamedelima W.},
+           giveni={V\bibinitperiod\bibinitdelim W\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=b49bef06f190111f600e9f9c8c0c5133}{%
+           family={Zhou},
+           familyi={Z\bibinitperiod},
+           given={YanYan},
+           giveni={Y\bibinitperiod},
+           givenun=0}}%
+      }
+      \strng{namehash}{f4b2252876e6b9ff7b730c8d36fb083e}
+      \strng{fullhash}{f4b2252876e6b9ff7b730c8d36fb083e}
+      \strng{fullhashraw}{f4b2252876e6b9ff7b730c8d36fb083e}
+      \strng{bibnamehash}{f4b2252876e6b9ff7b730c8d36fb083e}
+      \strng{authorbibnamehash}{f4b2252876e6b9ff7b730c8d36fb083e}
+      \strng{authornamehash}{f4b2252876e6b9ff7b730c8d36fb083e}
+      \strng{authorfullhash}{f4b2252876e6b9ff7b730c8d36fb083e}
+      \strng{authorfullhashraw}{f4b2252876e6b9ff7b730c8d36fb083e}
+      \field{sortinit}{B}
+      \field{sortinithash}{d7095fff47cda75ca2589920aae98399}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \true{uniqueprimaryauthor}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Wiley StatsRef: Statistics Reference Online}
+      \field{month}{09}
+      \field{title}{Kolmogorov-Smirnov Test: Overview}
+      \field{year}{2014}
+      \verb{doi}
+      \verb 10.1002/9781118445112.stat06558
+      \endverb
+    \endentry
+    \entry{cohen_1988_statistical}{book}{}{}
+      \name{author}{1}{}{%
+        {{un=0,uniquepart=base,hash=eaad07ee1c6ef93a9308150f12c3c2eb}{%
+           family={Cohen},
+           familyi={C\bibinitperiod},
+           given={Jacob},
+           giveni={J\bibinitperiod},
+           givenun=0}}%
+      }
+      \list{publisher}{1}{%
+        {Routledge}%
+      }
+      \strng{namehash}{eaad07ee1c6ef93a9308150f12c3c2eb}
+      \strng{fullhash}{eaad07ee1c6ef93a9308150f12c3c2eb}
+      \strng{fullhashraw}{eaad07ee1c6ef93a9308150f12c3c2eb}
+      \strng{bibnamehash}{eaad07ee1c6ef93a9308150f12c3c2eb}
+      \strng{authorbibnamehash}{eaad07ee1c6ef93a9308150f12c3c2eb}
+      \strng{authornamehash}{eaad07ee1c6ef93a9308150f12c3c2eb}
+      \strng{authorfullhash}{eaad07ee1c6ef93a9308150f12c3c2eb}
+      \strng{authorfullhashraw}{eaad07ee1c6ef93a9308150f12c3c2eb}
+      \field{sortinit}{C}
+      \field{sortinithash}{4d103a86280481745c9c897c925753c0}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \true{uniqueprimaryauthor}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{edition}{2}
+      \field{title}{Statistical Power Analysis for the Behavioral Sciences}
+      \field{urlday}{30}
+      \field{urlmonth}{8}
+      \field{urlyear}{2025}
+      \field{year}{1988}
+      \field{urldateera}{ce}
+      \verb{doi}
+      \verb 10.4324/9780203771587
+      \endverb
+      \verb{urlraw}
+      \verb https://www.taylorfrancis.com/books/mono/10.4324/9780203771587/statistical-power-analysis-behavioral-sciences-jacob-cohen
+      \endverb
+      \verb{url}
+      \verb https://www.taylorfrancis.com/books/mono/10.4324/9780203771587/statistical-power-analysis-behavioral-sciences-jacob-cohen
+      \endverb
+    \endentry
     \entry{cricbuzz_2025_ajantha}{misc}{}{}
       \name{author}{1}{}{%
         {{un=0,uniquepart=base,hash=520bd4f2276493d6c93a8b4d496a6d0c}{%
@@ -956,6 +1096,49 @@
       \verb https://www.espncricinfo.com/story/ipl-2022-pbks-vs-kkr-the-undew-advantage-what-choice-do-teams-batting-first-have-1308698
       \endverb
     \endentry
+    \entry{kuhn_2008_building}{article}{}{}
+      \name{author}{1}{}{%
+        {{un=0,uniquepart=base,hash=3305789acf03200ed22f154007d4fab9}{%
+           family={Kuhn},
+           familyi={K\bibinitperiod},
+           given={Max},
+           giveni={M\bibinitperiod},
+           givenun=0}}%
+      }
+      \strng{namehash}{3305789acf03200ed22f154007d4fab9}
+      \strng{fullhash}{3305789acf03200ed22f154007d4fab9}
+      \strng{fullhashraw}{3305789acf03200ed22f154007d4fab9}
+      \strng{bibnamehash}{3305789acf03200ed22f154007d4fab9}
+      \strng{authorbibnamehash}{3305789acf03200ed22f154007d4fab9}
+      \strng{authornamehash}{3305789acf03200ed22f154007d4fab9}
+      \strng{authorfullhash}{3305789acf03200ed22f154007d4fab9}
+      \strng{authorfullhashraw}{3305789acf03200ed22f154007d4fab9}
+      \field{sortinit}{K}
+      \field{sortinithash}{c02bf6bff1c488450c352b40f5d853ab}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \true{uniqueprimaryauthor}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Journal of Statistical Software}
+      \field{month}{11}
+      \field{title}{Building predictive models in R using the caret package}
+      \field{urlday}{5}
+      \field{urlmonth}{9}
+      \field{urlyear}{2025}
+      \field{volume}{28}
+      \field{year}{2008}
+      \field{urldateera}{ce}
+      \verb{doi}
+      \verb 10.18637/jss.v028.i05
+      \endverb
+      \verb{urlraw}
+      \verb https://www.jstatsoft.org/article/view/v028i05
+      \endverb
+      \verb{url}
+      \verb https://www.jstatsoft.org/article/view/v028i05
+      \endverb
+    \endentry
     \entry{e1071}{manual}{}{}
       \name{author}{5}{}{%
         {{un=0,uniquepart=base,hash=8b8264d1ec124bc1b7e8110d3c084941}{%
@@ -1049,73 +1232,6 @@
       \verb{url}
       \verb https://www.R-project.org/
       \endverb
-    \endentry
-    \entry{pROC_package}{article}{}{}
-      \name{author}{7}{}{%
-        {{un=0,uniquepart=base,hash=eddb2d35bb86970a3b620919032872f2}{%
-           family={Robin},
-           familyi={R\bibinitperiod},
-           given={Xavier},
-           giveni={X\bibinitperiod},
-           givenun=0}}%
-        {{un=0,uniquepart=base,hash=a515bb6a9d253d799ec6dd12f3879c67}{%
-           family={Turck},
-           familyi={T\bibinitperiod},
-           given={Natacha},
-           giveni={N\bibinitperiod},
-           givenun=0}}%
-        {{un=0,uniquepart=base,hash=80459c015d86c296cbe6721f80470c41}{%
-           family={Hainard},
-           familyi={H\bibinitperiod},
-           given={Alexandre},
-           giveni={A\bibinitperiod},
-           givenun=0}}%
-        {{un=0,uniquepart=base,hash=9c7c12ff1cf878cb71a42cc0496c0b0d}{%
-           family={Tiberti},
-           familyi={T\bibinitperiod},
-           given={Natalia},
-           giveni={N\bibinitperiod},
-           givenun=0}}%
-        {{un=0,uniquepart=base,hash=7d0aaccffe7b26dc63f4dc4244e13c92}{%
-           family={Lisacek},
-           familyi={L\bibinitperiod},
-           given={Frédérique},
-           giveni={F\bibinitperiod},
-           givenun=0}}%
-        {{un=0,uniquepart=base,hash=8b4958618472f5d053fd537916d0069f}{%
-           family={Sanchez},
-           familyi={S\bibinitperiod},
-           given={Jean-Charles},
-           giveni={J\bibinithyphendelim C\bibinitperiod},
-           givenun=0}}%
-        {{un=0,uniquepart=base,hash=a72c3487103e77ffaf5aed3be8bcf625}{%
-           family={Müller},
-           familyi={M\bibinitperiod},
-           given={Markus},
-           giveni={M\bibinitperiod},
-           givenun=0}}%
-      }
-      \strng{namehash}{b791d00f9a2d0465d669dc5e4b98078e}
-      \strng{fullhash}{62460c953243f4e080a6d4518342efce}
-      \strng{fullhashraw}{62460c953243f4e080a6d4518342efce}
-      \strng{bibnamehash}{62460c953243f4e080a6d4518342efce}
-      \strng{authorbibnamehash}{62460c953243f4e080a6d4518342efce}
-      \strng{authornamehash}{b791d00f9a2d0465d669dc5e4b98078e}
-      \strng{authorfullhash}{62460c953243f4e080a6d4518342efce}
-      \strng{authorfullhashraw}{62460c953243f4e080a6d4518342efce}
-      \field{sortinit}{R}
-      \field{sortinithash}{5e1c39a9d46ffb6bebd8f801023a9486}
-      \field{extradatescope}{labelyear}
-      \field{labeldatesource}{}
-      \true{uniqueprimaryauthor}
-      \field{labelnamesource}{author}
-      \field{labeltitlesource}{title}
-      \field{journaltitle}{BMC Bioinformatics}
-      \field{title}{pROC: an open-source package for R and S+ to analyze and compare ROC curves}
-      \field{volume}{12}
-      \field{year}{2011}
-      \field{pages}{77}
-      \range{pages}{1}
     \endentry
     \entry{statsguru_2025_total}{misc}{}{}
       \name{author}{1}{}{%

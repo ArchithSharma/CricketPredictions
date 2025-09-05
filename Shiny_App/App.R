@@ -13,8 +13,8 @@ player_data <- read.csv("data/player_data.csv")
 venue_factors <- read.csv("data/grounddata.csv")
 
 # Model parameters
-overallbestlambda <- 0.081
-overallbestalpha <- 0
+overallbestlambda <- 0.055
+overallbestalpha <- 0.1
 
 # Train the model
 final_model <- glmnet(
@@ -29,7 +29,7 @@ final_model <- glmnet(
 team_colors <- c(
   IND = "#0078d3", PAK = "#006400", WI = "#800000", ENG = "#FF0000",
   NZL = "#000000", RSA = "#90EE90", AUS = "#FFFF00", ZIM = "#FFA500",
-  SL = "#800080", AFG = "#4169E1", BAN = "#006A4E", IRE = "#009A44",
+  SL = "#800080", AFG = "#3d4dbc", BAN = "#006A4E", IRE = "#009A44",
   "Team 1" = "#0078d3", "Team 2" = "#FF0000"
 )
 
