@@ -39,7 +39,7 @@ The dataset includes:
 ## Repository Structure
 ```
 CricketPredictions/
-│── code/                  # Contains R code that was used in designing project          
+│── code_archive/                  # Contains R code that was used in designing project          
 │── data/                  # Includes datasets used in the project
 │── Markdown_Script/       # Markdown version available on RPubs, fully reproducible
 │── Shiny_App/             # Includes Source Code for Shiny App                 
