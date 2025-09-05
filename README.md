@@ -8,7 +8,7 @@ This project analyzes T20I cricket match data to predict match outcomes based on
 - Venue factor adjustments for performance predictions
 - Player impact calculation based on batting and bowling statistics
 - Rolling forecasts using statistical models
-- R Markdown Version for easy reproducibility: https://rpubs.com/ArchithS/CricketData
+- R Markdown Version for easy reproducibility: https://archithsharma.github.io/CricketPredictions
 - ShinyApp for player comparison, past match model output, and future match prediction by inputting playing XI: https://archithsharma.shinyapps.io/Cricket-Analyzer/
 
 ## Installation
@@ -43,14 +43,10 @@ CricketPredictions/
 │── data/                  # Includes datasets used in the project
 │── Markdown_Script/       # Markdown version available on RPubs, fully reproducible
 │── Shiny_App/             # Includes Source Code for Shiny App                 
-│── paper/                 # Research paper and TeX source
 │── README.md              # Project documentation
 │── LICENSE                # License information
 
 ```
-## Paper compilation if generating from TeX
-
-Instructions can be found in this [markdown file](paper/Stats&Stumps-TeXSource/TeX_Compiling.md) and can be compiled either using latexmk or Overleaf. The PDF file is also included.
 
 ## License
 This project is licensed under the MIT License.
@@ -59,7 +55,7 @@ This project is licensed under the MIT License.
 - **Archith Sharma** *(Project Creator)*
 
 ## Contact
-For questions or suggestions, open an issue on GitHub or reach out via email at [archithsharma@gmail.com](url).
+For questions or suggestions, open an issue on GitHub.
 
 ## Acknowledgments
 I extend my gratitude to the cricket analytics community and open-source contributors for making data-driven sports analysis possible. A special thank you to Rob Hyndman at Monash University for authoring the cricketdata R package to make ESPN Crincinfo data which is used in this analysis easily accessible.
