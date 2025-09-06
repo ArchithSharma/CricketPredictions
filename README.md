@@ -55,7 +55,7 @@ This project is licensed under the MIT License.
 - **Anonymous Cricket** *(Project Creator)*
 
 ## Contact
-For questions or suggestions, open an issue on GitHub.
+For questions or suggestions, open an issue or pull request on GitHub.
 
 ## Acknowledgments
 I extend my gratitude to the cricket analytics community and open-source contributors for making data-driven sports analysis possible. A special thank you to Rob Hyndman at Monash University for authoring the cricketdata R package to make ESPN Crincinfo data which is used in this analysis easily accessible.
