@@ -70,7 +70,7 @@ get_player_gauges <- function(player_name) {
     }
     
     # Per-game batting
-    if (p$MatchesPlayed >= 20) {
+    if (p$MatchesPlayed >= 15) {
       per_game <- p$CareerBatImpact / p$MatchesPlayed
       if (type == "Batter") {
         pg_pct <- percentile(batters$CareerBatImpact / batters$MatchesPlayed, per_game)
@@ -105,7 +105,7 @@ get_player_gauges <- function(player_name) {
     }
     
     # Per-game bowling
-    if (p$MatchesPlayed >= 20) {
+    if (p$MatchesPlayed >= 15) {
       per_game <- p$CareerBowlImpact / p$MatchesPlayed
       if (type == "Bowler") {
         pg_pct <- percentile(bowlers$CareerBowlImpact / bowlers$MatchesPlayed, per_game)

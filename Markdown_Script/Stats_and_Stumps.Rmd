@@ -71,7 +71,7 @@ bowling_data$Country <- country_acronyms[bowling_data$Country]
 bowling_data$Opposition <- country_acronyms[bowling_data$Opposition]
 
 
-match_data_file_cricinfo$Date <- as.Date.character(match_data_file_cricinfo$Match.Date, format = "%b %d, %Y")
+match_data_file_cricinfo$Date <- as.Date(match_data_file_cricinfo$Match.Date, format = "%d-%b-%y")
 batting_data$Date <- as.Date(batting_data$Date)
 bowling_data$Date <- as.Date(bowling_data$Date)
 
@@ -151,7 +151,7 @@ bowling_impact <- bowling_data %>%
   summarise(TotalBowlingImpact = sum(BowlingImpact, na.rm = TRUE)) %>%
   ungroup()
 
-hist(bowling_impact$TotalBowlingImpact, breaks = 50, main = "Bowling and Batting Impact Distribution", xlab = "Total Impact", col = rgb(0,0,1,1/4))
+hist(bowling_impact$TotalBowlingImpact, breaks = 50, main = "Fig 1: Bowling and Batting Impact Distribution", xlab = "Total Impact", col = rgb(0,0,1,1/4))
 hist(batting_impact$TotalBattingImpact, breaks = 50, main = "Batting Impact Distribution", xlab = "Total Batting Impact", col = rgb(1,0,0,1/4), add = TRUE)
 
 ```
@@ -539,7 +539,7 @@ ggplot(team_ranking_recent, aes(x = reorder(Country, TotalImpact_perGame), y = T
 
 Get data for Lord's
 ```{r}
-battingranking[80,]
+battingranking[82,]
 ```
 
 # Model Training and Evaluation - Cricket_Prediction.R
